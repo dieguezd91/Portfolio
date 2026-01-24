@@ -1,16 +1,70 @@
-# React + Vite
+# Daniel Dieguez Portfolio
 
-This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
+Portfolio web para Game & Web Developer construido con React, Tailwind CSS y Vite.
 
-Currently, two official plugins are available:
+## Tecnologías
 
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react) uses [Babel](https://babeljs.io/) (or [oxc](https://oxc.rs) when used in [rolldown-vite](https://vite.dev/guide/rolldown)) for Fast Refresh
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react-swc) uses [SWC](https://swc.rs/) for Fast Refresh
+- **React** - Librería de UI
+- **Tailwind CSS v4** - Framework de estilos
+- **Vite** - Build tool y dev server
 
-## React Compiler
+## Características
 
-The React Compiler is not enabled on this template because of its impact on dev & build performances. To add it, see [this documentation](https://react.dev/learn/react-compiler/installation).
+- Diseño minimalista y moderno
+- Completamente responsive
+- Smooth scroll navigation
+- Imágenes de proyectos cargadas desde itch.io
+- Componentes reutilizables y escalables
+- Animaciones y efectos hover
 
-## Expanding the ESLint configuration
+## Estructura del Proyecto
 
-If you are developing a production application, we recommend using TypeScript with type-aware lint rules enabled. Check out the [TS template](https://github.com/vitejs/vite/tree/main/packages/create-vite/template-react-ts) for information on how to integrate TypeScript and [`typescript-eslint`](https://typescript-eslint.io) in your project.
+```
+src/
+├── components/
+│   ├── Navbar.jsx      # Navegación principal
+│   ├── Hero.jsx        # Sección de presentación
+│   ├── Projects.jsx    # Grid de proyectos
+│   ├── About.jsx       # Información y skills
+│   ├── Contact.jsx     # Información de contacto
+│   └── Footer.jsx      # Pie de página
+├── App.jsx
+└── index.css
+```
+
+## Instalación y Uso
+
+```bash
+# Instalar dependencias
+npm install
+
+# Iniciar servidor de desarrollo
+npm run dev
+
+# Build para producción
+npm run build
+
+# Preview del build
+npm run preview
+```
+
+## Personalización
+
+Para personalizar el portfolio:
+
+1. **Proyectos**: Edita el array `projects` en `src/components/Projects.jsx`
+2. **Skills**: Edita el array `skills` en `src/components/About.jsx`
+3. **Links de contacto**: Modifica el array `contacts` en `src/components/Contact.jsx`
+4. **Información personal**: Actualiza los textos en cada componente
+
+## Deploy
+
+Este proyecto puede ser desplegado en:
+- Vercel
+- Netlify
+- GitHub Pages
+- Cualquier hosting que soporte SPA
+
+---
+
+Desarrollado por Daniel Dieguez
