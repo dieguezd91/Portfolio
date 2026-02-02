@@ -39,14 +39,18 @@ export default function Navbar() {
       animate={{ y: 0 }}
       transition={{ duration: 0.6, ease: "easeOut" }}
       className={`fixed top-0 w-full z-50 transition-all duration-300 ${scrolled
-          ? 'bg-black/90 backdrop-blur-md border-b border-zinc-800'
-          : 'bg-black/80 backdrop-blur-md border-b border-zinc-800/50'
+        ? 'bg-black/90 backdrop-blur-md border-b border-zinc-800'
+        : 'bg-black/80 backdrop-blur-md border-b border-zinc-800/50'
         }`}
     >
       <div className="max-w-7xl mx-auto px-6">
         <div className="flex justify-between items-center h-24 md:h-28">
           <motion.a
             href="#"
+            onClick={(e) => {
+              e.preventDefault();
+              window.scrollTo({ top: 0, behavior: 'smooth' });
+            }}
             whileHover={{ scale: 1.02 }}
             className="flex flex-col"
             style={{ fontFamily: 'var(--font-heading)' }}
