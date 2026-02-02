@@ -4,7 +4,6 @@ import Hero from './components/Hero';
 import Projects from './components/Projects';
 import Education from './components/Education';
 import Technologies from './components/Technologies';
-import Contact from './components/Contact';
 import Footer from './components/Footer';
 
 export default function App() {
@@ -19,7 +18,6 @@ export default function App() {
       <Projects />
       <Education />
       <Technologies />
-      <Contact />
       <Footer />
     </div>
   );

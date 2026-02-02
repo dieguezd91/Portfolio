@@ -1,6 +1,6 @@
 import { useState, useEffect } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
-import { SiGithub, SiLinkedin, SiItchdotio } from 'react-icons/si';
+import { SiGithub, SiLinkedin, SiItchdotio, SiLinktree } from 'react-icons/si';
 
 export default function Navbar() {
   const [isOpen, setIsOpen] = useState(false);
@@ -19,17 +19,17 @@ export default function Navbar() {
     {
       name: 'GitHub',
       href: 'https://github.com/dieguezd91',
-      icon: <SiGithub className="w-5 h-5" />
+      icon: <SiGithub className="w-8 h-8" />
     },
     {
       name: 'LinkedIn',
       href: 'https://www.linkedin.com/in/daniel-dieguez/',
-      icon: <SiLinkedin className="w-5 h-5" />
+      icon: <SiLinkedin className="w-8 h-8" />
     },
     {
       name: 'itch.io',
       href: 'https://danidieguez.itch.io',
-      icon: <SiItchdotio className="w-5 h-5" />
+      icon: <SiItchdotio className="w-8 h-8" />
     }
   ];
 
@@ -45,18 +45,23 @@ export default function Navbar() {
       }`}
     >
       <div className="max-w-7xl mx-auto px-6">
-        <div className="flex justify-between items-center h-16">
+        <div className="flex justify-between items-center h-32 md:h-36">
           <motion.a
             href="#"
             whileHover={{ scale: 1.02 }}
-            className="text-xl font-bold text-white"
+            className="flex flex-col"
             style={{ fontFamily: 'var(--font-heading)' }}
           >
-            Daniel Dieguez
+            <span className="text-2xl md:text-4xl font-bold text-white uppercase tracking-wide whitespace-nowrap">
+              Daniel Dieguez
+            </span>
+            <span className="text-sm md:text-lg text-zinc-400 uppercase tracking-wider">
+              Game Developer
+            </span>
           </motion.a>
 
           {/* Desktop Navigation */}
-          <div className="hidden md:flex items-center gap-6">
+          <div className="hidden md:flex items-center gap-10">
             {externalLinks.map((link) => (
               <motion.a
                 key={link.name}
@@ -64,7 +69,7 @@ export default function Navbar() {
                 target="_blank"
                 rel="noopener noreferrer"
                 whileHover={{ scale: 1.02 }}
-                className="flex items-center gap-2 text-zinc-400 hover:text-white transition-colors"
+                className="flex items-center gap-3 text-zinc-400 hover:text-white transition-colors text-xl font-bold"
               >
                 {link.icon}
                 <span>{link.name}</span>
@@ -75,9 +80,12 @@ export default function Navbar() {
               download="Daniel_Dieguez_CV.pdf"
               whileHover={{ scale: 1.02 }}
               whileTap={{ scale: 0.98 }}
-              className="px-4 py-2 bg-indigo-600 hover:bg-indigo-500 rounded-lg text-white font-semibold transition-colors"
+              className="px-8 py-4 border-2 border-indigo-600 hover:border-indigo-500 bg-transparent rounded-lg text-white font-bold transition-colors text-xl flex items-center gap-3"
             >
-              Download CV
+              RESUME
+              <svg className="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M19 14l-7 7m0 0l-7-7m7 7V3" />
+              </svg>
             </motion.a>
           </div>
 
@@ -116,7 +124,7 @@ export default function Navbar() {
                     rel="noopener noreferrer"
                     onClick={() => setIsOpen(false)}
                     whileHover={{ x: 5 }}
-                    className="flex items-center gap-2 py-2 text-zinc-400 hover:text-white transition-all"
+                    className="flex items-center gap-3 py-3 text-zinc-400 hover:text-white transition-all text-lg font-bold"
                   >
                     {link.icon}
                     <span>{link.name}</span>
@@ -125,10 +133,13 @@ export default function Navbar() {
                 <motion.a
                   href="/Daniel_Dieguez_CV.pdf"
                   download="Daniel_Dieguez_CV.pdf"
-                  className="block mt-4 px-4 py-2 bg-indigo-600 hover:bg-indigo-500 rounded-lg text-white font-semibold text-center transition-colors"
+                  className="flex items-center justify-center gap-3 mt-4 px-6 py-3 border-2 border-indigo-600 hover:border-indigo-500 bg-transparent rounded-lg text-white font-bold transition-colors text-lg"
                   onClick={() => setIsOpen(false)}
                 >
-                  Download CV
+                  RESUME
+                  <svg className="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M19 14l-7 7m0 0l-7-7m7 7V3" />
+                  </svg>
                 </motion.a>
               </div>
             </motion.div>

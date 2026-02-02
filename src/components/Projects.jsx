@@ -7,8 +7,8 @@ const projects = [
     year: 2024,
     role: "Game Designer & Programmer",
     description: "A dynamic 2D mobile strategy game blending Tower Defense tactics with a Roguelike Deckbuilder",
-    media: "/projects/clockwork-siege.gif",
-    mediaType: "gif",
+    media: "https://img.itch.zone/aW1nLzI0NTQ0NDkyLnBuZw==/original/5BYBsz.png",
+    mediaType: "image",
     tags: ["Mobile", "Strategy", "Deckbuilder"],
     link: "https://danidieguez.itch.io/clockwork-siege"
   },
@@ -18,8 +18,8 @@ const projects = [
     year: 2023,
     role: "VR Developer",
     description: "VR Arcade Educational Game – Sort and recycle trash in zero gravity",
-    media: "/projects/binforcervr.gif",
-    mediaType: "gif",
+    media: "https://img.itch.zone/aW1nLzIzODc4MjQxLnBuZw==/original/6%2Bq1bX.png",
+    mediaType: "image",
     tags: ["VR", "Educational", "Unity"],
     link: "https://danidieguez.itch.io/binforcervr"
   },
@@ -29,8 +29,8 @@ const projects = [
     year: 2023,
     role: "Game Developer",
     description: "Bullet hell style game set in a horror world",
-    media: "/projects/evolster.gif",
-    mediaType: "gif",
+    media: "https://img.itch.zone/aW1nLzE3MjE0NDM4LnBuZw==/original/KN6nAD.png",
+    mediaType: "image",
     tags: ["Bullet Hell", "Horror", "Survival"],
     link: "https://danidieguez.itch.io/evolster"
   },
@@ -40,8 +40,8 @@ const projects = [
     year: 2023,
     role: "Gameplay Programmer",
     description: "Survival horror video game with tactical combat and strategic character switching",
-    media: "/projects/project-corvus.gif",
-    mediaType: "gif",
+    media: "https://img.itch.zone/aW1nLzIwNTE2ODQ3LnBuZw==/original/JvEPqn.png",
+    mediaType: "image",
     tags: ["Survival", "Horror", "Tactical"],
     link: "https://astroriftgames.itch.io/project-corvus"
   },
@@ -51,8 +51,8 @@ const projects = [
     year: 2022,
     role: "Lead Developer",
     description: "Endless runner advergame created for the MÜECAS cereal brand",
-    media: "/projects/muecas.gif",
-    mediaType: "gif",
+    media: "https://img.itch.zone/aW1nLzE4NDA1MTAyLnBuZw==/347x500/WxMnkm.png",
+    mediaType: "image",
     tags: ["Endless Runner", "Browser", "Advergame"],
     link: "https://astroriftgames.itch.io/muecas"
   },
@@ -62,8 +62,8 @@ const projects = [
     year: 2024,
     role: "Game Developer",
     description: "Fun 3D arkanoid prototype with modern mechanics",
-    media: "/projects/arkanoid-3d.gif",
-    mediaType: "gif",
+    media: "https://img.itch.zone/aW1hZ2UvMjg0ODA3My8xNzAyMjMyNi5wbmc=/original/aBoCqA.png",
+    mediaType: "image",
     tags: ["Arcade", "3D", "Prototype"],
     link: "https://danidieguez.itch.io/arkanoid-3d"
   },
@@ -73,8 +73,8 @@ const projects = [
     year: 2022,
     role: "Game Developer",
     description: "Browser-playable survival game with unique mechanics",
-    media: "/projects/wheelin-to-roll.gif",
-    mediaType: "gif",
+    media: "https://img.itch.zone/aW1nLzE0ODc1ODQ0LnBuZw==/original/07A6It.png",
+    mediaType: "image",
     tags: ["Survival", "Browser", "Action"],
     link: "https://danidieguez.itch.io/wheelin-to-roll"
   },
@@ -84,8 +84,8 @@ const projects = [
     year: 2023,
     role: "Game Developer",
     description: "Survival game with rhythm-based mechanics",
-    media: "/projects/forbbiden-rhytms.gif",
-    mediaType: "gif",
+    media: "https://img.itch.zone/aW1nLzE3MjE0Njk3LnBuZw==/original/adoidh.png",
+    mediaType: "image",
     tags: ["Survival", "Rhythm", "Action"],
     link: "https://danidieguez.itch.io/forbbiden-rhytms"
   },
@@ -95,8 +95,8 @@ const projects = [
     year: 2022,
     role: "Game Developer",
     description: "A pixel-art cyberpunk adventure with turn-based combat in Neo-City's depths",
-    media: "/projects/cyber-realm.gif",
-    mediaType: "gif",
+    media: "https://img.itch.zone/aW1nLzE0ODc1ODM5LnBuZw==/original/OHRs81.png",
+    mediaType: "image",
     tags: ["Cyberpunk", "Pixel Art", "RPG"],
     link: "https://tomas-taboada.itch.io/cyberrealm"
   }
@@ -115,7 +115,7 @@ function ProjectCard({ title, year, role, description, tags, link, media, mediaT
       whileHover={{ y: -4 }}
       className="group relative bg-[#2a2a2a] rounded-xl overflow-hidden transition-all duration-300 border border-zinc-800 hover:border-indigo-500/50"
     >
-      {/* MEDIA: Video o GIF */}
+      {/* MEDIA: Video, GIF o Image */}
       <div className="aspect-video overflow-hidden bg-[#1a1a1a] relative">
         {mediaType === 'video' ? (
           <video
@@ -127,6 +127,13 @@ function ProjectCard({ title, year, role, description, tags, link, media, mediaT
           >
             <source src={media} type="video/mp4" />
           </video>
+        ) : mediaType === 'gif' ? (
+          <img
+            src={media}
+            alt={title}
+            className="w-full h-full object-cover object-center"
+            loading="lazy"
+          />
         ) : (
           <img
             src={media}

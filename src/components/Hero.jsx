@@ -8,71 +8,25 @@ export default function Hero() {
 
           {/* COLUMNA IZQUIERDA: Texto */}
           <div className="order-2 lg:order-1">
-            <motion.div
-              initial={{ opacity: 0, y: 20 }}
-              animate={{ opacity: 1, y: 0 }}
-              transition={{ duration: 0.6, ease: "easeOut" }}
-              className="mb-6"
-            >
-              <span className="inline-block px-4 py-2 bg-indigo-500/10 border border-indigo-500/30 rounded-full text-indigo-300 text-sm font-medium backdrop-blur-sm">
-                GAME & WEB DEVELOPER
-              </span>
-            </motion.div>
-
             <motion.h1
               initial={{ opacity: 0, y: 20 }}
               animate={{ opacity: 1, y: 0 }}
-              transition={{ duration: 0.6, delay: 0.2, ease: "easeOut" }}
-              className="text-5xl lg:text-7xl font-bold text-white mb-3"
+              transition={{ duration: 0.6, ease: "easeOut" }}
+              className="text-4xl lg:text-6xl font-bold text-white mb-6"
               style={{ fontFamily: 'var(--font-heading)' }}
             >
-              Daniel Dieguez
+              Game Systems & Web Architecture
             </motion.h1>
 
             <motion.p
               initial={{ opacity: 0, y: 20 }}
               animate={{ opacity: 1, y: 0 }}
-              transition={{ duration: 0.6, delay: 0.3, ease: "easeOut" }}
-              className="text-xl text-zinc-400 mb-6 font-medium"
-              style={{ fontFamily: 'var(--font-heading)' }}
-            >
-              Game Systems & Web Architecture
-            </motion.p>
-
-            <motion.p
-              initial={{ opacity: 0, y: 20 }}
-              animate={{ opacity: 1, y: 0 }}
-              transition={{ duration: 0.6, delay: 0.4, ease: "easeOut" }}
-              className="text-lg text-zinc-300 mb-12 max-w-xl leading-relaxed"
+              transition={{ duration: 0.6, delay: 0.2, ease: "easeOut" }}
+              className="text-lg text-zinc-300 max-w-xl leading-relaxed"
             >
               Designing scalable game systems and modern web experiences,
               with a strong focus on architecture and interaction.
             </motion.p>
-
-            <motion.div
-              initial={{ opacity: 0, y: 20 }}
-              animate={{ opacity: 1, y: 0 }}
-              transition={{ duration: 0.6, delay: 0.6, ease: "easeOut" }}
-              className="flex flex-col sm:flex-row gap-4"
-            >
-              <motion.a
-                href="#projects"
-                whileHover={{ scale: 1.02 }}
-                whileTap={{ scale: 0.98 }}
-                className="px-8 py-4 bg-indigo-600 hover:bg-indigo-500 rounded-lg font-semibold transition-colors text-center"
-              >
-                View My Projects
-              </motion.a>
-
-              <motion.a
-                href="#contact"
-                whileHover={{ scale: 1.02 }}
-                whileTap={{ scale: 0.98 }}
-                className="px-8 py-4 border border-zinc-700 hover:border-indigo-500 bg-transparent rounded-lg font-semibold transition-colors text-center"
-              >
-                Get In Touch
-              </motion.a>
-            </motion.div>
           </div>
 
           {/* COLUMNA DERECHA: Foto */}
