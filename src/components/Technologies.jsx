@@ -1,18 +1,20 @@
 import { motion } from 'framer-motion';
 
-const technologies = [
-  "Unity",
+const gameDev = [
   "C#",
-  "Unreal Engine",
-  "VR Development",
+  "Unity",
+  "Game Design",
+  "VR Development"
+];
+
+const webDev = [
+  "HTML5",
+  "CSS3",
   "JavaScript",
   "React",
   "Node.js",
   "Tailwind CSS",
-  "TypeScript",
-  "Git",
-  "Game Design",
-  "3D Modeling"
+  "Git"
 ];
 
 export default function Technologies() {
@@ -39,21 +41,41 @@ export default function Technologies() {
           whileInView={{ opacity: 1, y: 0 }}
           viewport={{ once: true }}
           transition={{ duration: 0.6, delay: 0.2, ease: "easeOut" }}
-          className="flex flex-wrap gap-4 justify-center"
+          className="flex flex-col gap-4"
         >
-          {technologies.map((tech, index) => (
-            <motion.span
-              key={tech}
-              initial={{ opacity: 0, scale: 0.8 }}
-              whileInView={{ opacity: 1, scale: 1 }}
-              viewport={{ once: true }}
-              transition={{ duration: 0.3, delay: index * 0.05 }}
-              whileHover={{ scale: 1.05, borderColor: "rgba(99, 102, 241, 0.5)" }}
-              className="px-6 py-3 bg-[#2a2a2a] border-2 border-zinc-800 rounded-lg text-white font-medium hover:border-indigo-500/50 transition-colors"
-            >
-              {tech}
-            </motion.span>
-          ))}
+          {/* Game Development */}
+          <div className="flex flex-wrap gap-4 justify-center">
+            {gameDev.map((tech, index) => (
+              <motion.span
+                key={tech}
+                initial={{ opacity: 0, scale: 0.8 }}
+                whileInView={{ opacity: 1, scale: 1 }}
+                viewport={{ once: true }}
+                transition={{ duration: 0.3, delay: index * 0.05 }}
+                whileHover={{ scale: 1.05, borderColor: "rgba(99, 102, 241, 0.5)" }}
+                className="px-6 py-3 bg-[#2a2a2a] border-2 border-zinc-800 rounded-lg text-white font-medium hover:border-indigo-500/50 transition-colors"
+              >
+                {tech}
+              </motion.span>
+            ))}
+          </div>
+
+          {/* Web Development */}
+          <div className="flex flex-wrap gap-4 justify-center">
+            {webDev.map((tech, index) => (
+              <motion.span
+                key={tech}
+                initial={{ opacity: 0, scale: 0.8 }}
+                whileInView={{ opacity: 1, scale: 1 }}
+                viewport={{ once: true }}
+                transition={{ duration: 0.3, delay: index * 0.05 + 0.2 }}
+                whileHover={{ scale: 1.05, borderColor: "rgba(99, 102, 241, 0.5)" }}
+                className="px-6 py-3 bg-[#2a2a2a] border-2 border-zinc-800 rounded-lg text-white font-medium hover:border-indigo-500/50 transition-colors"
+              >
+                {tech}
+              </motion.span>
+            ))}
+          </div>
         </motion.div>
       </div>
     </section>

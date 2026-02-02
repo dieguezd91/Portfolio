@@ -113,7 +113,7 @@ function ProjectCard({ title, year, role, description, tags, link, media, mediaT
       viewport={{ once: true, margin: "-50px" }}
       transition={{ duration: 0.5, delay: index * 0.1, ease: "easeOut" }}
       whileHover={{ y: -4 }}
-      className="group relative bg-[#2a2a2a] rounded-xl overflow-hidden transition-all duration-300 border border-zinc-800 hover:border-indigo-500/50"
+      className="group relative bg-[#2a2a2a] rounded-lg overflow-hidden transition-all duration-300 border border-zinc-800 hover:border-indigo-500/50"
     >
       {/* MEDIA: Video, GIF o Image */}
       <div className="aspect-video overflow-hidden bg-[#1a1a1a] relative">

@@ -3,16 +3,13 @@ import { motion } from 'framer-motion';
 const skills = [
   { name: "Unity", category: "game" },
   { name: "C#", category: "game" },
-  { name: "Unreal Engine", category: "game" },
   { name: "VR Development", category: "game" },
   { name: "JavaScript", category: "web" },
   { name: "React", category: "web" },
   { name: "Node.js", category: "web" },
   { name: "Tailwind CSS", category: "web" },
-  { name: "TypeScript", category: "web" },
   { name: "Git", category: "tools" },
-  { name: "Game Design", category: "tools" },
-  { name: "3D Modeling", category: "tools" }
+  { name: "Game Design", category: "tools" }
 ];
 
 const stats = [

@@ -3,15 +3,27 @@ import { motion } from 'framer-motion';
 const education = [
   {
     id: 1,
-    institution: "Universidad Nacional de La Plata",
-    degree: "Licenciatura en Sistemas",
-    years: "2018 - 2023"
+    institution: "Universidad Argentina De la Empresa",
+    degree: "Bachelor's Degree in Video Game Development",
+    years: "2022 - 2025"
   },
   {
     id: 2,
     institution: "Coderhouse",
-    degree: "Game Development",
-    years: "2020 - 2021"
+    degree: "Web development",
+    years: "2022"
+  },
+  {
+    id: 3,
+    institution: "Udemy",
+    degree: "Game Production & Design",
+    years: "2023"
+  },
+  {
+    id: 4,
+    institution: "Udemy",
+    degree: "Unity Programming with C#",
+    years: "2023"
   }
 ];
 
@@ -23,7 +35,7 @@ function EducationCard({ institution, degree, years, index }) {
       viewport={{ once: true }}
       transition={{ duration: 0.5, delay: index * 0.1, ease: "easeOut" }}
       whileHover={{ y: -4 }}
-      className="p-6 bg-[#2a2a2a] border border-zinc-800 hover:border-indigo-500/50 rounded-xl transition-all duration-300"
+      className="p-6 bg-[#2a2a2a] border border-zinc-800 hover:border-indigo-500/50 rounded-lg transition-all duration-300"
     >
       <h3 className="text-xl font-bold text-white mb-2" style={{ fontFamily: 'var(--font-heading)' }}>
         {institution}

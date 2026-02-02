@@ -1,36 +1,14 @@
 import { motion } from 'framer-motion';
+import profilePic from '../assets/Profile_pic.jpg';
 
 export default function Hero() {
   return (
-    <section className="min-h-screen bg-gradient-to-b from-[#0a0a0a] to-[#1a1a1a] text-white flex items-center">
-      <div className="max-w-7xl mx-auto px-6 py-20 w-full">
-        <div className="grid lg:grid-cols-2 gap-12 items-center">
+    <section className="bg-gradient-to-b from-[#0a0a0a] to-[#1a1a1a] text-white flex items-center">
+      <div className="max-w-6xl mx-auto px-6 pt-56 pb-40 w-full">
+        <div className="grid lg:grid-cols-2 gap-8 items-center">
 
-          {/* COLUMNA IZQUIERDA: Texto */}
-          <div className="order-2 lg:order-1">
-            <motion.h1
-              initial={{ opacity: 0, y: 20 }}
-              animate={{ opacity: 1, y: 0 }}
-              transition={{ duration: 0.6, ease: "easeOut" }}
-              className="text-4xl lg:text-6xl font-bold text-white mb-6"
-              style={{ fontFamily: 'var(--font-heading)' }}
-            >
-              Game Systems & Web Architecture
-            </motion.h1>
-
-            <motion.p
-              initial={{ opacity: 0, y: 20 }}
-              animate={{ opacity: 1, y: 0 }}
-              transition={{ duration: 0.6, delay: 0.2, ease: "easeOut" }}
-              className="text-lg text-zinc-300 max-w-xl leading-relaxed"
-            >
-              Designing scalable game systems and modern web experiences,
-              with a strong focus on architecture and interaction.
-            </motion.p>
-          </div>
-
-          {/* COLUMNA DERECHA: Foto */}
-          <div className="order-1 lg:order-2 flex justify-center lg:justify-end">
+          {/* COLUMNA IZQUIERDA: Foto */}
+          <div className="order-1 lg:order-1 flex justify-center lg:justify-start">
             <motion.div
               initial={{ opacity: 0, scale: 0.8 }}
               animate={{ opacity: 1, scale: 1 }}
@@ -38,11 +16,23 @@ export default function Hero() {
               className="relative"
             >
               <img
-                src="/profile.jpg"
+                src={profilePic}
                 alt="Daniel Dieguez"
                 className="w-48 h-48 md:w-64 md:h-64 lg:w-80 lg:h-80 rounded-full border-4 border-indigo-500/30 object-cover"
               />
             </motion.div>
+          </div>
+
+          {/* COLUMNA DERECHA: Texto */}
+          <div className="order-2 lg:order-2">
+            <motion.p
+              initial={{ opacity: 0, y: 20 }}
+              animate={{ opacity: 1, y: 0 }}
+              transition={{ duration: 0.6, ease: "easeOut" }}
+              className="text-xl lg:text-2xl text-zinc-300 max-w-xl leading-relaxed uppercase"
+            >
+              Programmer specialized in gameplay and systems, with a strong foundation in software engineering. Open to new challenges and adaptable beyond game development.
+            </motion.p>
           </div>
 
         </div>

@@ -45,34 +45,34 @@ export default function Navbar() {
       }`}
     >
       <div className="max-w-7xl mx-auto px-6">
-        <div className="flex justify-between items-center h-32 md:h-36">
+        <div className="flex justify-between items-center h-24 md:h-28">
           <motion.a
             href="#"
             whileHover={{ scale: 1.02 }}
             className="flex flex-col"
             style={{ fontFamily: 'var(--font-heading)' }}
           >
-            <span className="text-2xl md:text-4xl font-bold text-white uppercase tracking-wide whitespace-nowrap">
+            <span className="text-xl md:text-3xl font-bold text-white uppercase tracking-wide whitespace-nowrap">
               Daniel Dieguez
             </span>
-            <span className="text-sm md:text-lg text-zinc-400 uppercase tracking-wider">
+            <span className="text-xs md:text-base text-zinc-400 uppercase tracking-wider">
               Game Developer
             </span>
           </motion.a>
 
           {/* Desktop Navigation */}
-          <div className="hidden md:flex items-center gap-10">
+          <div className="hidden md:flex items-center gap-6">
             {externalLinks.map((link) => (
               <motion.a
                 key={link.name}
                 href={link.href}
                 target="_blank"
                 rel="noopener noreferrer"
-                whileHover={{ scale: 1.02 }}
-                className="flex items-center gap-3 text-zinc-400 hover:text-white transition-colors text-xl font-bold"
+                whileHover={{ scale: 1.1 }}
+                className="text-zinc-400 hover:text-white transition-colors"
+                aria-label={link.name}
               >
                 {link.icon}
-                <span>{link.name}</span>
               </motion.a>
             ))}
             <motion.a
@@ -80,10 +80,10 @@ export default function Navbar() {
               download="Daniel_Dieguez_CV.pdf"
               whileHover={{ scale: 1.02 }}
               whileTap={{ scale: 0.98 }}
-              className="px-8 py-4 border-2 border-indigo-600 hover:border-indigo-500 bg-transparent rounded-lg text-white font-bold transition-colors text-xl flex items-center gap-3"
+              className="px-4 py-2 border-2 border-indigo-600 hover:border-indigo-500 bg-transparent rounded-lg text-white font-bold transition-colors text-lg flex items-center gap-2"
             >
               RESUME
-              <svg className="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+              <svg className="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                 <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M19 14l-7 7m0 0l-7-7m7 7V3" />
               </svg>
             </motion.a>
@@ -115,7 +115,7 @@ export default function Navbar() {
               transition={{ duration: 0.3, ease: "easeInOut" }}
               className="md:hidden overflow-hidden border-t border-zinc-800/50"
             >
-              <div className="py-4 space-y-2">
+              <div className="py-4 flex justify-center gap-8">
                 {externalLinks.map((link) => (
                   <motion.a
                     key={link.name}
@@ -123,11 +123,11 @@ export default function Navbar() {
                     target="_blank"
                     rel="noopener noreferrer"
                     onClick={() => setIsOpen(false)}
-                    whileHover={{ x: 5 }}
-                    className="flex items-center gap-3 py-3 text-zinc-400 hover:text-white transition-all text-lg font-bold"
+                    whileHover={{ scale: 1.1 }}
+                    className="text-zinc-400 hover:text-white transition-all"
+                    aria-label={link.name}
                   >
                     {link.icon}
-                    <span>{link.name}</span>
                   </motion.a>
                 ))}
                 <motion.a
