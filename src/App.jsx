@@ -14,11 +14,13 @@ export default function App() {
   return (
     <div className="scroll-smooth">
       <Navbar />
-      <Hero />
-      <Projects />
-      <Education />
-      <Technologies />
-      <Footer />
+      <div className="max-w-[1920px] mx-auto bg-[#0a0a0a] shadow-2xl">
+        <Hero />
+        <Projects />
+        <Education />
+        <Technologies />
+        <Footer />
+      </div>
     </div>
   );
 }

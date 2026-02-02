@@ -5,7 +5,7 @@ export default function Hero() {
   return (
     <section className="bg-gradient-to-b from-[#0a0a0a] to-[#1a1a1a] text-white flex items-center">
       <div className="max-w-6xl mx-auto px-6 pt-56 pb-40 w-full">
-        <div className="grid lg:grid-cols-2 gap-8 items-center">
+        <div className="grid lg:grid-cols-2 gap-4 items-center">
 
           {/* COLUMNA IZQUIERDA: Foto */}
           <div className="order-1 lg:order-1 flex justify-center lg:justify-start">
@@ -29,10 +29,9 @@ export default function Hero() {
               initial={{ opacity: 0, y: 20 }}
               animate={{ opacity: 1, y: 0 }}
               transition={{ duration: 0.6, ease: "easeOut" }}
-              className="text-xl lg:text-2xl text-zinc-300 max-w-xl leading-relaxed uppercase"
+              className="text-xl lg:text-2xl text-zinc-300 max-w-2xl leading-loose uppercase"
             >
-              Programmer specialized in gameplay and systems, with a strong foundation in software engineering. Open to new challenges and adaptable beyond game development.
-            </motion.p>
+Programmer specialized in gameplay and systems, with a strong foundation in software engineering. Entrepreneurial by nature, I’m used to taking ownership of projects, making technical decisions, and balancing creativity with practical constraints. Open to new challenges and adaptable beyond game development.            </motion.p>
           </div>
 
         </div>

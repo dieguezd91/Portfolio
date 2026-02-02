@@ -13,13 +13,14 @@ export default function Footer() {
           whileInView={{ opacity: 1, y: 0 }}
           viewport={{ once: true }}
           transition={{ duration: 0.6 }}
-          className="mb-8 text-center"
+          className="mb-8"
         >
-          <p className="text-lg text-zinc-400 leading-relaxed">
-            Soy un desarrollador apasionado por crear experiencias interactivas memorables.
-            Con experiencia en desarrollo de juegos y aplicaciones web, combino creatividad
-            técnica con diseño de sistemas robustos. Siempre buscando nuevos desafíos y
-            oportunidades para aprender.
+          <p className="text-lg text-white leading-relaxed">
+            <span className="font-bold text-2xl">Hello, I'm Daniel</span>
+            <br /><br />
+            I'm a programmer who enjoys building things and understanding how systems work. I started with game development, driven by curiosity and a love for interactive experiences, but over time I became interested in software development as a whole. I like learning new tools, adapting to different kinds of projects, and taking on new challenges that help me grow.
+            <br /><br />
+            If you'd like to know more or think I could be a good fit, feel free to reach out — I'd be happy to connect.
           </p>
         </motion.div>
 
@@ -29,7 +30,7 @@ export default function Footer() {
           whileInView={{ opacity: 1 }}
           viewport={{ once: true }}
           transition={{ duration: 0.6, delay: 0.2 }}
-          className="text-center text-sm text-zinc-600"
+          className="text-center text-xs text-white"
         >
           © {currentYear} Daniel Dieguez. All rights reserved.
         </motion.div>

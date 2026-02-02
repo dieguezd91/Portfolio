@@ -200,7 +200,7 @@ export default function Projects() {
             className="h-1 bg-indigo-600 mx-auto mb-6"
           />
           <p className="text-xl text-zinc-400 max-w-2xl mx-auto">
-            A collection of games ranging from VR experiences to mobile strategy and browser-based adventures
+            Every project tells a story. Here are some of the games I've brought to life
           </p>
         </motion.div>
 
