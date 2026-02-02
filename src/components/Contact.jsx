@@ -73,7 +73,7 @@ export default function Contact() {
           transition={{ duration: 0.6, ease: "easeOut" }}
           className="text-center mb-16"
         >
-          <h2 className="text-5xl md:text-6xl font-bold mb-4 bg-gradient-to-r from-white to-purple-400 bg-clip-text text-transparent">
+          <h2 className="text-5xl md:text-6xl font-bold mb-4 bg-gradient-to-r from-white to-purple-400 bg-clip-text text-transparent" style={{ fontFamily: 'var(--font-heading)' }}>
             Let's Work Together
           </h2>
           <motion.div
@@ -120,7 +120,7 @@ export default function Contact() {
                 {contacts[0].icon}
               </motion.div>
               <div className="flex-1 max-w-md">
-                <h3 className="font-semibold mb-1 text-xl group-hover:text-purple-300 transition-colors">
+                <h3 className="font-semibold mb-1 text-xl group-hover:text-purple-300 transition-colors" style={{ fontFamily: 'var(--font-heading)' }}>
                   {contacts[0].name}
                 </h3>
                 <p className="text-gray-400 break-all">{contacts[0].label}</p>
@@ -169,7 +169,7 @@ export default function Contact() {
                     {contact.icon}
                   </motion.div>
                   <div className="flex-1">
-                    <h3 className="font-semibold mb-1 text-lg group-hover:text-purple-300 transition-colors">
+                    <h3 className="font-semibold mb-1 text-lg group-hover:text-purple-300 transition-colors" style={{ fontFamily: 'var(--font-heading)' }}>
                       {contact.name}
                     </h3>
                     <p className="text-gray-400 text-sm break-all">{contact.label}</p>
@@ -199,7 +199,8 @@ export default function Contact() {
         >
           <p className="text-gray-500 mb-4">Or download my resume</p>
           <motion.a
-            href="#"
+            href="/Daniel_Dieguez_CV.pdf"
+            download="Daniel_Dieguez_CV.pdf"
             whileHover={{ scale: 1.05, backgroundColor: "rgba(255, 255, 255, 0.1)" }}
             whileTap={{ scale: 0.95 }}
             className="inline-flex items-center gap-2 px-6 py-3 bg-white/5 border border-white/10 rounded-lg transition-all"

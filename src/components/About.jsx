@@ -55,7 +55,7 @@ export default function About() {
           transition={{ duration: 0.6, ease: "easeOut" }}
           className="text-center mb-16"
         >
-          <h2 className="text-5xl md:text-6xl font-bold mb-4 bg-gradient-to-r from-white to-purple-400 bg-clip-text text-transparent">
+          <h2 className="text-5xl md:text-6xl font-bold mb-4 bg-gradient-to-r from-white to-purple-400 bg-clip-text text-transparent" style={{ fontFamily: 'var(--font-heading)' }}>
             About Me
           </h2>
           <motion.div
@@ -124,7 +124,7 @@ export default function About() {
           viewport={{ once: true, margin: "-50px" }}
           transition={{ duration: 0.6 }}
         >
-          <h3 className="text-3xl font-bold mb-8 text-center">Technical Skills</h3>
+          <h3 className="text-3xl font-bold mb-8 text-center" style={{ fontFamily: 'var(--font-heading)' }}>Technical Skills</h3>
 
           <div className="space-y-8">
             {[

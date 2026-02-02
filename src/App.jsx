@@ -2,7 +2,8 @@ import { useEffect } from 'react';
 import Navbar from './components/Navbar';
 import Hero from './components/Hero';
 import Projects from './components/Projects';
-import About from './components/About';
+import Education from './components/Education';
+import Technologies from './components/Technologies';
 import Contact from './components/Contact';
 import Footer from './components/Footer';
 
@@ -16,7 +17,8 @@ export default function App() {
       <Navbar />
       <Hero />
       <Projects />
-      <About />
+      <Education />
+      <Technologies />
       <Contact />
       <Footer />
     </div>

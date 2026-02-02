@@ -1,5 +1,6 @@
 import { useState, useEffect } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
+import { SiGithub, SiLinkedin, SiItchdotio } from 'react-icons/si';
 
 export default function Navbar() {
   const [isOpen, setIsOpen] = useState(false);
@@ -14,11 +15,22 @@ export default function Navbar() {
     return () => window.removeEventListener('scroll', handleScroll);
   }, []);
 
-  const navLinks = [
-    { name: 'Home', href: '#' },
-    { name: 'Projects', href: '#projects' },
-    { name: 'About', href: '#about' },
-    { name: 'Contact', href: '#contact' }
+  const externalLinks = [
+    {
+      name: 'GitHub',
+      href: 'https://github.com/dieguezd91',
+      icon: <SiGithub className="w-5 h-5" />
+    },
+    {
+      name: 'LinkedIn',
+      href: 'https://www.linkedin.com/in/daniel-dieguez/',
+      icon: <SiLinkedin className="w-5 h-5" />
+    },
+    {
+      name: 'itch.io',
+      href: 'https://danidieguez.itch.io',
+      icon: <SiItchdotio className="w-5 h-5" />
+    }
   ];
 
   return (
@@ -28,52 +40,44 @@ export default function Navbar() {
       transition={{ duration: 0.6, ease: "easeOut" }}
       className={`fixed top-0 w-full z-50 transition-all duration-300 ${
         scrolled
-          ? 'bg-gray-900/95 backdrop-blur-md border-b border-gray-800/80 shadow-lg shadow-purple-500/5'
-          : 'bg-gray-900/80 backdrop-blur-md border-b border-gray-800/50'
+          ? 'bg-black/90 backdrop-blur-md border-b border-zinc-800'
+          : 'bg-black/80 backdrop-blur-md border-b border-zinc-800/50'
       }`}
     >
       <div className="max-w-7xl mx-auto px-6">
         <div className="flex justify-between items-center h-16">
           <motion.a
             href="#"
-            whileHover={{ scale: 1.05 }}
-            className="text-xl font-bold bg-gradient-to-r from-purple-400 to-pink-400 bg-clip-text text-transparent"
+            whileHover={{ scale: 1.02 }}
+            className="text-xl font-bold text-white"
+            style={{ fontFamily: 'var(--font-heading)' }}
           >
             Daniel Dieguez
           </motion.a>
 
           {/* Desktop Navigation */}
-          <div className="hidden md:flex items-center gap-8">
-            {navLinks.map((link, index) => (
+          <div className="hidden md:flex items-center gap-6">
+            {externalLinks.map((link) => (
               <motion.a
                 key={link.name}
                 href={link.href}
-                initial={{ opacity: 0, y: -20 }}
-                animate={{ opacity: 1, y: 0 }}
-                transition={{ duration: 0.5, delay: index * 0.1 }}
-                className="text-gray-300 hover:text-white transition-colors relative group"
+                target="_blank"
+                rel="noopener noreferrer"
+                whileHover={{ scale: 1.02 }}
+                className="flex items-center gap-2 text-zinc-400 hover:text-white transition-colors"
               >
-                {link.name}
-                <motion.span
-                  className="absolute -bottom-1 left-0 h-0.5 bg-gradient-to-r from-purple-400 to-pink-400"
-                  initial={{ width: 0 }}
-                  whileHover={{ width: "100%" }}
-                  transition={{ duration: 0.3 }}
-                />
+                {link.icon}
+                <span>{link.name}</span>
               </motion.a>
             ))}
             <motion.a
-              href="https://danidieguez.itch.io"
-              target="_blank"
-              rel="noopener noreferrer"
-              initial={{ opacity: 0, scale: 0.8 }}
-              animate={{ opacity: 1, scale: 1 }}
-              transition={{ duration: 0.5, delay: 0.4 }}
-              whileHover={{ scale: 1.05, boxShadow: "0 0 20px rgba(168, 85, 247, 0.3)" }}
-              whileTap={{ scale: 0.95 }}
-              className="px-4 py-2 bg-gradient-to-r from-purple-600 to-pink-600 rounded-lg text-white font-semibold transition-all shadow-md"
+              href="/Daniel_Dieguez_CV.pdf"
+              download="Daniel_Dieguez_CV.pdf"
+              whileHover={{ scale: 1.02 }}
+              whileTap={{ scale: 0.98 }}
+              className="px-4 py-2 bg-indigo-600 hover:bg-indigo-500 rounded-lg text-white font-semibold transition-colors"
             >
-              itch.io
+              Download CV
             </motion.a>
           </div>
 
@@ -81,7 +85,7 @@ export default function Navbar() {
           <motion.button
             onClick={() => setIsOpen(!isOpen)}
             whileTap={{ scale: 0.9 }}
-            className="md:hidden text-gray-300 hover:text-white p-2"
+            className="md:hidden text-zinc-400 hover:text-white p-2"
           >
             <svg className="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
               {isOpen ? (
@@ -101,33 +105,30 @@ export default function Navbar() {
               animate={{ opacity: 1, height: "auto" }}
               exit={{ opacity: 0, height: 0 }}
               transition={{ duration: 0.3, ease: "easeInOut" }}
-              className="md:hidden overflow-hidden border-t border-gray-800/50"
+              className="md:hidden overflow-hidden border-t border-zinc-800/50"
             >
               <div className="py-4 space-y-2">
-                {navLinks.map((link, index) => (
+                {externalLinks.map((link) => (
                   <motion.a
                     key={link.name}
                     href={link.href}
+                    target="_blank"
+                    rel="noopener noreferrer"
                     onClick={() => setIsOpen(false)}
-                    initial={{ opacity: 0, x: -20 }}
-                    animate={{ opacity: 1, x: 0 }}
-                    transition={{ duration: 0.3, delay: index * 0.05 }}
-                    whileHover={{ x: 5, color: "#a855f7" }}
-                    className="block py-2 text-gray-300 hover:text-white transition-all"
+                    whileHover={{ x: 5 }}
+                    className="flex items-center gap-2 py-2 text-zinc-400 hover:text-white transition-all"
                   >
-                    {link.name}
+                    {link.icon}
+                    <span>{link.name}</span>
                   </motion.a>
                 ))}
                 <motion.a
-                  href="https://danidieguez.itch.io"
-                  target="_blank"
-                  rel="noopener noreferrer"
-                  initial={{ opacity: 0, x: -20 }}
-                  animate={{ opacity: 1, x: 0 }}
-                  transition={{ duration: 0.3, delay: 0.2 }}
-                  className="block mt-4 px-4 py-2 bg-gradient-to-r from-purple-600 to-pink-600 rounded-lg text-white font-semibold text-center"
+                  href="/Daniel_Dieguez_CV.pdf"
+                  download="Daniel_Dieguez_CV.pdf"
+                  className="block mt-4 px-4 py-2 bg-indigo-600 hover:bg-indigo-500 rounded-lg text-white font-semibold text-center transition-colors"
+                  onClick={() => setIsOpen(false)}
                 >
-                  itch.io
+                  Download CV
                 </motion.a>
               </div>
             </motion.div>

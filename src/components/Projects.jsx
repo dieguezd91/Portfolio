@@ -4,78 +4,105 @@ const projects = [
   {
     id: 1,
     title: "Clockwork Siege",
+    year: 2024,
+    role: "Game Designer & Programmer",
     description: "A dynamic 2D mobile strategy game blending Tower Defense tactics with a Roguelike Deckbuilder",
+    media: "/projects/clockwork-siege.gif",
+    mediaType: "gif",
     tags: ["Mobile", "Strategy", "Deckbuilder"],
-    link: "https://danidieguez.itch.io/clockwork-siege",
-    image: "https://img.itch.zone/aW1nLzI0NTQ0NDkyLnBuZw==/original/5BYBsz.png"
+    link: "https://danidieguez.itch.io/clockwork-siege"
   },
   {
     id: 2,
     title: "BinforcerVR",
+    year: 2023,
+    role: "VR Developer",
     description: "VR Arcade Educational Game – Sort and recycle trash in zero gravity",
+    media: "/projects/binforcervr.gif",
+    mediaType: "gif",
     tags: ["VR", "Educational", "Unity"],
-    link: "https://danidieguez.itch.io/binforcervr",
-    image: "https://img.itch.zone/aW1nLzIzODc4MjQxLnBuZw==/original/6%2Bq1bX.png"
+    link: "https://danidieguez.itch.io/binforcervr"
   },
   {
     id: 3,
     title: "Evolster",
+    year: 2023,
+    role: "Game Developer",
     description: "Bullet hell style game set in a horror world",
+    media: "/projects/evolster.gif",
+    mediaType: "gif",
     tags: ["Bullet Hell", "Horror", "Survival"],
-    link: "https://danidieguez.itch.io/evolster",
-    image: "https://img.itch.zone/aW1nLzE3MjE0NDM4LnBuZw==/original/KN6nAD.png"
+    link: "https://danidieguez.itch.io/evolster"
   },
   {
     id: 4,
     title: "Project C.O.R.V.U.S.",
+    year: 2023,
+    role: "Gameplay Programmer",
     description: "Survival horror video game with tactical combat and strategic character switching",
+    media: "/projects/project-corvus.gif",
+    mediaType: "gif",
     tags: ["Survival", "Horror", "Tactical"],
-    link: "https://astroriftgames.itch.io/project-corvus",
-    image: "https://img.itch.zone/aW1nLzIwNTE2ODQ3LnBuZw==/original/JvEPqn.png"
+    link: "https://astroriftgames.itch.io/project-corvus"
   },
   {
     id: 5,
     title: "Müecas Game",
+    year: 2022,
+    role: "Lead Developer",
     description: "Endless runner advergame created for the MÜECAS cereal brand",
+    media: "/projects/muecas.gif",
+    mediaType: "gif",
     tags: ["Endless Runner", "Browser", "Advergame"],
-    link: "https://astroriftgames.itch.io/muecas",
-    image: "https://img.itch.zone/aW1nLzE4NDA1MTAyLnBuZw==/347x500/WxMnkm.png"
+    link: "https://astroriftgames.itch.io/muecas"
   },
   {
     id: 6,
     title: "Arkanoid 3D",
+    year: 2024,
+    role: "Game Developer",
     description: "Fun 3D arkanoid prototype with modern mechanics",
+    media: "/projects/arkanoid-3d.gif",
+    mediaType: "gif",
     tags: ["Arcade", "3D", "Prototype"],
-    link: "https://danidieguez.itch.io/arkanoid-3d",
-    image: "https://img.itch.zone/aW1hZ2UvMjg0ODA3My8xNzAyMjMyNi5wbmc=/original/aBoCqA.png"
+    link: "https://danidieguez.itch.io/arkanoid-3d"
   },
   {
     id: 7,
     title: "Wheelin' To Roll",
+    year: 2022,
+    role: "Game Developer",
     description: "Browser-playable survival game with unique mechanics",
+    media: "/projects/wheelin-to-roll.gif",
+    mediaType: "gif",
     tags: ["Survival", "Browser", "Action"],
-    link: "https://danidieguez.itch.io/wheelin-to-roll",
-    image: "https://img.itch.zone/aW1nLzE0ODc1ODQ0LnBuZw==/original/07A6It.png"
+    link: "https://danidieguez.itch.io/wheelin-to-roll"
   },
   {
     id: 8,
     title: "Forbbiden Rhytms",
+    year: 2023,
+    role: "Game Developer",
     description: "Survival game with rhythm-based mechanics",
+    media: "/projects/forbbiden-rhytms.gif",
+    mediaType: "gif",
     tags: ["Survival", "Rhythm", "Action"],
-    link: "https://danidieguez.itch.io/forbbiden-rhytms",
-    image: "https://img.itch.zone/aW1nLzE3MjE0Njk3LnBuZw==/original/adoidh.png"
+    link: "https://danidieguez.itch.io/forbbiden-rhytms"
   },
   {
     id: 9,
     title: "Cyber Realm: Shadows of Neo-City",
+    year: 2022,
+    role: "Game Developer",
     description: "A pixel-art cyberpunk adventure with turn-based combat in Neo-City's depths",
+    media: "/projects/cyber-realm.gif",
+    mediaType: "gif",
     tags: ["Cyberpunk", "Pixel Art", "RPG"],
-    link: "https://tomas-taboada.itch.io/cyberrealm",
-    image: "https://img.itch.zone/aW1nLzE0ODc1ODM5LnBuZw==/original/OHRs81.png"
+    link: "https://tomas-taboada.itch.io/cyberrealm"
   }
 ];
 
-function ProjectCard({ title, description, tags, link, image, index }) {
+function ProjectCard({ title, year, role, description, tags, link, media, mediaType, index }) {
   return (
     <motion.a
       href={link}
@@ -85,76 +112,66 @@ function ProjectCard({ title, description, tags, link, image, index }) {
       whileInView={{ opacity: 1, y: 0 }}
       viewport={{ once: true, margin: "-50px" }}
       transition={{ duration: 0.5, delay: index * 0.1, ease: "easeOut" }}
-      whileHover={{ y: -8 }}
-      className="group relative bg-gray-800/50 backdrop-blur-sm rounded-xl overflow-hidden transition-all duration-300 border border-gray-700/50 hover:border-purple-500/50"
+      whileHover={{ y: -4 }}
+      className="group relative bg-[#2a2a2a] rounded-xl overflow-hidden transition-all duration-300 border border-zinc-800 hover:border-indigo-500/50"
     >
-      {/* Glow effect on hover */}
-      <motion.div
-        className="absolute inset-0 bg-gradient-to-r from-purple-500/0 via-purple-500/10 to-pink-500/0 opacity-0 group-hover:opacity-100 transition-opacity duration-300"
-        style={{ pointerEvents: 'none' }}
-      />
-
-      <div className="aspect-video overflow-hidden bg-gray-900 relative">
-        <motion.img
-          src={image}
-          alt={title}
-          className="w-full h-full object-cover object-center"
-          loading="lazy"
-          whileHover={{ scale: 1.05 }}
-          transition={{ duration: 0.6, ease: "easeOut" }}
-        />
-
-        {/* Overlay gradient on hover */}
-        <div className="absolute inset-0 bg-gradient-to-t from-gray-900/80 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300" />
+      {/* MEDIA: Video o GIF */}
+      <div className="aspect-video overflow-hidden bg-[#1a1a1a] relative">
+        {mediaType === 'video' ? (
+          <video
+            autoPlay
+            loop
+            muted
+            playsInline
+            className="w-full h-full object-cover object-center"
+          >
+            <source src={media} type="video/mp4" />
+          </video>
+        ) : (
+          <img
+            src={media}
+            alt={title}
+            className="w-full h-full object-cover object-center"
+            loading="lazy"
+          />
+        )}
       </div>
 
+      {/* CONTENIDO */}
       <div className="p-6 relative">
-        <h3 className="text-2xl font-bold mb-2 group-hover:text-purple-400 transition-colors duration-300">
-          {title}
+        {/* Título + Año */}
+        <h3 className="text-2xl font-bold text-white mb-1 group-hover:text-indigo-400 transition-colors duration-300" style={{ fontFamily: 'var(--font-heading)' }}>
+          {title} <span className="text-lg text-zinc-500 font-normal">({year})</span>
         </h3>
-        <p className="text-gray-400 mb-4 line-clamp-2 leading-relaxed">
+
+        {/* Rol */}
+        <p className="text-sm text-indigo-400 font-medium mb-3">{role}</p>
+
+        {/* Descripción */}
+        <p className="text-zinc-400 mb-4 line-clamp-2 leading-relaxed">
           {description}
         </p>
+
+        {/* Tags */}
         <div className="flex flex-wrap gap-2">
-          {tags.map((tag, i) => (
-            <motion.span
+          {tags.map((tag) => (
+            <span
               key={tag}
-              initial={{ opacity: 0, scale: 0.8 }}
-              whileInView={{ opacity: 1, scale: 1 }}
-              viewport={{ once: true }}
-              transition={{ duration: 0.3, delay: index * 0.1 + i * 0.05 }}
-              className="bg-purple-500/10 border border-purple-500/30 text-purple-300 px-3 py-1 rounded-full text-sm backdrop-blur-sm"
+              className="bg-indigo-500/10 border border-indigo-500/30 text-indigo-300 px-3 py-1 rounded-full text-sm"
             >
               {tag}
-            </motion.span>
+            </span>
           ))}
         </div>
       </div>
-
-      <motion.div
-        initial={{ opacity: 0, x: -10 }}
-        whileHover={{ opacity: 1, x: 0 }}
-        className="absolute top-4 right-4 bg-black/50 backdrop-blur-sm px-3 py-1 rounded-full text-sm flex items-center gap-1"
-      >
-        View on itch.io
-        <motion.span
-          animate={{ x: [0, 3, 0] }}
-          transition={{ duration: 1.5, repeat: Infinity, ease: "easeInOut" }}
-        >
-          →
-        </motion.span>
-      </motion.div>
     </motion.a>
   );
 }
 
 export default function Projects() {
   return (
-    <section id="projects" className="min-h-screen bg-gradient-to-b from-gray-900 to-gray-800 text-white py-20 px-6 relative overflow-hidden">
-      {/* Subtle background glow */}
-      <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[800px] h-[800px] bg-purple-500/5 rounded-full blur-3xl" />
-
-      <div className="max-w-7xl mx-auto relative">
+    <section id="projects" className="min-h-screen bg-[#1a1a1a] text-white py-20 px-6">
+      <div className="max-w-7xl mx-auto">
         <motion.div
           initial={{ opacity: 0, y: 30 }}
           whileInView={{ opacity: 1, y: 0 }}
@@ -162,27 +179,22 @@ export default function Projects() {
           transition={{ duration: 0.6, ease: "easeOut" }}
           className="text-center mb-16"
         >
-          <motion.h2
-            className="text-5xl md:text-6xl font-bold mb-4 bg-gradient-to-r from-white to-purple-400 bg-clip-text text-transparent"
+          <h2
+            className="text-5xl md:text-6xl font-bold mb-4 text-white"
+            style={{ fontFamily: 'var(--font-heading)' }}
           >
             My Games
-          </motion.h2>
+          </h2>
           <motion.div
             initial={{ width: 0 }}
             whileInView={{ width: 96 }}
             viewport={{ once: true }}
             transition={{ duration: 0.8, delay: 0.2, ease: "easeOut" }}
-            className="h-1 bg-gradient-to-r from-purple-600 to-pink-600 mx-auto mb-6"
+            className="h-1 bg-indigo-600 mx-auto mb-6"
           />
-          <motion.p
-            initial={{ opacity: 0 }}
-            whileInView={{ opacity: 1 }}
-            viewport={{ once: true }}
-            transition={{ duration: 0.6, delay: 0.3 }}
-            className="text-xl text-gray-400 max-w-2xl mx-auto"
-          >
+          <p className="text-xl text-zinc-400 max-w-2xl mx-auto">
             A collection of games ranging from VR experiences to mobile strategy and browser-based adventures
-          </motion.p>
+          </p>
         </motion.div>
 
         <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-8">
