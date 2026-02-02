@@ -190,7 +190,7 @@ export default function Projects() {
             className="text-5xl md:text-6xl font-bold mb-4 text-white"
             style={{ fontFamily: 'var(--font-heading)' }}
           >
-            My Games
+            Projects
           </h2>
           <motion.div
             initial={{ width: 0 }}
@@ -200,7 +200,7 @@ export default function Projects() {
             className="h-1 bg-indigo-600 mx-auto mb-6"
           />
           <p className="text-xl text-zinc-400 max-w-2xl mx-auto">
-            Every project tells a story. Here are some of the games I've brought to life
+            Projects and prototypes built during my professional training and indie game development journey.
           </p>
         </motion.div>
 
