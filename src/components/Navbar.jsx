@@ -38,11 +38,10 @@ export default function Navbar() {
       initial={{ y: -100 }}
       animate={{ y: 0 }}
       transition={{ duration: 0.6, ease: "easeOut" }}
-      className={`fixed top-0 w-full z-50 transition-all duration-300 ${
-        scrolled
+      className={`fixed top-0 w-full z-50 transition-all duration-300 ${scrolled
           ? 'bg-black/90 backdrop-blur-md border-b border-zinc-800'
           : 'bg-black/80 backdrop-blur-md border-b border-zinc-800/50'
-      }`}
+        }`}
     >
       <div className="max-w-7xl mx-auto px-6">
         <div className="flex justify-between items-center h-24 md:h-28">
@@ -115,25 +114,30 @@ export default function Navbar() {
               transition={{ duration: 0.3, ease: "easeInOut" }}
               className="md:hidden overflow-hidden border-t border-zinc-800/50"
             >
-              <div className="py-4 flex justify-center gap-8">
-                {externalLinks.map((link) => (
-                  <motion.a
-                    key={link.name}
-                    href={link.href}
-                    target="_blank"
-                    rel="noopener noreferrer"
-                    onClick={() => setIsOpen(false)}
-                    whileHover={{ scale: 1.1 }}
-                    className="text-zinc-400 hover:text-white transition-all"
-                    aria-label={link.name}
-                  >
-                    {link.icon}
-                  </motion.a>
-                ))}
+              <div className="py-6 flex flex-col items-center gap-6">
+                {/* Íconos sociales */}
+                <div className="flex justify-center gap-8">
+                  {externalLinks.map((link) => (
+                    <motion.a
+                      key={link.name}
+                      href={link.href}
+                      target="_blank"
+                      rel="noopener noreferrer"
+                      onClick={() => setIsOpen(false)}
+                      whileHover={{ scale: 1.1 }}
+                      className="text-zinc-400 hover:text-white transition-all"
+                      aria-label={link.name}
+                    >
+                      {link.icon}
+                    </motion.a>
+                  ))}
+                </div>
+
+                {/* Botón Resume */}
                 <motion.a
                   href="/Daniel_Dieguez_CV.pdf"
                   download="Daniel_Dieguez_CV.pdf"
-                  className="flex items-center justify-center gap-3 mt-4 px-6 py-3 border-2 border-indigo-600 hover:border-indigo-500 bg-transparent rounded-lg text-white font-bold transition-colors text-lg"
+                  className="flex items-center justify-center gap-3 px-6 py-3 border-2 border-indigo-600 hover:border-indigo-500 bg-transparent rounded-lg text-white font-bold transition-colors text-lg"
                   onClick={() => setIsOpen(false)}
                 >
                   RESUME

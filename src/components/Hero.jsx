@@ -31,7 +31,7 @@ export default function Hero() {
               transition={{ duration: 0.6, ease: "easeOut" }}
               className="text-xl lg:text-2xl text-zinc-300 max-w-2xl leading-loose uppercase"
             >
-Programmer specialized in gameplay and systems, with a strong foundation in software engineering. Entrepreneurial by nature, I’m used to taking ownership of projects, making technical decisions, and balancing creativity with practical constraints. Open to new challenges and adaptable beyond game development.            </motion.p>
+              Programmer specialized in gameplay and systems, with a strong foundation in software engineering. Entrepreneurial by nature, I’m used to taking ownership of projects, making technical decisions, and balancing creativity with practical constraints. Open to new challenges and adaptable beyond game development.            </motion.p>
           </div>
 
         </div>
