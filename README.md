@@ -1,70 +1,84 @@
-# Daniel Dieguez Portfolio
+# Daniel Dieguez – Personal Portfolio
 
-Portfolio web para Game & Web Developer construido con React, Tailwind CSS y Vite.
+Personal portfolio built with React, Tailwind CSS, and Vite.
+Designed as a responsive single-page application showcasing selected projects and technical skills.
 
-## Tecnologías
+## Tech Stack
 
-- **React** - Librería de UI
-- **Tailwind CSS v4** - Framework de estilos
-- **Vite** - Build tool y dev server
+- **React** - Component-based UI library
+- **Tailwind CSS v4** - Utility-first CSS framework
+- **Vite** - Modern build tool and development server
 
-## Características
+## Key Features
 
-- Diseño minimalista y moderno
-- Completamente responsive
-- Smooth scroll navigation
-- Imágenes de proyectos cargadas desde itch.io
-- Componentes reutilizables y escalables
-- Animaciones y efectos hover
+Responsive single-page application (SPA)
 
-## Estructura del Proyecto
+Modular and reusable component structure
+
+Smooth navigation and structured layout
+
+Dynamic project content integration (Itch.io links)
+
+Clean and minimal UI design
+
+Optimized build configuration with Vite
+
+## Project Structure
 
 ```
 src/
 ├── components/
-│   ├── Navbar.jsx      # Navegación principal
-│   ├── Hero.jsx        # Sección de presentación
-│   ├── Projects.jsx    # Grid de proyectos
-│   ├── About.jsx       # Información y skills
-│   ├── Contact.jsx     # Información de contacto
-│   └── Footer.jsx      # Pie de página
+│   ├── Navbar.jsx
+│   ├── Hero.jsx
+│   ├── Projects.jsx
+│   ├── About.jsx
+│   ├── Contact.jsx
+│   └── Footer.jsx
 ├── App.jsx
 └── index.css
+
 ```
 
-## Instalación y Uso
+## Getting Started
 
 ```bash
-# Instalar dependencias
+# Install dependencies
 npm install
 
-# Iniciar servidor de desarrollo
+# Start development server
 npm run dev
 
-# Build para producción
+# Build for production
 npm run build
 
-# Preview del build
+# Preview production build
 npm run preview
 ```
 
-## Personalización
+## Customization
 
-Para personalizar el portfolio:
+To customize the portfolio:
 
-1. **Proyectos**: Edita el array `projects` en `src/components/Projects.jsx`
-2. **Skills**: Edita el array `skills` en `src/components/About.jsx`
-3. **Links de contacto**: Modifica el array `contacts` en `src/components/Contact.jsx`
-4. **Información personal**: Actualiza los textos en cada componente
+Update project data in Projects.jsx
 
-## Deploy
+Modify skills in About.jsx
 
-Este proyecto puede ser desplegado en:
-- Vercel
-- Netlify
-- GitHub Pages
-- Cualquier hosting que soporte SPA
+Edit contact links in Contact.jsx
+
+Adjust layout or styling directly within components
+
+## Deployment
+
+This project can be deployed on:
+
+Vercel
+
+Netlify
+
+GitHub Pages
+
+Any static hosting provider that supports SPA applications
 
 ---
 
-Desarrollado por Daniel Dieguez
+Developed by Daniel Dieguez
