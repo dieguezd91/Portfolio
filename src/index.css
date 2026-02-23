@@ -36,6 +36,29 @@
   box-shadow: 0 0 8px rgba(0, 245, 212, 0.18);
 }
 
+/* ─── HUD Button Primary (pink filled) ───────────────────────────────────── */
+/*
+ * Single primary CTA — pink fill, dark text, reserved for the hero entry point.
+ * Elevation handled by Framer Motion whileHover.
+ */
+.hud-btn-primary {
+  background-color: #FF2D95;
+  border: 1px solid #FF2D95;
+  color: #0F1020;
+  box-shadow: 0 0 12px rgba(255, 45, 149, 0.2);
+  transition: box-shadow 160ms ease, background-color 160ms ease;
+}
+
+.hud-btn-primary:hover {
+  background-color: #ff3da0;
+  box-shadow: 0 0 22px rgba(255, 45, 149, 0.36);
+}
+
+.hud-btn-primary:active {
+  background-color: #e0267f;
+  box-shadow: 0 0 6px rgba(255, 45, 149, 0.15);
+}
+
 /* ─── HUD Card ───────────────────────────────────────────────────────────── */
 /*
  * Same accent token as .hud-btn — unified cyan system.

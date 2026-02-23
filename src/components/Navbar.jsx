@@ -1,6 +1,7 @@
 import { useState, useEffect } from 'react';
 import { motion } from 'framer-motion';
 import { SiGithub, SiLinkedin, SiItchdotio } from 'react-icons/si';
+import HudButton from './HudButton';
 
 export default function Navbar() {
   const [scrolled, setScrolled] = useState(false);
@@ -61,18 +62,16 @@ export default function Navbar() {
           </div>
 
           {/* Right — Resume button */}
-          <motion.a
+          <HudButton
             href="/Daniel_Dieguez_CV.pdf"
             download="Daniel_Dieguez_CV.pdf"
-            whileHover={{ y: -2 }}
-            whileTap={{ scale: 0.97 }}
-            className="hud-btn px-4 py-2 rounded-lg font-bold text-base md:text-lg flex items-center gap-2"
+            className="px-4 py-2 rounded-lg text-base md:text-lg"
           >
             RESUME
             <svg className="w-4 h-4 md:w-5 md:h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
               <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M19 14l-7 7m0 0l-7-7m7 7V3" />
             </svg>
-          </motion.a>
+          </HudButton>
 
         </div>
       </div>
