@@ -28,10 +28,7 @@ export default function Technologies() {
           transition={{ duration: 0.6, ease: "easeOut" }}
           className="text-center mb-8"
         >
-          <h2
-            className="text-3xl md:text-4xl font-bold text-white"
-            style={{ fontFamily: 'var(--font-heading)' }}
-          >
+          <h2 className="font-heading text-3xl md:text-4xl font-semibold text-white">
             Technologies I Work With
           </h2>
         </motion.div>
@@ -53,7 +50,7 @@ export default function Technologies() {
                 viewport={{ once: true }}
                 transition={{ duration: 0.3, delay: index * 0.05 }}
                 whileHover={{ scale: 1.02 }}
-                className="px-6 py-3 bg-[#14162A] border border-white/[0.06] rounded-lg text-zinc-400 font-medium hover:text-[#00F5D4] hover:border-[#00F5D4]/25 transition-all duration-150"
+                className="font-body px-6 py-3 bg-[#14162A] border border-white/[0.06] rounded-lg text-zinc-400 font-medium hover:text-[#00F5D4] hover:border-[#00F5D4]/25 transition-all duration-150"
               >
                 {tech}
               </motion.span>
@@ -70,7 +67,7 @@ export default function Technologies() {
                 viewport={{ once: true }}
                 transition={{ duration: 0.3, delay: index * 0.05 + 0.2 }}
                 whileHover={{ scale: 1.02 }}
-                className="px-6 py-3 bg-[#14162A] border border-white/[0.06] rounded-lg text-zinc-400 font-medium hover:text-[#00F5D4] hover:border-[#00F5D4]/25 transition-all duration-150"
+                className="font-body px-6 py-3 bg-[#14162A] border border-white/[0.06] rounded-lg text-zinc-400 font-medium hover:text-[#00F5D4] hover:border-[#00F5D4]/25 transition-all duration-150"
               >
                 {tech}
               </motion.span>

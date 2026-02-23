@@ -29,7 +29,7 @@ function gaussian(mean, std) {
 }
 
 function getCount() {
-  return window.innerWidth < 768 ? 50 : 100;
+  return window.innerWidth < 768 ? 35 : 100;
 }
 
 // cx / cy are pre-computed by setup() so tick() shares the same focal point.

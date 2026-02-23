@@ -23,7 +23,7 @@ export default function HudButton({
   ...props
 }) {
   const variantClass = variant === 'primary' ? 'hud-btn-primary' : 'hud-btn';
-  const classes = `${variantClass} font-bold flex items-center justify-center gap-2 ${className}`.trim();
+  const classes = `${variantClass} font-heading font-semibold flex items-center justify-center gap-2 ${className}`.trim();
 
   const motion_props = {
     whileHover: { y: -2 },

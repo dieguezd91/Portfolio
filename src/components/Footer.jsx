@@ -15,7 +15,7 @@ export default function Footer() {
           whileInView={{ opacity: 1, y: 0 }}
           viewport={{ once: true }}
           transition={{ duration: 0.6 }}
-          className="text-xs tracking-[0.3em] uppercase text-zinc-500 text-center"
+          className="font-body text-xs tracking-[0.2em] uppercase text-zinc-500 text-center"
         >
           Available for game development opportunities
         </motion.p>
@@ -44,7 +44,7 @@ export default function Footer() {
           whileInView={{ opacity: 1 }}
           viewport={{ once: true }}
           transition={{ duration: 0.6, delay: 0.24 }}
-          className="text-xs text-zinc-600 tracking-wider"
+          className="font-body text-xs text-zinc-600 tracking-wide"
         >
           © {currentYear} Daniel Dieguez
         </motion.p>

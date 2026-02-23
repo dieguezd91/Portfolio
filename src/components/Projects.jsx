@@ -147,15 +147,15 @@ function ProjectCard({ title, year, role, description, tags, link, media, mediaT
       {/* CONTENIDO */}
       <div className="p-6 relative">
         {/* Título + Año */}
-        <h3 className="text-2xl font-bold text-white mb-1 group-hover:text-[#00F5D4] transition-colors duration-150" style={{ fontFamily: 'var(--font-heading)' }}>
-          {title} <span className="text-lg text-zinc-500 font-normal">({year})</span>
+        <h3 className="font-heading text-2xl font-semibold text-white mb-1 group-hover:text-[#00F5D4] transition-colors duration-150">
+          {title} <span className="font-body text-lg text-zinc-500 font-normal">({year})</span>
         </h3>
 
         {/* Rol */}
-        <p className="text-sm text-zinc-500 font-medium mb-3">{role}</p>
+        <p className="font-body text-sm text-zinc-500 font-medium mb-3">{role}</p>
 
         {/* Descripción */}
-        <p className="text-zinc-400 mb-4 line-clamp-2 leading-relaxed">
+        <p className="font-body text-zinc-400 mb-4 line-clamp-2 leading-relaxed">
           {description}
         </p>
 
@@ -164,7 +164,7 @@ function ProjectCard({ title, year, role, description, tags, link, media, mediaT
           {tags.map((tag) => (
             <span
               key={tag}
-              className="bg-white/[0.04] border border-white/[0.08] text-zinc-500 px-3 py-1 rounded-full text-sm transition-colors duration-150"
+              className="font-body bg-white/[0.04] border border-white/[0.08] text-zinc-500 px-3 py-1 rounded-full text-sm transition-colors duration-150"
             >
               {tag}
             </span>
@@ -186,10 +186,7 @@ export default function Projects() {
           transition={{ duration: 0.6, ease: "easeOut" }}
           className="text-center mb-16"
         >
-          <h2
-            className="text-5xl md:text-6xl font-bold mb-4 text-white"
-            style={{ fontFamily: 'var(--font-heading)' }}
-          >
+          <h2 className="font-heading text-5xl md:text-6xl font-semibold mb-4 text-white">
             Projects
           </h2>
           <motion.div
@@ -199,7 +196,7 @@ export default function Projects() {
             transition={{ duration: 0.8, delay: 0.2, ease: "easeOut" }}
             className="h-1 bg-[#00F5D4]/50 mx-auto mb-6"
           />
-          <p className="text-xl text-zinc-400 max-w-2xl mx-auto">
+          <p className="font-body text-xl text-zinc-400 max-w-2xl mx-auto">
             Projects and prototypes built during my professional training and indie game development journey.
           </p>
         </motion.div>

@@ -1,9 +1,9 @@
 @import "tailwindcss";
 
 @theme {
-  --font-heading: Montserrat, Arial, sans-serif;
-  --font-body: Montserrat, Arial, sans-serif;
-  --font-mono: Montserrat, Arial, sans-serif;
+  --font-heading: 'Space Grotesk', Arial, sans-serif;
+  --font-body:    'Inter', Arial, sans-serif;
+  --font-mono:    'JetBrains Mono', monospace;
 
   /* Custom color palette */
   --color-background-base: #0F1020;

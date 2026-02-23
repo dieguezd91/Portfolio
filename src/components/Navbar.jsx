@@ -44,8 +44,8 @@ export default function Navbar() {
       <div className="max-w-7xl mx-auto px-6">
         <div className="flex justify-between items-center h-16 md:h-20">
 
-          {/* Left — social icons */}
-          <div className="flex items-center gap-4 md:gap-6">
+          {/* Left — social icons (desktop only) */}
+          <div className="hidden md:flex items-center gap-6">
             {externalLinks.map((link) => (
               <motion.a
                 key={link.name}
@@ -61,11 +61,11 @@ export default function Navbar() {
             ))}
           </div>
 
-          {/* Right — Resume button */}
+          {/* Right — Resume button (desktop only) */}
           <HudButton
             href="/Daniel_Dieguez_CV.pdf"
             download="Daniel_Dieguez_CV.pdf"
-            className="px-4 py-2 rounded-lg text-base md:text-lg"
+            className="hidden md:flex px-4 py-2 rounded-lg text-lg"
           >
             RESUME
             <svg className="w-4 h-4 md:w-5 md:h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
