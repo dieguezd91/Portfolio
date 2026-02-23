@@ -31,7 +31,8 @@ export default function HudButton({
 
   const motion_props = {
     whileHover: { y: -2 },
-    whileTap:   { scale: 0.97 },
+    whileTap:   { scale: 0.98 },
+    transition: { duration: 0.16, ease: 'easeOut' },
   };
 
   if (href) {

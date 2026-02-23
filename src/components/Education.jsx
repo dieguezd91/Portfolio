@@ -40,8 +40,8 @@ function EducationCard({ institution, degree, years, index }) {
       <h3 className="font-heading text-lg font-medium text-white mb-2">
         {institution}
       </h3>
-      <p className="font-body text-sm text-zinc-400 mb-2">{degree}</p>
-      <p className="font-body text-sm text-[#00F5D4]/60">{years}</p>
+      <p className="font-body text-sm text-zinc-300 mb-2">{degree}</p>
+      <p className="font-body text-sm text-[#00F5D4]/75">{years}</p>
     </motion.div>
   );
 }

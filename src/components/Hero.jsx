@@ -99,7 +99,8 @@ export default function Hero() {
               target="_blank"
               rel="noopener noreferrer"
               whileHover={{ scale: 1.05 }}
-              whileTap={{ scale: 0.93 }}
+              whileTap={{ scale: 0.96 }}
+              transition={{ duration: 0.16, ease: 'easeOut' }}
               className="p-3.5 rounded-lg bg-[#1C1F3A] border border-white/[0.10] text-zinc-500
                          hover:border-white/[0.24] hover:text-zinc-300
                          active:bg-white/[0.06] active:border-white/[0.30]

@@ -26,7 +26,7 @@
   border: 1px solid #00F5D4;
   color: #0F1020;
   box-shadow: 0 0 14px rgba(0, 245, 212, 0.22);
-  transition: box-shadow 160ms ease, background-color 160ms ease;
+  transition: box-shadow 160ms ease, background-color 160ms ease, transform 160ms ease;
 }
 
 .hud-btn-solid:hover {
@@ -49,7 +49,7 @@
   border: 1px solid rgba(0, 245, 212, 0.55);
   color: #E5E7EB;
   box-shadow: none;
-  transition: box-shadow 160ms ease, background-color 160ms ease, color 160ms ease, border-color 160ms ease;
+  transition: box-shadow 160ms ease, background-color 160ms ease, color 160ms ease, border-color 160ms ease, transform 160ms ease;
 }
 
 .hud-btn:hover {

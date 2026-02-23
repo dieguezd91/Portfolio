@@ -45,7 +45,7 @@ export default function Footer() {
           whileInView={{ opacity: 1 }}
           viewport={{ once: true }}
           transition={{ duration: 0.6, delay: 0.24 }}
-          className="font-body text-xs text-zinc-600 tracking-wide"
+          className="font-body text-xs text-zinc-500 tracking-wide"
         >
           © {currentYear} Daniel Dieguez
         </motion.p>
