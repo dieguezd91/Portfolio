@@ -1,39 +1,54 @@
 import { motion } from 'framer-motion';
+import { SiLinktree } from 'react-icons/si';
+import HudButton from './HudButton';
 
 export default function Footer() {
   const currentYear = new Date().getFullYear();
 
   return (
-    <footer className="bg-[#0F1020] border-t border-white/[0.05] text-zinc-400 py-16 px-6">
-      <div className="max-w-4xl mx-auto">
+    <footer className="bg-[#0F1020] border-t border-white/[0.05] text-zinc-400 py-20 px-6">
+      <div className="max-w-4xl mx-auto flex flex-col items-center gap-8">
 
-        {/* CARTA DE PRESENTACIÓN */}
-        <motion.div
-          initial={{ opacity: 0, y: 20 }}
+        {/* CTA phrase */}
+        <motion.p
+          initial={{ opacity: 0, y: 16 }}
           whileInView={{ opacity: 1, y: 0 }}
           viewport={{ once: true }}
           transition={{ duration: 0.6 }}
-          className="mb-8"
+          className="text-xs tracking-[0.3em] uppercase text-zinc-500 text-center"
         >
-          <p className="text-lg text-white leading-relaxed">
-            <span className="font-bold text-2xl">Hello, I'm Daniel</span>
-            <br /><br />
-            I'm a programmer who enjoys building things and understanding how systems work. I started with game development, driven by curiosity and a love for interactive experiences, but over time I became interested in software development as a whole. I like learning new tools, adapting to different kinds of projects, and taking on new challenges that help me grow.
-            <br /><br />
-            If you'd like to know more or think I could be a good fit, feel free to reach out — I'd be happy to connect.
-          </p>
+          Available for game development opportunities
+        </motion.p>
+
+        {/* Contact button */}
+        <motion.div
+          initial={{ opacity: 0, y: 12 }}
+          whileInView={{ opacity: 1, y: 0 }}
+          viewport={{ once: true }}
+          transition={{ duration: 0.6, delay: 0.12 }}
+        >
+          <HudButton
+            href="https://linktr.ee/daniel_dieguez"
+            target="_blank"
+            rel="noopener noreferrer"
+            className="px-7 py-3 rounded-lg text-sm"
+          >
+            <SiLinktree className="w-4 h-4" />
+            GET IN TOUCH
+          </HudButton>
         </motion.div>
 
-        {/* COPYRIGHT */}
-        <motion.div
+        {/* Copyright */}
+        <motion.p
           initial={{ opacity: 0 }}
           whileInView={{ opacity: 1 }}
           viewport={{ once: true }}
-          transition={{ duration: 0.6, delay: 0.2 }}
-          className="text-center text-xs text-white"
+          transition={{ duration: 0.6, delay: 0.24 }}
+          className="text-xs text-zinc-600 tracking-wider"
         >
-          © {currentYear} Daniel Dieguez. All rights reserved.
-        </motion.div>
+          © {currentYear} Daniel Dieguez
+        </motion.p>
+
       </div>
     </footer>
   );

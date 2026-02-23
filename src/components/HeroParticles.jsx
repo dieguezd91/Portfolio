@@ -2,21 +2,26 @@ import { useEffect, useRef } from 'react';
 
 // ─── Config ──────────────────────────────────────────────────────────────────
 const COLORS         = ['#00F5D4', '#FF2D95'];
+const CYAN_RATIO     = 0.70;   // 70 % cyan, 30 % pink
+
 const MOUSE_R        = 130;    // repulsion radius (px)
-const MOUSE_F        = 0.044;  // repulsion force multiplier
-const MAX_SPEED      = 0.55;   // px/frame velocity cap
-const DRIFT          = 0.22;   // initial velocity spread (±)
-const EDGE_FADE      = 0.12;   // fraction of dimension faded at each wall
-const FADE_IN_FRAMES = 90;     // ~1.5 s at 60 fps
+const MOUSE_F        = 0.060;  // repulsion force multiplier
+const SPRING_K       = 0.010;  // spring-return strength — lower = slower, more organic
+const DAMPING        = 0.97;   // velocity damping per frame
+const MICRO_DRIFT    = 0.008;  // per-frame random noise — keeps particles alive at rest
+const MAX_SPEED      = 1.0;    // px / frame velocity cap
 
-// Radial cluster — particles concentrate behind the name
-const CLUSTER_Y      = 0.44;   // vertical focus (fraction of H); slightly above center
-const CLUSTER_STD_X  = 0.28;   // horizontal Gaussian spread (fraction of W)
-const CLUSTER_STD_Y  = 0.18;   // vertical Gaussian spread (fraction of H)
-const CLUSTER_RADIUS = 0.52;   // alpha falloff radius (fraction of min(W,H))
-const CLUSTER_FLOOR  = 0.10;   // minimum alpha multiplier for far particles
+const EDGE_FADE      = 0.12;   // fraction of canvas dimension faded at each wall
+const FADE_IN_FRAMES = 90;     // entry fade ~1.5 s at 60 fps
 
-// Box-Muller Gaussian — returns a normally distributed random number
+// Radial cluster centred on the hero name
+const CLUSTER_Y      = 0.44;   // vertical focus (fraction of H) — base value
+const CLUSTER_STD_X  = 0.16;   // horizontal Gaussian σ (fraction of W)
+const CLUSTER_STD_Y  = 0.11;   // vertical   Gaussian σ (fraction of H)
+const CLUSTER_RADIUS = 0.36;   // alpha-falloff radius (fraction of min(W, H))
+const CLUSTER_FLOOR  = 0.10;   // minimum alpha multiplier beyond falloff radius
+
+// Box-Muller transform — normally distributed sample
 function gaussian(mean, std) {
   const u1 = Math.random() || 1e-10;
   const u2 = Math.random();
@@ -27,19 +32,25 @@ function getCount() {
   return window.innerWidth < 768 ? 50 : 100;
 }
 
-function createParticles(W, H, count) {
-  const cx = W / 2;
-  const cy = H * CLUSTER_Y;
-  return Array.from({ length: count }, () => ({
-    // Spawn clustered around the name's position using Gaussian distribution
-    x:     Math.min(Math.max(gaussian(cx, W * CLUSTER_STD_X), 0), W),
-    y:     Math.min(Math.max(gaussian(cy, H * CLUSTER_STD_Y), 0), H),
-    vx:    (Math.random() - 0.5) * DRIFT,
-    vy:    (Math.random() - 0.5) * DRIFT,
-    r:     Math.random() * 1.1 + 0.7,
-    color: COLORS[Math.random() < 0.5 ? 0 : 1],
-    alpha: Math.random() * 0.28 + 0.07,
-  }));
+// cx / cy are pre-computed by setup() so tick() shares the same focal point.
+// stdX / stdY are jittered per load to visually differentiate each visit.
+function createParticles(W, H, count, cx, cy) {
+  const stdX = W * (CLUSTER_STD_X + (Math.random() - 0.5) * 0.04);
+  const stdY = H * (CLUSTER_STD_Y + (Math.random() - 0.5) * 0.03);
+  return Array.from({ length: count }, () => {
+    const x = Math.min(Math.max(gaussian(cx, stdX), 0), W);
+    const y = Math.min(Math.max(gaussian(cy, stdY), 0), H);
+    return {
+      x, y,
+      baseX: x,
+      baseY: y,
+      vx: (Math.random() - 0.5) * 0.08,
+      vy: (Math.random() - 0.5) * 0.08,
+      r:     Math.random() * 2.0 + 1.5,   // 1.5 – 3.5 px
+      color: Math.random() < CYAN_RATIO ? COLORS[0] : COLORS[1],
+      alpha: Math.random() * 0.28 + 0.07,
+    };
+  });
 }
 
 // ─── Component ───────────────────────────────────────────────────────────────
@@ -53,6 +64,7 @@ export default function HeroParticles({ mouseRef }) {
     const ctx = canvas.getContext('2d');
     let raf;
     let W, H, dpr, particles;
+    let clusterCx, clusterCy;   // randomised each load; shared by spawn + alpha falloff
     let frame  = 0;
     let paused = false;
 
@@ -67,7 +79,11 @@ export default function HeroParticles({ mouseRef }) {
       canvas.style.width  = W + 'px';
       canvas.style.height = H + 'px';
       ctx.setTransform(dpr, 0, 0, dpr, 0, 0);
-      particles = createParticles(W, H, getCount());
+      // Jitter the cluster centre slightly on every load / resize so the
+      // field looks distinct across visits while staying behind the name.
+      clusterCx = W / 2 + (Math.random() - 0.5) * W * 0.07;
+      clusterCy = H * CLUSTER_Y + (Math.random() - 0.5) * H * 0.05;
+      particles = createParticles(W, H, getCount(), clusterCx, clusterCy);
     }
 
     // ── Animation loop ──────────────────────────────────────────────────────
@@ -80,19 +96,17 @@ export default function HeroParticles({ mouseRef }) {
       frame++;
       const fadeIn = Math.min(frame / FADE_IN_FRAMES, 1);
 
-      const mx    = mouseRef.current.x;
-      const my    = mouseRef.current.y;
-      const fzX   = W * EDGE_FADE;
-      const fzY   = H * EDGE_FADE;
-      const mr2   = MOUSE_R * MOUSE_R;
-
-      // Cluster focus center — same point used during spawn
-      const cx    = W / 2;
-      const cy    = H * CLUSTER_Y;
-      const maxR  = Math.min(W, H) * CLUSTER_RADIUS;
+      const mx   = mouseRef.current.x;
+      const my   = mouseRef.current.y;
+      const fzX  = W * EDGE_FADE;
+      const fzY  = H * EDGE_FADE;
+      const mr2  = MOUSE_R * MOUSE_R;
+      const cx   = clusterCx;
+      const cy   = clusterCy;
+      const maxR = Math.min(W, H) * CLUSTER_RADIUS;
 
       for (const p of particles) {
-        // Mouse repulsion
+        // 1 ─ Mouse repulsion (squared-distance check avoids sqrt when outside radius)
         const dx    = p.x - mx;
         const dy    = p.y - my;
         const dist2 = dx * dx + dy * dy;
@@ -103,11 +117,20 @@ export default function HeroParticles({ mouseRef }) {
           p.vy += (dy / dist) * force;
         }
 
-        // Velocity damping
-        p.vx *= 0.98;
-        p.vy *= 0.98;
+        // 2 ─ Spring return toward base position
+        //     Acts as a gentle attractor; overridden by mouse when cursor is near.
+        p.vx += (p.baseX - p.x) * SPRING_K;
+        p.vy += (p.baseY - p.y) * SPRING_K;
 
-        // Speed cap
+        // 3 ─ Micro-drift — tiny random impulse keeps particles alive at rest
+        p.vx += (Math.random() - 0.5) * MICRO_DRIFT;
+        p.vy += (Math.random() - 0.5) * MICRO_DRIFT;
+
+        // 4 ─ Dampen velocity
+        p.vx *= DAMPING;
+        p.vy *= DAMPING;
+
+        // 5 ─ Speed cap
         const spd = Math.sqrt(p.vx * p.vx + p.vy * p.vy);
         if (spd > MAX_SPEED) {
           const inv = MAX_SPEED / spd;
@@ -115,35 +138,28 @@ export default function HeroParticles({ mouseRef }) {
           p.vy *= inv;
         }
 
-        // Integrate
+        // 6 ─ Integrate position
         p.x += p.vx;
         p.y += p.vy;
 
-        // Wrap-around
-        if      (p.x < -4)    p.x = W + 4;
-        else if (p.x > W + 4) p.x = -4;
-        if      (p.y < -4)    p.y = H + 4;
-        else if (p.y > H + 4) p.y = -4;
-
-        // Edge fade
-        const fadeX = Math.min(p.x / fzX, (W - p.x) / fzX, 1);
-        const fadeY = Math.min(p.y / fzY, (H - p.y) / fzY, 1);
+        // 7 ─ Edge fade — alpha softens near all four walls
+        const fadeX    = Math.min(p.x / fzX, (W - p.x) / fzX, 1);
+        const fadeY    = Math.min(p.y / fzY, (H - p.y) / fzY, 1);
         const edgeFade = Math.min(fadeX, fadeY);
 
-        // Radial cluster fade — particles near the name's center are fully bright;
-        // particles far away fade toward CLUSTER_FLOOR, never fully invisible.
-        const dxc = p.x - cx;
-        const dyc = p.y - cy;
-        const distC = Math.sqrt(dxc * dxc + dyc * dyc);
+        // 8 ─ Radial cluster fade — full brightness at centre, CLUSTER_FLOOR at radius edge
+        const dxc         = p.x - cx;
+        const dyc         = p.y - cy;
+        const distC       = Math.sqrt(dxc * dxc + dyc * dyc);
         const clusterFade = CLUSTER_FLOOR + (1 - CLUSTER_FLOOR) * Math.max(0, 1 - distC / maxR);
 
         const finalAlpha = p.alpha * Math.max(0, edgeFade) * fadeIn * clusterFade;
         if (finalAlpha < 0.005) continue;
 
-        // Draw dot with soft glow
+        // 9 ─ Draw with soft glow
         ctx.save();
         ctx.globalAlpha = finalAlpha;
-        ctx.shadowBlur  = 7;
+        ctx.shadowBlur  = 6;
         ctx.shadowColor = p.color;
         ctx.fillStyle   = p.color;
         ctx.beginPath();
@@ -153,7 +169,7 @@ export default function HeroParticles({ mouseRef }) {
       }
     }
 
-    // IntersectionObserver — pause RAF draw when hero is off-screen
+    // Pause draw work when hero scrolls off-screen
     const observer = new IntersectionObserver(
       ([entry]) => { paused = !entry.isIntersecting; },
       { threshold: 0 }
