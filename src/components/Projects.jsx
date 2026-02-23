@@ -147,15 +147,15 @@ function ProjectCard({ title, year, role, description, tags, link, media, mediaT
       {/* CONTENIDO */}
       <div className="p-6 relative">
         {/* Título + Año */}
-        <h3 className="font-heading text-2xl font-semibold text-white mb-1 group-hover:text-[#00F5D4] transition-colors duration-150">
-          {title} <span className="font-body text-lg text-zinc-500 font-normal">({year})</span>
+        <h3 className="font-heading text-lg md:text-xl font-semibold text-white mb-1 group-hover:text-[#00F5D4] transition-colors duration-150">
+          {title} <span className="font-body text-sm text-zinc-500 font-normal">({year})</span>
         </h3>
 
         {/* Rol */}
         <p className="font-body text-sm text-zinc-500 font-medium mb-3">{role}</p>
 
         {/* Descripción */}
-        <p className="font-body text-zinc-400 mb-4 line-clamp-2 leading-relaxed">
+        <p className="font-body font-normal text-base text-zinc-400 mb-4 line-clamp-2 leading-relaxed">
           {description}
         </p>
 
@@ -186,7 +186,7 @@ export default function Projects() {
           transition={{ duration: 0.6, ease: "easeOut" }}
           className="text-center mb-16"
         >
-          <h2 className="font-heading text-5xl md:text-6xl font-semibold mb-4 text-white">
+          <h2 className="font-heading text-3xl md:text-4xl font-semibold mb-4 text-white">
             Projects
           </h2>
           <motion.div
@@ -196,7 +196,7 @@ export default function Projects() {
             transition={{ duration: 0.8, delay: 0.2, ease: "easeOut" }}
             className="h-1 bg-[#00F5D4]/50 mx-auto mb-6"
           />
-          <p className="font-body text-xl text-zinc-400 max-w-2xl mx-auto">
+          <p className="font-body font-normal text-base md:text-lg text-zinc-400 max-w-2xl mx-auto leading-relaxed">
             Projects and prototypes built during my professional training and indie game development journey.
           </p>
         </motion.div>

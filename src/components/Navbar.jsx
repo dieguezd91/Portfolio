@@ -65,7 +65,7 @@ export default function Navbar() {
           <HudButton
             href="/Daniel_Dieguez_CV.pdf"
             download="Daniel_Dieguez_CV.pdf"
-            className="hidden md:flex px-4 py-2 rounded-lg text-lg"
+            className="hidden md:flex px-4 py-2 rounded-lg text-base"
           >
             RESUME
             <svg className="w-4 h-4 md:w-5 md:h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">

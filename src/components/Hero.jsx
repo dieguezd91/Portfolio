@@ -33,7 +33,7 @@ export default function Hero() {
           initial={{ opacity: 0, y: 24 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.7, ease: 'easeOut' }}
-          className="font-heading text-5xl sm:text-5xl md:text-6xl lg:text-7xl font-bold text-white uppercase tracking-wide leading-none"
+          className="font-heading text-5xl md:text-6xl font-bold text-white uppercase tracking-wide leading-none"
         >
           Daniel Dieguez
         </motion.h1>
@@ -43,7 +43,7 @@ export default function Hero() {
           initial={{ opacity: 0, y: 16 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.6, delay: 0.12, ease: 'easeOut' }}
-          className="font-heading text-sm md:text-lg text-[#00F5D4] uppercase tracking-[0.25em] font-semibold mt-5 md:mt-6"
+          className="font-heading text-lg md:text-xl text-[#00F5D4] uppercase tracking-[0.25em] font-medium mt-5 md:mt-6"
         >
           Game Developer
         </motion.p>
@@ -55,14 +55,14 @@ export default function Hero() {
           transition={{ duration: 0.6, delay: 0.22, ease: 'easeOut' }}
           className="flex md:hidden flex-col w-full gap-3 mt-10"
         >
-          <HudButton href="#projects" className="w-full py-4 rounded-lg text-sm">
+          <HudButton variant="solid" href="#projects" className="w-full py-4 rounded-lg text-base">
             EXPLORE PROJECTS
           </HudButton>
 
           <HudButton
             href="/Daniel_Dieguez_CV.pdf"
             download="Daniel_Dieguez_CV.pdf"
-            className="w-full py-4 rounded-lg text-sm"
+            className="w-full py-4 rounded-lg text-base"
           >
             DOWNLOAD RESUME
             <svg className="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
@@ -74,7 +74,7 @@ export default function Hero() {
             href="https://linktr.ee/daniel_dieguez"
             target="_blank"
             rel="noopener noreferrer"
-            className="w-full py-4 rounded-lg text-sm"
+            className="w-full py-4 rounded-lg text-base"
           >
             <SiLinktree className="w-4 h-4" />
             CONTACT
@@ -100,9 +100,9 @@ export default function Hero() {
               rel="noopener noreferrer"
               whileHover={{ scale: 1.05 }}
               whileTap={{ scale: 0.93 }}
-              className="p-3.5 rounded-lg bg-[#1C1F3A] border border-[#00F5D4]/30 text-zinc-300
-                         hover:border-[#00F5D4]/60 hover:text-[#00F5D4] hover:shadow-[0_0_16px_rgba(0,245,212,0.22)]
-                         active:bg-[#00F5D4]/15 active:border-[#00F5D4]/70 active:text-[#00F5D4]
+              className="p-3.5 rounded-lg bg-[#1C1F3A] border border-white/[0.10] text-zinc-500
+                         hover:border-white/[0.24] hover:text-zinc-300
+                         active:bg-white/[0.06] active:border-white/[0.30]
                          transition-all duration-150"
               aria-label={label}
             >
@@ -117,7 +117,7 @@ export default function Hero() {
           initial={{ opacity: 0, y: 16 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.6, delay: 0.32, ease: 'easeOut' }}
-          className="font-body max-w-sm md:max-w-xl text-xs md:text-base text-zinc-400 md:text-zinc-300 leading-loose uppercase mt-10 md:mt-8"
+          className="font-body font-normal max-w-sm md:max-w-xl text-base md:text-lg text-zinc-400 md:text-zinc-300 leading-relaxed uppercase mt-10 md:mt-8"
         >
           Game Developer specializing in gameplay and systems, taking ownership of features from concept to implementation with a strong engineering mindset.
         </motion.p>
@@ -129,7 +129,7 @@ export default function Hero() {
           transition={{ duration: 0.6, delay: 0.42, ease: 'easeOut' }}
           className="hidden md:block mt-12"
         >
-          <HudButton href="#projects" className="px-7 py-3 rounded-lg text-sm">
+          <HudButton variant="solid" href="#projects" className="px-7 py-3 rounded-lg text-base">
             EXPLORE PROJECTS
           </HudButton>
         </motion.div>

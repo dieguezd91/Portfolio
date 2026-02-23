@@ -4,8 +4,9 @@ import { motion } from 'framer-motion';
  * HudButton — polymorphic interactive element.
  *
  * Variants
- *   'outline'  (default)  cyan border, transparent bg  → .hud-btn
- *   'primary'             pink solid fill              → .hud-btn-primary
+ *   'outline'  (default)  cyan border, no glow at rest → .hud-btn        (Level 2)
+ *   'solid'               cyan solid fill, ambient glow → .hud-btn-solid  (Level 1)
+ *   'primary'             pink solid fill              → .hud-btn-primary (reserved)
  *
  * Element
  *   Renders as <motion.a>      when `href` is provided.
@@ -22,7 +23,10 @@ export default function HudButton({
   children,
   ...props
 }) {
-  const variantClass = variant === 'primary' ? 'hud-btn-primary' : 'hud-btn';
+  const variantClass =
+    variant === 'solid'   ? 'hud-btn-solid' :
+    variant === 'primary' ? 'hud-btn-primary' :
+                            'hud-btn';
   const classes = `${variantClass} font-heading font-semibold flex items-center justify-center gap-2 ${className}`.trim();
 
   const motion_props = {

@@ -37,7 +37,7 @@ function EducationCard({ institution, degree, years, index }) {
       whileHover={{ y: -4 }}
       className="p-6 bg-[#0F1020] border border-white/[0.06] hover:border-[#00F5D4]/20 hover:shadow-[0_0_20px_rgba(0,245,212,0.07)] rounded-lg transition-all duration-200"
     >
-      <h3 className="font-heading text-xl font-semibold text-white mb-2">
+      <h3 className="font-heading text-lg font-medium text-white mb-2">
         {institution}
       </h3>
       <p className="font-body text-sm text-zinc-400 mb-2">{degree}</p>
@@ -57,7 +57,7 @@ export default function Education() {
           transition={{ duration: 0.6, ease: "easeOut" }}
           className="text-center mb-12"
         >
-          <h2 className="font-heading text-5xl md:text-6xl font-semibold mb-4 text-white">
+          <h2 className="font-heading text-3xl md:text-4xl font-semibold mb-4 text-white">
             Education
           </h2>
           <motion.div

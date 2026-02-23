@@ -12,22 +12,49 @@
   --color-border: rgba(255, 255, 255, 0.05);
 }
 
-/* ─── HUD Button ─────────────────────────────────────────────────────────── */
+/* ─── Button hierarchy ────────────────────────────────────────────────────
+ *
+ *  Level 1 — .hud-btn-solid   Primary CTA  — solid cyan fill, ambient glow
+ *  Level 2 — .hud-btn         Secondary    — outline only, glow on hover
+ *  Level 3 — inline Tailwind  Tertiary     — neutral, no glow (social icons)
+ *
+ * ───────────────────────────────────────────────────────────────────────── */
+
+/* Level 1 — Primary CTA */
+.hud-btn-solid {
+  background-color: #00F5D4;
+  border: 1px solid #00F5D4;
+  color: #0F1020;
+  box-shadow: 0 0 14px rgba(0, 245, 212, 0.22);
+  transition: box-shadow 160ms ease, background-color 160ms ease;
+}
+
+.hud-btn-solid:hover {
+  background-color: #00e6c5;
+  box-shadow: 0 0 26px rgba(0, 245, 212, 0.40);
+}
+
+.hud-btn-solid:active {
+  background-color: #00c9aa;
+  box-shadow: 0 0 8px rgba(0, 245, 212, 0.14);
+}
+
+/* Level 2 — Secondary CTA */
 /*
- * Default  : transparent bg, cyan outline, subtle ambient glow
- * Hover    : elevated glow (translateY handled by Framer Motion on desktop)
- * Active   : solid cyan fill, dark text, glow pulled back
+ * No permanent glow — distinguishes from Level 1.
+ * Glow appears only on hover to signal interactivity.
  */
 .hud-btn {
   background: transparent;
-  border: 1px solid #00F5D4;
+  border: 1px solid rgba(0, 245, 212, 0.55);
   color: #E5E7EB;
-  box-shadow: 0 0 8px rgba(0, 245, 212, 0.12);
-  transition: box-shadow 160ms ease, background-color 160ms ease, color 160ms ease;
+  box-shadow: none;
+  transition: box-shadow 160ms ease, background-color 160ms ease, color 160ms ease, border-color 160ms ease;
 }
 
 .hud-btn:hover {
-  box-shadow: 0 0 22px rgba(0, 245, 212, 0.38);
+  border-color: #00F5D4;
+  box-shadow: 0 0 18px rgba(0, 245, 212, 0.28);
 }
 
 .hud-btn:active {
@@ -36,11 +63,7 @@
   box-shadow: 0 0 8px rgba(0, 245, 212, 0.18);
 }
 
-/* ─── HUD Button Primary (pink filled) ───────────────────────────────────── */
-/*
- * Single primary CTA — pink fill, dark text, reserved for the hero entry point.
- * Elevation handled by Framer Motion whileHover.
- */
+/* ─── HUD Button Primary (pink filled) — reserved, not currently used ─────── */
 .hud-btn-primary {
   background-color: #FF2D95;
   border: 1px solid #FF2D95;

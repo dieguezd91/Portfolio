@@ -28,10 +28,11 @@ export default function Footer() {
           transition={{ duration: 0.6, delay: 0.12 }}
         >
           <HudButton
+            variant="solid"
             href="https://linktr.ee/daniel_dieguez"
             target="_blank"
             rel="noopener noreferrer"
-            className="px-7 py-3 rounded-lg text-sm"
+            className="px-7 py-3 rounded-lg text-base"
           >
             <SiLinktree className="w-4 h-4" />
             GET IN TOUCH
