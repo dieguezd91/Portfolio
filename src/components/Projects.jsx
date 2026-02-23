@@ -113,10 +113,10 @@ function ProjectCard({ title, year, role, description, tags, link, media, mediaT
       viewport={{ once: true, margin: "-50px" }}
       transition={{ duration: 0.5, delay: index * 0.1, ease: "easeOut" }}
       whileHover={{ y: -4 }}
-      className="group relative bg-[#2a2a2a] rounded-lg overflow-hidden transition-all duration-300 border border-zinc-800 hover:border-indigo-500/50"
+      className="group relative bg-[#0F1020] rounded-lg overflow-hidden hud-card"
     >
       {/* MEDIA: Video, GIF o Image */}
-      <div className="aspect-video overflow-hidden bg-[#1a1a1a] relative">
+      <div className="aspect-video overflow-hidden bg-[#14162A] relative">
         {mediaType === 'video' ? (
           <video
             autoPlay
@@ -147,12 +147,12 @@ function ProjectCard({ title, year, role, description, tags, link, media, mediaT
       {/* CONTENIDO */}
       <div className="p-6 relative">
         {/* Título + Año */}
-        <h3 className="text-2xl font-bold text-white mb-1 group-hover:text-indigo-400 transition-colors duration-300" style={{ fontFamily: 'var(--font-heading)' }}>
+        <h3 className="text-2xl font-bold text-white mb-1 group-hover:text-[#00F5D4] transition-colors duration-150" style={{ fontFamily: 'var(--font-heading)' }}>
           {title} <span className="text-lg text-zinc-500 font-normal">({year})</span>
         </h3>
 
         {/* Rol */}
-        <p className="text-sm text-indigo-400 font-medium mb-3">{role}</p>
+        <p className="text-sm text-zinc-500 font-medium mb-3">{role}</p>
 
         {/* Descripción */}
         <p className="text-zinc-400 mb-4 line-clamp-2 leading-relaxed">
@@ -164,7 +164,7 @@ function ProjectCard({ title, year, role, description, tags, link, media, mediaT
           {tags.map((tag) => (
             <span
               key={tag}
-              className="bg-indigo-500/10 border border-indigo-500/30 text-indigo-300 px-3 py-1 rounded-full text-sm"
+              className="bg-white/[0.04] border border-white/[0.08] text-zinc-500 px-3 py-1 rounded-full text-sm transition-colors duration-150"
             >
               {tag}
             </span>
@@ -177,7 +177,7 @@ function ProjectCard({ title, year, role, description, tags, link, media, mediaT
 
 export default function Projects() {
   return (
-    <section id="projects" className="min-h-screen bg-[#1a1a1a] text-white py-20 px-6">
+    <section id="projects" className="min-h-screen bg-[#14162A] text-white py-20 px-6">
       <div className="max-w-7xl mx-auto">
         <motion.div
           initial={{ opacity: 0, y: 30 }}
@@ -197,7 +197,7 @@ export default function Projects() {
             whileInView={{ width: 96 }}
             viewport={{ once: true }}
             transition={{ duration: 0.8, delay: 0.2, ease: "easeOut" }}
-            className="h-1 bg-indigo-600 mx-auto mb-6"
+            className="h-1 bg-[#00F5D4]/50 mx-auto mb-6"
           />
           <p className="text-xl text-zinc-400 max-w-2xl mx-auto">
             Projects and prototypes built during my professional training and indie game development journey.

@@ -19,7 +19,7 @@ const webDev = [
 
 export default function Technologies() {
   return (
-    <section className="py-12 bg-[#0a0a0a] text-white">
+    <section className="py-12 bg-[#0F1020] text-white">
       <div className="max-w-7xl mx-auto px-6">
         <motion.div
           initial={{ opacity: 0, y: 20 }}
@@ -52,8 +52,8 @@ export default function Technologies() {
                 whileInView={{ opacity: 1, scale: 1 }}
                 viewport={{ once: true }}
                 transition={{ duration: 0.3, delay: index * 0.05 }}
-                whileHover={{ scale: 1.05, borderColor: "rgba(99, 102, 241, 0.5)" }}
-                className="px-6 py-3 bg-[#2a2a2a] border-2 border-zinc-800 rounded-lg text-white font-medium hover:border-indigo-500/50 transition-colors"
+                whileHover={{ scale: 1.02 }}
+                className="px-6 py-3 bg-[#14162A] border border-white/[0.06] rounded-lg text-zinc-400 font-medium hover:text-[#00F5D4] hover:border-[#00F5D4]/25 transition-all duration-150"
               >
                 {tech}
               </motion.span>
@@ -69,8 +69,8 @@ export default function Technologies() {
                 whileInView={{ opacity: 1, scale: 1 }}
                 viewport={{ once: true }}
                 transition={{ duration: 0.3, delay: index * 0.05 + 0.2 }}
-                whileHover={{ scale: 1.05, borderColor: "rgba(99, 102, 241, 0.5)" }}
-                className="px-6 py-3 bg-[#2a2a2a] border-2 border-zinc-800 rounded-lg text-white font-medium hover:border-indigo-500/50 transition-colors"
+                whileHover={{ scale: 1.02 }}
+                className="px-6 py-3 bg-[#14162A] border border-white/[0.06] rounded-lg text-zinc-400 font-medium hover:text-[#00F5D4] hover:border-[#00F5D4]/25 transition-all duration-150"
               >
                 {tech}
               </motion.span>

@@ -4,7 +4,7 @@ export default function Footer() {
   const currentYear = new Date().getFullYear();
 
   return (
-    <footer className="bg-black text-zinc-400 py-16 px-6">
+    <footer className="bg-[#0F1020] border-t border-white/[0.05] text-zinc-400 py-16 px-6">
       <div className="max-w-4xl mx-auto">
 
         {/* CARTA DE PRESENTACIÓN */}

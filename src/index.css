@@ -6,17 +6,60 @@
   --font-mono: Montserrat, Arial, sans-serif;
 
   /* Custom color palette */
-  --color-background-base: #0a0a0a;
-  --color-background-secondary: #1a1a1a;
-  --color-background-elevated: #2a2a2a;
-  --color-border: #3a3a3a;
+  --color-background-base: #0F1020;
+  --color-background-secondary: #14162A;
+  --color-background-elevated: #1C1F3A;
+  --color-border: rgba(255, 255, 255, 0.05);
 }
 
+/* ─── HUD Button ─────────────────────────────────────────────────────────── */
+/*
+ * Default  : transparent bg, cyan outline, subtle ambient glow
+ * Hover    : elevated glow (translateY handled by Framer Motion on desktop)
+ * Active   : solid cyan fill, dark text, glow pulled back
+ */
+.hud-btn {
+  background: transparent;
+  border: 1px solid #00F5D4;
+  color: #E5E7EB;
+  box-shadow: 0 0 8px rgba(0, 245, 212, 0.12);
+  transition: box-shadow 160ms ease, background-color 160ms ease, color 160ms ease;
+}
+
+.hud-btn:hover {
+  box-shadow: 0 0 22px rgba(0, 245, 212, 0.38);
+}
+
+.hud-btn:active {
+  background-color: #00F5D4;
+  color: #0F1020;
+  box-shadow: 0 0 8px rgba(0, 245, 212, 0.18);
+}
+
+/* ─── HUD Card ───────────────────────────────────────────────────────────── */
+/*
+ * Same accent token as .hud-btn — unified cyan system.
+ * Default  : near-invisible cyan border, no glow
+ * Hover    : visible cyan border, soft ambient glow
+ *            (translateY elevation handled by Framer Motion whileHover)
+ */
+.hud-card {
+  border: 1px solid rgba(0, 245, 212, 0.07);
+  box-shadow: none;
+  transition: border-color 160ms ease, box-shadow 160ms ease;
+}
+
+.hud-card:hover {
+  border-color: rgba(0, 245, 212, 0.28);
+  box-shadow: 0 0 24px rgba(0, 245, 212, 0.12);
+}
+
+/* ─── Base ────────────────────────────────────────────────────────────────── */
 html {
   scroll-behavior: smooth;
 }
 
 body {
   font-family: var(--font-body);
-  background-color: #000000;
+  background-color: #0F1020;
 }

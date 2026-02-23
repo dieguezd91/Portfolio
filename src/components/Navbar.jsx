@@ -38,9 +38,9 @@ export default function Navbar() {
       initial={{ y: -100 }}
       animate={{ y: 0 }}
       transition={{ duration: 0.6, ease: "easeOut" }}
-      className={`fixed top-0 w-full z-50 transition-all duration-300 ${scrolled
-        ? 'bg-black/90 backdrop-blur-md border-b border-zinc-800'
-        : 'bg-black/80 backdrop-blur-md border-b border-zinc-800/50'
+      className={`fixed top-0 w-full z-50 transition-all duration-200 ${scrolled
+        ? 'bg-[#0F1020]/95 backdrop-blur-md shadow-[0_2px_24px_rgba(0,0,0,0.6),0_1px_0_rgba(255,255,255,0.04)]'
+        : 'bg-[#0F1020]/80 backdrop-blur-md'
         }`}
     >
       <div className="max-w-7xl mx-auto px-6">
@@ -81,9 +81,9 @@ export default function Navbar() {
             <motion.a
               href="/Daniel_Dieguez_CV.pdf"
               download="Daniel_Dieguez_CV.pdf"
-              whileHover={{ scale: 1.02 }}
-              whileTap={{ scale: 0.98 }}
-              className="px-4 py-2 border-2 border-indigo-600 hover:border-indigo-500 bg-transparent rounded-lg text-white font-bold transition-colors text-lg flex items-center gap-2"
+              whileHover={{ y: -2 }}
+              whileTap={{ scale: 0.97 }}
+              className="hud-btn px-4 py-2 rounded-lg font-bold text-lg flex items-center gap-2"
             >
               RESUME
               <svg className="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
@@ -116,7 +116,7 @@ export default function Navbar() {
               animate={{ opacity: 1, height: "auto" }}
               exit={{ opacity: 0, height: 0 }}
               transition={{ duration: 0.3, ease: "easeInOut" }}
-              className="md:hidden overflow-hidden border-t border-zinc-800/50"
+              className="md:hidden overflow-hidden border-t border-white/[0.05]"
             >
               <div className="py-6 flex flex-col items-center gap-6">
                 {/* Íconos sociales */}
@@ -141,7 +141,8 @@ export default function Navbar() {
                 <motion.a
                   href="/Daniel_Dieguez_CV.pdf"
                   download="Daniel_Dieguez_CV.pdf"
-                  className="flex items-center justify-center gap-3 px-6 py-3 border-2 border-indigo-600 hover:border-indigo-500 bg-transparent rounded-lg text-white font-bold transition-colors text-lg"
+                  whileTap={{ scale: 0.97 }}
+                  className="hud-btn flex items-center justify-center gap-3 px-6 py-3 rounded-lg font-bold text-lg"
                   onClick={() => setIsOpen(false)}
                 >
                   RESUME

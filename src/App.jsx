@@ -14,7 +14,7 @@ export default function App() {
   return (
     <div className="scroll-smooth">
       <Navbar />
-      <div className="max-w-[1920px] mx-auto bg-[#0a0a0a] shadow-2xl">
+      <div className="max-w-[1920px] mx-auto bg-[#0F1020] shadow-2xl">
         <Hero />
         <Projects />
         <Education />

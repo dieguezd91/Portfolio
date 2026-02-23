@@ -1,10 +1,34 @@
+import { useRef } from 'react';
 import { motion } from 'framer-motion';
 import profilePic from '../assets/Profile_pic.jpg';
+import HeroParticles from './HeroParticles';
 
 export default function Hero() {
+  const mouseRef = useRef({ x: -9999, y: -9999 });
+
+  function onMouseMove(e) {
+    const rect = e.currentTarget.getBoundingClientRect();
+    mouseRef.current = {
+      x: e.clientX - rect.left,
+      y: e.clientY - rect.top,
+    };
+  }
+
+  function onMouseLeave() {
+    mouseRef.current = { x: -9999, y: -9999 };
+  }
+
   return (
-    <section className="bg-gradient-to-b from-[#0a0a0a] to-[#1a1a1a] text-white flex items-center">
-      <div className="max-w-7xl mx-auto px-6 pt-56 pb-40 w-full">
+    <section
+      className="relative bg-gradient-to-b from-[#0F1020] to-[#14162A] text-white flex items-center overflow-hidden"
+      onMouseMove={onMouseMove}
+      onMouseLeave={onMouseLeave}
+    >
+      {/* Particle layer — sits behind all content */}
+      <HeroParticles mouseRef={mouseRef} />
+
+      {/* Content — layered above canvas */}
+      <div className="relative z-10 max-w-7xl mx-auto px-6 pt-56 pb-40 w-full">
         <div className="grid lg:grid-cols-[auto_1fr] gap-12 items-center">
 
           {/* COLUMNA IZQUIERDA: Foto */}
@@ -18,7 +42,7 @@ export default function Hero() {
               <img
                 src={profilePic}
                 alt="Daniel Dieguez"
-                className="w-48 h-48 md:w-64 md:h-64 lg:w-80 lg:h-80 rounded-full border-4 border-indigo-500/30 object-cover"
+                className="w-48 h-48 md:w-64 md:h-64 lg:w-80 lg:h-80 rounded-full border-4 border-white/10 object-cover"
               />
             </motion.div>
           </div>
