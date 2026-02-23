@@ -25,14 +25,14 @@ export default function Hero() {
       <HeroParticles mouseRef={mouseRef} />
 
       {/* Content */}
-      <div className="relative z-10 w-full max-w-5xl mx-auto px-6 pt-28 pb-20 flex flex-col items-center text-center gap-6">
+      <div className="relative z-10 w-full max-w-5xl mx-auto px-6 pt-28 pb-20 flex flex-col items-center text-center gap-0">
 
         {/* Name — dominant focal point */}
         <motion.h1
           initial={{ opacity: 0, y: 24 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.7, ease: 'easeOut' }}
-          className="text-5xl sm:text-6xl md:text-7xl lg:text-8xl font-bold text-white uppercase tracking-wide leading-none"
+          className="text-4xl sm:text-5xl md:text-6xl lg:text-7xl font-bold text-white uppercase tracking-wide leading-none"
           style={{ fontFamily: 'var(--font-heading)' }}
         >
           Daniel Dieguez
@@ -43,7 +43,7 @@ export default function Hero() {
           initial={{ opacity: 0, y: 16 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.6, delay: 0.12, ease: 'easeOut' }}
-          className="text-xs md:text-sm text-[#00F5D4] uppercase tracking-[0.3em] font-medium"
+          className="text-base md:text-lg text-[#00F5D4] uppercase tracking-[0.4em] font-semibold mt-6"
         >
           Game Developer
         </motion.p>
@@ -53,9 +53,9 @@ export default function Hero() {
           initial={{ opacity: 0, y: 16 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.6, delay: 0.22, ease: 'easeOut' }}
-          className="max-w-xl text-sm md:text-base text-zinc-500 leading-relaxed uppercase mt-2"
+          className="max-w-xl text-sm md:text-base text-zinc-300 leading-loose uppercase mt-8"
         >
-          Programmer specialized in gameplay and systems, with a strong foundation in software engineering. Entrepreneurial by nature, I'm used to taking ownership of projects, making technical decisions, and balancing creativity with practical constraints. Open to new challenges and adaptable beyond game development.
+          Game Developer specializing in gameplay and systems, taking ownership of features from concept to implementation with a strong engineering mindset.
         </motion.p>
 
         {/* CTA */}
@@ -63,7 +63,7 @@ export default function Hero() {
           initial={{ opacity: 0, y: 16 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.6, delay: 0.32, ease: 'easeOut' }}
-          className="mt-2"
+          className="mt-12"
         >
           <HudButton href="#projects" className="px-7 py-3 rounded-lg text-sm">
             EXPLORE PROJECTS
