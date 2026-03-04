@@ -60,8 +60,10 @@ export default function Hero() {
           </HudButton>
 
           <HudButton
-            href="/Daniel_Dieguez_CV.pdf"
+            href="https://docs.google.com/document/d/1HPbOMsd2OPtrPolEdgYsLw9HlJyP51cpGVxyOe_9Pgg/export?format=pdf"
             download="Daniel_Dieguez_CV.pdf"
+            target="_blank"
+            rel="noopener noreferrer"
             className="w-full py-4 rounded-lg text-base"
           >
             DOWNLOAD RESUME
