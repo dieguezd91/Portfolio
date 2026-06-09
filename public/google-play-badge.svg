@@ -1,0 +1,11 @@
+<svg width="1280" height="380" viewBox="0 0 1280 380" fill="none" xmlns="http://www.w3.org/2000/svg" role="img" aria-labelledby="title desc">
+  <title id="title">Get it on Google Play</title>
+  <desc id="desc">Google Play Store download badge.</desc>
+  <rect x="4" y="4" width="1272" height="372" rx="44" fill="#0A0A09" stroke="#A6A6A6" stroke-width="8"/>
+  <path d="M96 88C96 75.646 102.712 68.809 112.367 68.156C118.491 67.743 125.346 69.765 132.447 74.034L250.219 144.808L198.085 197.008L96 88Z" fill="#39B54A"/>
+  <path d="M96 88L198.085 197.008L96.245 299.108C96.084 297.838 96 296.527 96 295.178V88Z" fill="#5B7FCB"/>
+  <path d="M198.085 197.008L250.219 144.808L292.576 170.261C320.502 187.04 320.502 207.053 292.576 223.832L249.347 249.809L198.085 197.008Z" fill="#FDBD13"/>
+  <path d="M96.245 299.108L198.085 197.008L249.347 249.809L132.447 320.059C111.734 332.505 96 322.877 96 298.692C96 298.831 96.089 298.969 96.245 299.108Z" fill="#F93535"/>
+  <text x="388" y="125" fill="#FFFFFF" font-family="Arial, Helvetica, sans-serif" font-size="82" font-weight="500" letter-spacing="1">GET IT ON</text>
+  <text x="385" y="285" fill="#FFFFFF" font-family="Arial, Helvetica, sans-serif" font-size="156" font-weight="500" letter-spacing="-2">Google Play</text>
+</svg>
