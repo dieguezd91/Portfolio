@@ -2,25 +2,17 @@
 
 @theme {
   --font-heading: 'Space Grotesk', Arial, sans-serif;
-  --font-body:    'Inter', Arial, sans-serif;
-  --font-mono:    'JetBrains Mono', monospace;
+  --font-body: 'Inter', Arial, sans-serif;
+  --font-mono: 'JetBrains Mono', monospace;
 
-  /* Custom color palette */
   --color-background-base: #0F1020;
   --color-background-secondary: #14162A;
   --color-background-elevated: #1C1F3A;
   --color-border: rgba(255, 255, 255, 0.05);
 }
 
-/* ─── Button hierarchy ────────────────────────────────────────────────────
- *
- *  Level 1 — .hud-btn-solid   Primary CTA  — solid cyan fill, ambient glow
- *  Level 2 — .hud-btn         Secondary    — outline only, glow on hover
- *  Level 3 — inline Tailwind  Tertiary     — neutral, no glow (social icons)
- *
- * ───────────────────────────────────────────────────────────────────────── */
+/* ─── Button hierarchy ───────────────────────────────────────────────────── */
 
-/* Level 1 — Primary CTA */
 .hud-btn-solid {
   background-color: #00F5D4;
   border: 1px solid #00F5D4;
@@ -39,11 +31,6 @@
   box-shadow: 0 0 8px rgba(0, 245, 212, 0.14);
 }
 
-/* Level 2 — Secondary CTA */
-/*
- * No permanent glow — distinguishes from Level 1.
- * Glow appears only on hover to signal interactivity.
- */
 .hud-btn {
   background: transparent;
   border: 1px solid rgba(0, 245, 212, 0.55);
@@ -63,7 +50,6 @@
   box-shadow: 0 0 8px rgba(0, 245, 212, 0.18);
 }
 
-/* ─── HUD Button Primary (pink filled) — reserved, not currently used ─────── */
 .hud-btn-primary {
   background-color: #FF2D95;
   border: 1px solid #FF2D95;
@@ -80,8 +66,9 @@
 .hud-btn-primary:active {
   background-color: #e0267f;
 }
- 
-/* ─── Project Coverflow 3D ────────────────────────────────────────────────── */
+
+/* ─── Project polygon carousel ───────────────────────────────────────────── */
+
 :root {
   --slide-width: 80vw;
 }
@@ -99,14 +86,13 @@
 }
 
 .project-coverflow {
-  perspective: 1500px;
-  perspective-origin: 50% 48%;
-  overflow: hidden;
   position: relative;
-  /* Stable height using clamp */
-  height: clamp(240px, 36vw, 480px);
+  isolation: isolate;
   width: 100%;
-  /* Ambient lighting gradient */
+  height: clamp(260px, 37vw, 500px);
+  overflow: hidden;
+  perspective: clamp(850px, 65vw, 1100px);
+  perspective-origin: 50% 50%;
   background: radial-gradient(
     circle at center,
     rgba(0, 245, 212, 0.06),
@@ -114,33 +100,47 @@
   );
 }
 
+.project-coverflow__depth,
+.project-coverflow__rotor {
+  position: absolute;
+  inset: 0;
+  transform-style: preserve-3d;
+}
+
+.project-coverflow__depth {
+  pointer-events: none;
+}
+
+.project-coverflow__rotor {
+  pointer-events: none;
+  will-change: transform;
+}
+
 .coverflow-slide {
   position: absolute;
-  width: var(--slide-width);
-  height: calc(var(--slide-width) * 9 / 16);
-  /* Perfect absolute centering leaving transform free for Framer Motion */
   left: calc(50% - (var(--slide-width) / 2));
   top: calc(50% - (var(--slide-width) * 9 / 32));
+  width: var(--slide-width);
+  height: calc(var(--slide-width) * 9 / 16);
   transform-style: preserve-3d;
   transform-origin: center center;
   backface-visibility: hidden;
-  will-change: transform, opacity;
+  will-change: transform;
 }
 
-.carousel-control-btn:focus-visible,
-.carousel-selector-btn:focus-visible,
-.carousel-cta-link:focus-visible {
-  outline: 2px solid #00F5D4;
-  outline-offset: 4px;
+.coverflow-slide__surface {
+  transform-style: preserve-3d;
+  backface-visibility: hidden;
+  will-change: opacity;
 }
 
 .project-coverflow__controls {
   position: absolute;
   inset: 0;
+  z-index: 50;
   width: var(--slide-width);
   margin-inline: auto;
   pointer-events: none;
-  z-index: 30;
 }
 
 .project-coverflow__arrow {
@@ -158,7 +158,15 @@
   right: 16px;
 }
 
-/* ─── Base ────────────────────────────────────────────────────────────────── */
+.carousel-control-btn:focus-visible,
+.carousel-selector-btn:focus-visible,
+.carousel-cta-link:focus-visible {
+  outline: 2px solid #00F5D4;
+  outline-offset: 4px;
+}
+
+/* ─── Base ───────────────────────────────────────────────────────────────── */
+
 html {
   scroll-behavior: smooth;
 }

@@ -1,23 +1,24 @@
-import { useState, useEffect, useRef } from 'react';
+import { useEffect, useRef, useState } from 'react';
 import { motion as Motion, useReducedMotion } from 'framer-motion';
 import { projects } from '../data/projects';
 
-function formatNumber(num) {
-  return String(num).padStart(2, '0');
+function formatNumber(value) {
+  return String(value).padStart(2, '0');
 }
 
-// Circular index utility helpers
-function getPreviousIndex(index, total) {
-  return (index - 1 + total) % total;
+function wrapIndex(value, total) {
+  if (total <= 0) {
+    return 0;
+  }
+
+  return ((value % total) + total) % total;
 }
 
-// Circular index utility helpers
-function getNextIndex(index, total) {
-  return (index + 1) % total;
-}
-
-// Pure function returning shortest circular offset
 function getCircularOffset(projectIndex, activeIndex, total) {
+  if (total <= 0) {
+    return 0;
+  }
+
   let offset = projectIndex - activeIndex;
   const half = total / 2;
 
@@ -27,126 +28,151 @@ function getCircularOffset(projectIndex, activeIndex, total) {
     offset += total;
   }
 
-  // Consistent tie breaker for even collections
-  if (offset === half) {
-    return half;
-  }
-
   return offset;
 }
 
-// Pure function returning orbital Coverflow transformation values.
-function getSlideTransform(offset, shouldReduceMotion, isMobile, isTablet) {
-  const distance = Math.abs(offset);
+function getSlideWidth(windowWidth) {
+  if (windowWidth < 768) {
+    return windowWidth * 0.8;
+  }
 
-  if (offset === 0) {
+  if (windowWidth < 1024) {
+    return windowWidth * 0.66;
+  }
+
+  return Math.min(windowWidth * 0.5, 700);
+}
+
+function getPolygonGeometry(total, slideWidth, gap) {
+  if (total <= 1) {
     return {
-      x: 0,
-      z: 0,
-      scale: 1,
-      rotateY: 0,
-      opacity: 1,
-      zIndex: 20,
+      angle: 0,
+      radius: 0,
     };
   }
 
-  if (shouldReduceMotion) {
-    const spacing = isMobile ? 150 : isTablet ? 220 : 280;
-
+  if (total === 2) {
     return {
-      x: offset * spacing,
-      z: 0,
-      scale: distance === 1 ? 0.88 : 0.76,
-      rotateY: 0,
-      opacity: distance === 1 ? 0.5 : 0.22,
-      zIndex: 20 - distance,
+      angle: 180,
+      radius: slideWidth * 0.55 + gap,
     };
   }
-
-  const angleStep = isMobile ? 18 : isTablet ? 24 : 30;
-  const angleDegrees = offset * angleStep;
-  const angleRadians = angleDegrees * (Math.PI / 180);
-
-  const radius = isMobile ? 350 : isTablet ? 520 : 720;
 
   return {
-    x: Math.sin(angleRadians) * radius,
-    z: (Math.cos(angleRadians) - 1) * radius,
-    scale: Math.max(1 - distance * 0.14, 0.62),
-    rotateY: angleDegrees,
-    opacity: distance === 1 ? 0.68 : 0.26,
-    zIndex: 20 - distance,
+    angle: 360 / total,
+    radius: (slideWidth + gap) / (2 * Math.tan(Math.PI / total)),
   };
 }
 
-function ProjectCarousel({ title, description, projects }) {
-  const [activeIndex, setActiveIndex] = useState(0);
-  const [imageFailed, setImageFailed] = useState(false);
-  const [failedThumbnails, setFailedThumbnails] = useState({});
-  const [windowWidth, setWindowWidth] = useState(typeof window !== 'undefined' ? window.innerWidth : 1024);
-  const shouldReduceMotion = useReducedMotion();
-  
-  const scrollContainerRef = useRef(null);
-  const activeBtnRef = useRef(null);
+function getSurfaceOpacity(distance) {
+  if (distance === 0) {
+    return 1;
+  }
 
-  // Resize listener to adapt responsive ranges and rotations
+  if (distance === 1) {
+    return 0.72;
+  }
+
+  if (distance === 2) {
+    return 0.38;
+  }
+
+  return 0.16;
+}
+
+function ProjectCarousel({ title, description, projects: carouselProjects }) {
+  const [rotationStep, setRotationStep] = useState(0);
+  const [failedMedia, setFailedMedia] = useState({});
+  const [windowWidth, setWindowWidth] = useState(() =>
+    typeof window === 'undefined' ? 1024 : window.innerWidth
+  );
+
+  const shouldReduceMotion = useReducedMotion();
+  const scrollContainerRef = useRef(null);
+  const activeButtonRef = useRef(null);
+
   useEffect(() => {
     const handleResize = () => setWindowWidth(window.innerWidth);
+
     window.addEventListener('resize', handleResize);
     return () => window.removeEventListener('resize', handleResize);
   }, []);
 
+  const totalCount = carouselProjects?.length ?? 0;
+  const activeIndex = totalCount > 0 ? wrapIndex(rotationStep, totalCount) : 0;
+  const activeProject = totalCount > 0 ? carouselProjects[activeIndex] : null;
+
   const isMobile = windowWidth < 768;
   const isTablet = windowWidth >= 768 && windowWidth < 1024;
 
-  // Fallback bounds check
-  const totalCount = projects ? projects.length : 0;
-  const validIndex = totalCount > 0 ? Math.min(activeIndex, totalCount - 1) : 0;
-  const activeProject = totalCount > 0 ? projects[validIndex] : null;
+  const slideWidth = getSlideWidth(windowWidth);
+  const polygonGap = isMobile ? 12 : isTablet ? 18 : 24;
+  const { angle: polygonAngle, radius: polygonRadius } = getPolygonGeometry(
+    totalCount,
+    slideWidth,
+    polygonGap
+  );
 
-  useEffect(() => {
-    setImageFailed(false);
-  }, [activeProject?.id]);
-
-  // Horizontal auto-scroll of the bottom selector without page jumps
   useEffect(() => {
     const container = scrollContainerRef.current;
-    const activeBtn = activeBtnRef.current;
-    if (container && activeBtn) {
-      const containerWidth = container.clientWidth;
-      const btnOffsetLeft = activeBtn.offsetLeft;
-      const btnWidth = activeBtn.clientWidth;
-      container.scrollTo({
-        left: btnOffsetLeft - containerWidth / 2 + btnWidth / 2,
-        behavior: shouldReduceMotion ? 'auto' : 'smooth',
-      });
-    }
-  }, [validIndex, shouldReduceMotion]);
+    const activeButton = activeButtonRef.current;
 
-  if (!projects || totalCount === 0 || !activeProject) {
+    if (!container || !activeButton) {
+      return;
+    }
+
+    const targetLeft =
+      activeButton.offsetLeft -
+      container.clientWidth / 2 +
+      activeButton.clientWidth / 2;
+
+    container.scrollTo({
+      left: targetLeft,
+      behavior: shouldReduceMotion ? 'auto' : 'smooth',
+    });
+  }, [activeIndex, shouldReduceMotion]);
+
+  if (!activeProject) {
     return null;
   }
 
   const goToNext = () => {
     if (totalCount > 1) {
-      setActiveIndex(getNextIndex(validIndex, totalCount));
+      setRotationStep((currentStep) => currentStep + 1);
     }
   };
 
   const goToPrevious = () => {
     if (totalCount > 1) {
-      setActiveIndex(getPreviousIndex(validIndex, totalCount));
+      setRotationStep((currentStep) => currentStep - 1);
     }
   };
 
-  const goToProject = (index) => {
-    if (index === validIndex) return;
-    setActiveIndex(index);
+  const goToProject = (targetIndex) => {
+    if (totalCount <= 1 || targetIndex === activeIndex) {
+      return;
+    }
+
+    setRotationStep((currentStep) => {
+      const currentIndex = wrapIndex(currentStep, totalCount);
+      let delta = targetIndex - currentIndex;
+      const half = totalCount / 2;
+
+      if (delta > half) {
+        delta -= totalCount;
+      } else if (delta < -half) {
+        delta += totalCount;
+      }
+
+      return currentStep + delta;
+    });
   };
 
-  // Keyboard navigation
   const handleKeyDown = (event) => {
-    const interactiveElement = event.target.closest('a, button, input, textarea, select');
+    const interactiveElement = event.target.closest(
+      'a, button, input, textarea, select'
+    );
+
     if (interactiveElement && event.target !== event.currentTarget) {
       return;
     }
@@ -154,24 +180,26 @@ function ProjectCarousel({ title, description, projects }) {
     if (event.key === 'ArrowLeft') {
       event.preventDefault();
       goToPrevious();
-    } else if (event.key === 'ArrowRight') {
+      return;
+    }
+
+    if (event.key === 'ArrowRight') {
       event.preventDefault();
       goToNext();
     }
   };
 
-  // Swipe drag gesture config
-  const SWIPE_OFFSET_THRESHOLD = 70;
-  const SWIPE_VELOCITY_THRESHOLD = 500;
+  const swipeOffsetThreshold = 70;
+  const swipeVelocityThreshold = 500;
 
   const handleDragEnd = (_, info) => {
     const shouldGoNext =
-      info.offset.x < -SWIPE_OFFSET_THRESHOLD ||
-      info.velocity.x < -SWIPE_VELOCITY_THRESHOLD;
+      info.offset.x < -swipeOffsetThreshold ||
+      info.velocity.x < -swipeVelocityThreshold;
 
     const shouldGoPrevious =
-      info.offset.x > SWIPE_OFFSET_THRESHOLD ||
-      info.velocity.x > SWIPE_VELOCITY_THRESHOLD;
+      info.offset.x > swipeOffsetThreshold ||
+      info.velocity.x > swipeVelocityThreshold;
 
     if (shouldGoNext) {
       goToNext();
@@ -180,19 +208,30 @@ function ProjectCarousel({ title, description, projects }) {
     }
   };
 
-  // Filter projects to only render activeIndex ± maxRange
-  const maxRange = isMobile || isTablet ? 1 : 2;
-  const progressPercent = ((validIndex + 1) / totalCount) * 100;
-  const contributions = activeProject.contributions || [];
-  const techItems = (activeProject.technologies || activeProject.tags || []).slice(0, 4);
-  const techLine = techItems.join(' · ');
+  const markMediaAsFailed = (projectId) => {
+    setFailedMedia((current) => ({
+      ...current,
+      [projectId]: true,
+    }));
+  };
+
+  const progressPercent = ((activeIndex + 1) / totalCount) * 100;
+  const contributions = activeProject.contributions ?? [];
+  const technologyItems = (
+    activeProject.technologies ??
+    activeProject.tags ??
+    []
+  ).slice(0, 4);
+  const technologyLine = technologyItems.join(' · ');
 
   let defaultCta = 'View project';
+
   if (activeProject.storeType === 'googlePlay') {
     defaultCta = 'View on Google Play';
   } else if (activeProject.storeType === 'itch') {
     defaultCta = 'Play on itch.io';
   }
+
   const actionLabel = activeProject.ctaLabel || defaultCta;
 
   return (
@@ -200,41 +239,37 @@ function ProjectCarousel({ title, description, projects }) {
       className="mb-20 focus:outline-none"
       tabIndex={0}
       onKeyDown={handleKeyDown}
-      aria-label={`${title} coverflow. Use Left and Right Arrow keys to navigate.`}
+      aria-label={`${title} carousel. Use Left and Right Arrow keys to navigate.`}
     >
-      {/* Header */}
       <div className="mb-6 border-b border-white/[0.08] pb-4">
-        <h3 className="font-heading text-2xl font-bold tracking-tight text-white mb-2">{title}</h3>
+        <h3 className="mb-2 font-heading text-2xl font-bold tracking-tight text-white">
+          {title}
+        </h3>
+
         {description && (
-          <p className="font-body text-sm text-zinc-400">
-            {description}
-          </p>
+          <p className="font-body text-sm text-zinc-400">{description}</p>
         )}
       </div>
 
-      {/* 3D Viewport Area */}
       <div
         className="project-coverflow flex items-center justify-center py-4"
         aria-live="polite"
       >
-        {/* Floating Controls wrapper outside active slide area */}
         {totalCount > 1 && (
           <div className="project-coverflow__controls">
-            {/* Left Arrow Button */}
             <button
               type="button"
               onClick={goToPrevious}
-              className="project-coverflow__arrow project-coverflow__arrow--previous carousel-control-btn w-[52px] h-[52px] rounded-full bg-black/60 backdrop-blur-md border border-white/15 hover:border-white/30 text-white disabled:opacity-30 disabled:pointer-events-none transition-all duration-150 flex items-center justify-center cursor-pointer shadow-lg z-30"
+              className="project-coverflow__arrow project-coverflow__arrow--previous carousel-control-btn z-30 flex h-[52px] w-[52px] cursor-pointer items-center justify-center rounded-full border border-white/15 bg-black/60 text-white shadow-lg backdrop-blur-md transition-all duration-150 hover:border-white/30"
               aria-label="Previous project"
             >
               <span className="text-xl">&larr;</span>
             </button>
 
-            {/* Right Arrow Button */}
             <button
               type="button"
               onClick={goToNext}
-              className="project-coverflow__arrow project-coverflow__arrow--next carousel-control-btn w-[52px] h-[52px] rounded-full bg-black/60 backdrop-blur-md border border-white/15 hover:border-white/30 text-white disabled:opacity-30 disabled:pointer-events-none transition-all duration-150 flex items-center justify-center cursor-pointer shadow-lg z-30"
+              className="project-coverflow__arrow project-coverflow__arrow--next carousel-control-btn z-30 flex h-[52px] w-[52px] cursor-pointer items-center justify-center rounded-full border border-white/15 bg-black/60 text-white shadow-lg backdrop-blur-md transition-all duration-150 hover:border-white/30"
               aria-label="Next project"
             >
               <span className="text-xl">&rarr;</span>
@@ -242,111 +277,123 @@ function ProjectCarousel({ title, description, projects }) {
           </div>
         )}
 
-        {/* Slides rendering loop */}
-        {projects.map((project, idx) => {
-          const offset = getCircularOffset(idx, validIndex, totalCount);
-          
-          // Explicitly manage neighbor counts for different collection sizes to prevent empty gaps and duplicate visual states
-          if (totalCount === 1) {
-            if (offset !== 0) return null;
-          } else if (totalCount === 2) {
-            // Only show 1 neighbor to avoid duplicate representations
-            if (offset !== 0) {
-              if (validIndex === 0 && offset !== 1) return null;
-              if (validIndex === 1 && offset !== -1) return null;
-            }
-          } else if (totalCount === 3 || totalCount === 4) {
-            // Limit rendering window to ±1 to keep visual symmetry and prevent duplicate neighbor cards
-            if (Math.abs(offset) > 1) return null;
-          } else {
-            // 5 or more projects: render full ±2 range
-            if (Math.abs(offset) > maxRange) return null;
-          }
+        <div
+          className="project-coverflow__depth"
+          style={{
+            transform: `translateZ(-${polygonRadius}px)`,
+          }}
+        >
+          <Motion.div
+            className="project-coverflow__rotor"
+            animate={{
+              rotateY: -rotationStep * polygonAngle,
+            }}
+            transition={{
+              duration: shouldReduceMotion ? 0 : 0.55,
+              ease: [0.22, 1, 0.36, 1],
+            }}
+          >
+            {carouselProjects.map((project, index) => {
+              const offset = getCircularOffset(index, activeIndex, totalCount);
+              const distance = Math.abs(offset);
+              const isActive = index === activeIndex;
+              const isInteractive = isActive || distance === 1;
+              const hasMediaFailed = Boolean(failedMedia[project.id]);
 
-          const isActive = idx === validIndex;
-          const { x, z, scale, rotateY, opacity, zIndex } = getSlideTransform(
-            offset,
-            shouldReduceMotion,
-            isMobile,
-            isTablet
-          );
+              const SlideTag = isActive
+                ? 'article'
+                : isInteractive
+                  ? 'button'
+                  : 'div';
 
-          const SlideTag = isActive ? 'article' : 'button';
-          const slideProps = isActive
-            ? {}
-            : {
-                type: 'button',
-                onClick: () => goToProject(idx),
-                'aria-label': `Go to project: ${project.title}`,
-              };
+              const slideProps =
+                !isActive && isInteractive
+                  ? {
+                      type: 'button',
+                      onClick: () => goToProject(index),
+                      'aria-label': `Go to project: ${project.title}`,
+                    }
+                  : {};
 
-          return (
-            <Motion.div
-              key={project.id}
-              className={`coverflow-slide rounded-xl overflow-hidden bg-zinc-900 border border-white/10 ${
-                isActive ? 'shadow-xl' : 'shadow-none'
-              }`}
-              style={{ zIndex, transformOrigin: 'center center' }}
-              animate={{
-                x,
-                scale,
-                opacity,
-                rotateY,
-                z,
-              }}
-              transition={{ duration: 0.45, ease: [0.22, 1, 0.36, 1] }}
-            >
-              <SlideTag
-                {...slideProps}
-                className="group w-full h-full relative focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[#00F5D4] text-left block"
-              >
-                {/* Fallback image check */}
-                {isActive && imageFailed ? (
-                  <div className="w-full h-full flex flex-col items-center justify-center p-6 text-center bg-zinc-950">
-                    <span className="font-heading text-lg font-bold text-white mb-2">{project.title}</span>
-                    <span className="text-zinc-500 text-xs">Screenshot unavailable</span>
-                  </div>
-                ) : (
+              return (
+                <div
+                  key={project.id}
+                  className={`coverflow-slide overflow-hidden rounded-xl border border-white/10 bg-zinc-900 ${
+                    isActive ? 'shadow-xl' : 'shadow-none'
+                  }`}
+                  style={{
+                    transform: `rotateY(${index * polygonAngle}deg) translateZ(${polygonRadius}px)`,
+                    pointerEvents: isInteractive ? 'auto' : 'none',
+                  }}
+                  aria-hidden={!isInteractive}
+                >
                   <Motion.div
-                    drag={isActive && !shouldReduceMotion ? 'x' : false}
-                    dragConstraints={{ left: 0, right: 0 }}
-                    onDragEnd={handleDragEnd}
-                    className="w-full h-full"
-                    style={{ touchAction: 'pan-y' }}
+                    className="coverflow-slide__surface h-full w-full"
+                    animate={{
+                      opacity: getSurfaceOpacity(distance),
+                    }}
+                    transition={{
+                      duration: shouldReduceMotion ? 0 : 0.35,
+                      ease: 'easeOut',
+                    }}
                   >
-                    <img
-                      src={project.media}
-                      alt={`${project.title} gameplay screenshot`}
-                      loading="lazy"
-                      decoding="async"
-                      className="w-full h-full pointer-events-none select-none"
-                      style={{
-                        objectFit: project.mediaFit || 'cover',
-                        objectPosition: project.mediaPosition || 'center',
-                      }}
-                      draggable={false}
-                      onError={isActive ? () => setImageFailed(true) : undefined}
-                    />
-                  </Motion.div>
-                )}
+                    <SlideTag
+                      {...slideProps}
+                      className="group relative block h-full w-full text-left focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[#00F5D4]"
+                    >
+                      {hasMediaFailed ? (
+                        <div className="flex h-full w-full flex-col items-center justify-center bg-zinc-950 p-6 text-center">
+                          <span className="mb-2 font-heading text-lg font-bold text-white">
+                            {project.title}
+                          </span>
+                          <span className="text-xs text-zinc-500">
+                            Screenshot unavailable
+                          </span>
+                        </div>
+                      ) : (
+                        <Motion.div
+                          drag={isActive && !shouldReduceMotion ? 'x' : false}
+                          dragConstraints={{ left: 0, right: 0 }}
+                          dragElastic={0.08}
+                          onDragEnd={handleDragEnd}
+                          className="h-full w-full"
+                          style={{ touchAction: 'pan-y' }}
+                        >
+                          <img
+                            src={project.media}
+                            alt={`${project.title} gameplay screenshot`}
+                            loading="lazy"
+                            decoding="async"
+                            className="h-full w-full select-none pointer-events-none"
+                            style={{
+                              objectFit: project.mediaFit || 'cover',
+                              objectPosition: project.mediaPosition || 'center',
+                            }}
+                            draggable={false}
+                            onError={() => markMediaAsFailed(project.id)}
+                          />
+                        </Motion.div>
+                      )}
 
-                {/* Dark overlay for neighbor slides */}
-                {!isActive && (
-                  <div className="absolute inset-0 bg-black/40 transition-colors duration-200 group-hover:bg-black/25" />
-                )}
-              </SlideTag>
-            </Motion.div>
-          );
-        })}
+                      {!isActive && (
+                        <div className="absolute inset-0 bg-black/45 transition-colors duration-200 group-hover:bg-black/25" />
+                      )}
+                    </SlideTag>
+                  </Motion.div>
+                </div>
+              );
+            })}
+          </Motion.div>
+        </div>
       </div>
 
-      {/* Progress Line Bar & Counter */}
       {totalCount > 1 && (
-        <div className="mt-4 mb-6 flex items-center justify-center gap-4">
-          <span className="font-mono text-xs text-zinc-400 font-semibold tracking-wider">
-            {formatNumber(validIndex + 1)} / {formatNumber(totalCount)}
+        <div className="mb-6 mt-4 flex items-center justify-center gap-4">
+          <span className="font-mono text-xs font-semibold tracking-wider text-zinc-400">
+            {formatNumber(activeIndex + 1)} / {formatNumber(totalCount)}
           </span>
-          <div className="w-48 h-0.5 bg-white/10 rounded-full overflow-hidden">
+
+          <div className="h-0.5 w-48 overflow-hidden rounded-full bg-white/10">
             <div
               className="h-full bg-[#00F5D4] transition-all duration-300"
               style={{ width: `${progressPercent}%` }}
@@ -355,63 +402,64 @@ function ProjectCarousel({ title, description, projects }) {
         </div>
       )}
 
-      {/* Lower Active Project Information panel (Compact semantic hierarchy) */}
-      <div className="w-full max-w-5xl mx-auto text-zinc-300 mt-2 min-h-[150px] flex flex-col justify-center gap-4">
-        {/* Row 1 & 2: Title, platform/year, developer role */}
-        <div className="flex flex-col md:flex-row md:items-baseline justify-between gap-2 border-b border-white/[0.05] pb-3">
+      <div className="mx-auto mt-2 flex min-h-[150px] w-full max-w-5xl flex-col justify-center gap-4 text-zinc-300">
+        <div className="flex flex-col justify-between gap-2 border-b border-white/[0.05] pb-3 md:flex-row md:items-baseline">
           <div>
-            <h4 className="font-heading text-xl md:text-2xl font-bold text-white leading-tight">
+            <h4 className="font-heading text-xl font-bold leading-tight text-white md:text-2xl">
               {activeProject.title}
             </h4>
-            <p className="font-body text-xs text-[#00F5D4] font-semibold mt-1">
+            <p className="mt-1 font-body text-xs font-semibold text-[#00F5D4]">
               {activeProject.role}
             </p>
           </div>
+
           <div className="md:text-right">
-            <p className="font-body text-xs md:text-sm text-zinc-400 font-bold tracking-wide uppercase">
+            <p className="font-body text-xs font-bold uppercase tracking-wide text-zinc-400 md:text-sm">
               {activeProject.platform} &middot; {activeProject.year}
             </p>
           </div>
         </div>
 
-        {/* Row 3: Public Description */}
-        <div className="text-zinc-200 text-sm md:text-base leading-relaxed py-1">
+        <div className="py-1 text-sm leading-relaxed text-zinc-200 md:text-base">
           {activeProject.description}
         </div>
 
-        {/* Row 4: Technical Contributions */}
         {contributions.length > 0 && (
-          <div className="py-2 border-t border-white/[0.03] mt-1">
-            <h5 className="font-heading text-[10px] font-bold text-zinc-500 tracking-wider uppercase mb-2">
+          <div className="mt-1 border-t border-white/[0.03] py-2">
+            <h5 className="mb-2 font-heading text-[10px] font-bold uppercase tracking-wider text-zinc-500">
               Key Technical Contributions
             </h5>
+
             {isMobile ? (
               <ul className="space-y-1">
-                {contributions.slice(0, 3).map((contribution, cIdx) => (
-                  <li key={cIdx} className="flex items-start gap-2 text-xs text-zinc-400">
+                {contributions.slice(0, 3).map((contribution, index) => (
+                  <li
+                    key={`${activeProject.id}-${index}`}
+                    className="flex items-start gap-2 text-xs text-zinc-400"
+                  >
                     <span className="mt-1.5 h-1 w-1 shrink-0 rounded-full bg-[#00F5D4]" />
                     <span className="leading-relaxed">{contribution}</span>
                   </li>
                 ))}
               </ul>
             ) : (
-              <p className="text-xs md:text-sm text-zinc-400 leading-relaxed">
+              <p className="text-xs leading-relaxed text-zinc-400 md:text-sm">
                 {contributions.join('  ·  ')}
               </p>
             )}
           </div>
         )}
 
-        {/* Row 5: Technologies & CTA */}
-        <div className="flex items-center justify-between gap-6 border-t border-white/[0.05] pt-3 mt-1">
-          <p className="font-body text-xs text-zinc-500 font-medium tracking-wide">
-            {techLine}
+        <div className="mt-1 flex items-center justify-between gap-6 border-t border-white/[0.05] pt-3">
+          <p className="font-body text-xs font-medium tracking-wide text-zinc-500">
+            {technologyLine}
           </p>
+
           <a
             href={activeProject.storeUrl}
             target="_blank"
             rel="noopener noreferrer"
-            className="carousel-cta-link inline-flex items-center gap-1.5 text-xs font-semibold text-zinc-200 hover:text-[#00F5D4] focus-visible:text-[#00F5D4] focus:outline-none transition-colors duration-150 py-1"
+            className="carousel-cta-link inline-flex items-center gap-1.5 py-1 text-xs font-semibold text-zinc-200 transition-colors duration-150 hover:text-[#00F5D4] focus:outline-none focus-visible:text-[#00F5D4]"
           >
             <span>{actionLabel}</span>
             <span className="text-[10px]">↗</span>
@@ -419,44 +467,42 @@ function ProjectCarousel({ title, description, projects }) {
         </div>
       </div>
 
-      {/* Selector with Miniatures */}
       {totalCount > 1 && (
         <div
           ref={scrollContainerRef}
-          className="mt-6 flex gap-4 overflow-x-auto pb-2 scrollbar-none snap-x"
+          className="scrollbar-none mt-6 flex snap-x gap-4 overflow-x-auto pb-2"
         >
-          {projects.map((proj, idx) => {
-            const isActive = idx === validIndex;
-            const hasThumbFailed = failedThumbnails[proj.id];
+          {carouselProjects.map((project, index) => {
+            const isActive = index === activeIndex;
+            const hasMediaFailed = Boolean(failedMedia[project.id]);
 
             return (
               <button
-                key={proj.id}
-                ref={isActive ? activeBtnRef : null}
-                onClick={() => goToProject(idx)}
-                aria-label={`Go to project: ${proj.title}`}
-                className={`carousel-selector-btn rounded overflow-hidden aspect-video transition-all duration-200 shrink-0 snap-center focus:outline-none border ${
+                key={project.id}
+                ref={isActive ? activeButtonRef : null}
+                type="button"
+                onClick={() => goToProject(index)}
+                aria-label={`Go to project: ${project.title}`}
+                className={`carousel-selector-btn h-[40px] w-[72px] shrink-0 snap-center overflow-hidden rounded border transition-all duration-200 focus:outline-none md:h-[54px] md:w-24 ${
                   isActive
-                    ? 'border-[#00F5D4] opacity-100 scale-105'
+                    ? 'scale-105 border-[#00F5D4] opacity-100'
                     : 'border-white/10 opacity-40 hover:opacity-75'
-                } w-[72px] h-[40px] md:w-24 md:h-[54px]`}
+                }`}
               >
-                {hasThumbFailed ? (
-                  <div className="w-full h-full bg-zinc-950 flex items-center justify-center text-[8px] text-zinc-600 font-semibold truncate p-1">
-                    {proj.title}
+                {hasMediaFailed ? (
+                  <div className="flex h-full w-full items-center justify-center truncate bg-zinc-950 p-1 text-[8px] font-semibold text-zinc-600">
+                    {project.title}
                   </div>
                 ) : (
                   <img
-                    src={proj.media}
+                    src={project.media}
                     alt=""
-                    className="w-full h-full object-cover pointer-events-none select-none"
+                    className="h-full w-full select-none object-cover pointer-events-none"
                     style={{
-                      objectFit: proj.mediaFit || 'cover',
-                      objectPosition: proj.mediaPosition || 'center',
+                      objectFit: project.mediaFit || 'cover',
+                      objectPosition: project.mediaPosition || 'center',
                     }}
-                    onError={() => {
-                      setFailedThumbnails((prev) => ({ ...prev, [proj.id]: true }));
-                    }}
+                    onError={() => markMediaAsFailed(project.id)}
                   />
                 )}
               </button>
@@ -473,39 +519,38 @@ export default function Projects() {
   const projects2D = projects.filter((project) => project.dimension === '2D');
 
   return (
-    <section id="projects" className="min-h-screen bg-[#14162A] text-white py-20 px-6">
-      <div className="max-w-7xl mx-auto">
-        {/* Header */}
+    <section id="projects" className="min-h-screen bg-[#14162A] px-6 py-20 text-white">
+      <div className="mx-auto max-w-7xl">
         <Motion.div
           initial={{ opacity: 0, y: 20 }}
           whileInView={{ opacity: 1, y: 0 }}
           viewport={{ once: true, margin: '-100px' }}
           transition={{ duration: 0.5, ease: 'easeOut' }}
-          className="text-center mb-20"
+          className="mb-20 text-center"
         >
-          <h2 className="font-heading text-3xl md:text-4xl font-semibold mb-4 text-white">
+          <h2 className="mb-4 font-heading text-3xl font-semibold text-white md:text-4xl">
             Projects
           </h2>
+
           <Motion.div
             initial={{ width: 0 }}
             whileInView={{ width: 96 }}
             viewport={{ once: true }}
             transition={{ duration: 0.6, delay: 0.2, ease: 'easeOut' }}
-            className="h-1 bg-[#00F5D4]/50 mx-auto mb-6"
+            className="mx-auto mb-6 h-1 bg-[#00F5D4]/50"
           />
-          <p className="font-body font-normal text-base md:text-lg text-zinc-300 max-w-2xl mx-auto leading-relaxed">
+
+          <p className="mx-auto max-w-2xl font-body text-base font-normal leading-relaxed text-zinc-300 md:text-lg">
             Projects and prototypes built during my professional training and indie game development journey.
           </p>
         </Motion.div>
 
-        {/* 3D Projects Coverflow */}
         <ProjectCarousel
           title="3D Projects"
           description="Gameplay systems, AI, VR and interactive 3D experiences."
           projects={projects3D}
         />
 
-        {/* 2D Projects Coverflow */}
         <ProjectCarousel
           title="2D Projects"
           description="Mobile games, deckbuilders, and classic 2D arcade experiences."
