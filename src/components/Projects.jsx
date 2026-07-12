@@ -323,38 +323,26 @@ function ProjectCarousel({
         )}
       </div>
 
-      <div
-        className="project-coverflow flex items-center justify-center py-4"
-        aria-live="polite"
-      >
+      <div className="flex w-full items-center gap-3 md:gap-6">
         {totalCount > 1 && (
-          <div className="project-coverflow__controls">
-            <button
-              type="button"
-              onClick={goToPrevious}
-              className="project-coverflow__arrow project-coverflow__arrow--previous carousel-control-btn z-30 flex h-[52px] w-[52px] cursor-pointer items-center justify-center rounded-full border border-white/15 bg-black/60 text-white shadow-lg backdrop-blur-md transition-all duration-150 hover:border-white/30"
-              aria-label="Previous project"
-            >
-              <span className="text-xl">
-                &larr;
-              </span>
-            </button>
-
-            <button
-              type="button"
-              onClick={goToNext}
-              className="project-coverflow__arrow project-coverflow__arrow--next carousel-control-btn z-30 flex h-[52px] w-[52px] cursor-pointer items-center justify-center rounded-full border border-white/15 bg-black/60 text-white shadow-lg backdrop-blur-md transition-all duration-150 hover:border-white/30"
-              aria-label="Next project"
-            >
-              <span className="text-xl">
-                &rarr;
-              </span>
-            </button>
-          </div>
+          <button
+            type="button"
+            onClick={goToPrevious}
+            className="carousel-control-btn relative z-50 flex h-11 w-11 min-w-11 shrink-0 cursor-pointer items-center justify-center rounded-full border border-white/20 bg-[#0F1020] text-white shadow-lg transition-all duration-150 hover:border-[#00F5D4]/70 hover:text-[#00F5D4] md:h-[52px] md:w-[52px] md:min-w-[52px]"
+            aria-label="Previous project"
+          >
+            <span className="text-xl leading-none">
+              &larr;
+            </span>
+          </button>
         )}
 
         <div
-          className="project-coverflow__depth"
+          className="project-coverflow min-w-0 flex-1 items-center justify-center py-4"
+          aria-live="polite"
+        >
+          <div
+            className="project-coverflow__depth"
           style={{
             transform: `translateZ(-${polygonRadius}px)`,
           }}
@@ -522,7 +510,21 @@ function ProjectCarousel({
               }
             )}
           </Motion.div>
+          </div>
         </div>
+
+        {totalCount > 1 && (
+          <button
+            type="button"
+            onClick={goToNext}
+            className="carousel-control-btn relative z-50 flex h-11 w-11 min-w-11 shrink-0 cursor-pointer items-center justify-center rounded-full border border-white/20 bg-[#0F1020] text-white shadow-lg transition-all duration-150 hover:border-[#00F5D4]/70 hover:text-[#00F5D4] md:h-[52px] md:w-[52px] md:min-w-[52px]"
+            aria-label="Next project"
+          >
+            <span className="text-xl leading-none">
+              &rarr;
+            </span>
+          </button>
+        )}
       </div>
 
       {totalCount > 1 && (
@@ -728,17 +730,11 @@ export default function Projects() {
     )
     .filter(Boolean);
 
-  const featuredProjectIds = new Set(FEATURED_PROJECT_IDS);
-
-  const remainingProjects = projects.filter(
-    (project) => !featuredProjectIds.has(project.id)
-  );
-
-  const projects3D = remainingProjects.filter(
+  const projects3D = projects.filter(
     (project) => project.dimension === '3D'
   );
 
-  const projects2D = remainingProjects.filter(
+  const projects2D = projects.filter(
     (project) => project.dimension === '2D'
   );
 
@@ -795,7 +791,7 @@ export default function Projects() {
           projects={featuredProjects}
         />
 
-        <SectionHeading title="More Projects" />
+        <SectionHeading title="All Projects" />
 
         <ProjectCarousel
           title="3D Projects"

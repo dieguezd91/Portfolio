@@ -134,28 +134,41 @@
   will-change: opacity;
 }
 
-.project-coverflow__controls {
-  position: absolute;
-  inset: 0;
+.project-carousel-stage {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr);
+  align-items: center;
+  width: 100%;
+}
+
+.project-carousel-stage--with-controls {
+  grid-template-columns: 52px minmax(0, 1fr) 52px;
+  column-gap: clamp(12px, 2vw, 28px);
+}
+
+.project-carousel-stage__arrow {
+  position: relative;
   z-index: 50;
-  width: var(--slide-width);
-  margin-inline: auto;
-  pointer-events: none;
+  width: 52px;
+  height: 52px;
+  justify-self: center;
+  flex-shrink: 0;
 }
 
-.project-coverflow__arrow {
-  position: absolute;
-  top: 50%;
-  transform: translateY(-50%);
-  pointer-events: auto;
-}
+@media (max-width: 767px) {
+  :root {
+    --slide-width: min(72vw, calc(100vw - 124px));
+  }
 
-.project-coverflow__arrow--previous {
-  left: 16px;
-}
+  .project-carousel-stage--with-controls {
+    grid-template-columns: 40px minmax(0, 1fr) 40px;
+    column-gap: 6px;
+  }
 
-.project-coverflow__arrow--next {
-  right: 16px;
+  .project-carousel-stage__arrow {
+    width: 40px;
+    height: 40px;
+  }
 }
 
 .carousel-control-btn:focus-visible,
