@@ -696,7 +696,10 @@ function SectionHeading({ title }) {
       initial={{ opacity: 0, y: 16 }}
       whileInView={{ opacity: 1, y: 0 }}
       viewport={{ once: true, margin: '-80px' }}
-      transition={{ duration: 0.45, ease: 'easeOut' }}
+      transition={{
+        duration: 0.45,
+        ease: 'easeOut',
+      }}
       className="mb-10 text-center"
     >
       <h2 className="mb-4 font-heading text-3xl font-semibold text-white md:text-4xl">
@@ -707,7 +710,11 @@ function SectionHeading({ title }) {
         initial={{ width: 0 }}
         whileInView={{ width: 96 }}
         viewport={{ once: true }}
-        transition={{ duration: 0.6, delay: 0.15, ease: 'easeOut' }}
+        transition={{
+          duration: 0.6,
+          delay: 0.15,
+          ease: 'easeOut',
+        }}
         className="mx-auto h-1 bg-[#00F5D4]/50"
       />
     </Motion.div>
@@ -784,7 +791,7 @@ export default function Projects() {
 
         <ProjectCarousel
           title="Featured Projects"
-          description="Projects that best represent the range of my work across mobile, 3D, and virtual reality."
+          description="Projects that best represent my current work."
           projects={featuredProjects}
         />
 
