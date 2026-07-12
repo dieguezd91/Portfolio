@@ -67,14 +67,13 @@ function getSlideTransform(offset, shouldReduceMotion, isMobile, isTablet) {
   const angleDegrees = offset * angleStep;
   const angleRadians = angleDegrees * (Math.PI / 180);
 
-  const radiusX = isMobile ? 350 : isTablet ? 520 : 720;
-  const radiusZ = isMobile ? 120 : isTablet ? 210 : 320;
+  const radius = isMobile ? 350 : isTablet ? 520 : 720;
 
   return {
-    x: Math.sin(angleRadians) * radiusX,
-    z: Math.cos(angleRadians) * radiusZ - radiusZ,
+    x: Math.sin(angleRadians) * radius,
+    z: (Math.cos(angleRadians) - 1) * radius,
     scale: Math.max(1 - distance * 0.14, 0.62),
-    rotateY: -angleDegrees,
+    rotateY: angleDegrees,
     opacity: distance === 1 ? 0.68 : 0.26,
     zIndex: 20 - distance,
   };
