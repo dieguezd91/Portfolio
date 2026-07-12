@@ -2,6 +2,8 @@ import { useEffect, useMemo, useState } from 'react';
 import { motion as Motion, useReducedMotion } from 'framer-motion';
 import { projects } from '../data/projects';
 
+const FEATURED_PROJECT_IDS = [10, 11, 2];
+
 function formatNumber(value) {
   return String(value).padStart(2, '0');
 }
@@ -688,15 +690,49 @@ function ProjectCarousel({
   );
 }
 
+function SectionHeading({ title }) {
+  return (
+    <Motion.div
+      initial={{ opacity: 0, y: 16 }}
+      whileInView={{ opacity: 1, y: 0 }}
+      viewport={{ once: true, margin: '-80px' }}
+      transition={{ duration: 0.45, ease: 'easeOut' }}
+      className="mb-10 text-center"
+    >
+      <h2 className="mb-4 font-heading text-3xl font-semibold text-white md:text-4xl">
+        {title}
+      </h2>
+
+      <Motion.div
+        initial={{ width: 0 }}
+        whileInView={{ width: 96 }}
+        viewport={{ once: true }}
+        transition={{ duration: 0.6, delay: 0.15, ease: 'easeOut' }}
+        className="mx-auto h-1 bg-[#00F5D4]/50"
+      />
+    </Motion.div>
+  );
+}
+
 export default function Projects() {
-  const projects3D = projects.filter(
-    (project) =>
-      project.dimension === '3D'
+  const featuredProjects = FEATURED_PROJECT_IDS
+    .map((projectId) =>
+      projects.find((project) => project.id === projectId)
+    )
+    .filter(Boolean);
+
+  const featuredProjectIds = new Set(FEATURED_PROJECT_IDS);
+
+  const remainingProjects = projects.filter(
+    (project) => !featuredProjectIds.has(project.id)
   );
 
-  const projects2D = projects.filter(
-    (project) =>
-      project.dimension === '2D'
+  const projects3D = remainingProjects.filter(
+    (project) => project.dimension === '3D'
+  );
+
+  const projects2D = remainingProjects.filter(
+    (project) => project.dimension === '2D'
   );
 
   return (
@@ -725,7 +761,7 @@ export default function Projects() {
           className="mb-20 text-center"
         >
           <h2 className="mb-4 font-heading text-3xl font-semibold text-white md:text-4xl">
-            Projects
+            Selected Work
           </h2>
 
           <Motion.div
@@ -741,22 +777,26 @@ export default function Projects() {
           />
 
           <p className="mx-auto max-w-2xl font-body text-base font-normal leading-relaxed text-zinc-300 md:text-lg">
-            Projects and prototypes built
-            during my professional training
-            and indie game development
-            journey.
+            A selection of game projects showcasing my work in Unity,
+            gameplay programming, and systems implementation.
           </p>
         </Motion.div>
 
         <ProjectCarousel
+          title="Featured Projects"
+          description="Projects that best represent the range of my work across mobile, 3D, and virtual reality."
+          projects={featuredProjects}
+        />
+
+        <SectionHeading title="More Projects" />
+
+        <ProjectCarousel
           title="3D Projects"
-          description="Gameplay systems, AI, VR and interactive 3D experiences."
           projects={projects3D}
         />
 
         <ProjectCarousel
           title="2D Projects"
-          description="Mobile games, deckbuilders, and classic 2D arcade experiences."
           projects={projects2D}
         />
       </div>
