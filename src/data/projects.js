@@ -9,7 +9,7 @@ export const projects = [
     platform: 'Android',
     storeType: 'googlePlay',
     storeUrl: 'https://play.google.com/store/apps/details?id=com.astroriftgames.slashemout',
-    ctaLabel: 'Ver en Google Play',
+    ctaLabel: 'View on Google Play',
     media: '/SlashEmOut.png',
     mediaType: 'image',
     dimension: '2D',
