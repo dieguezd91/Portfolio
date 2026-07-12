@@ -1,4 +1,4 @@
-import { useEffect, useRef, useState } from 'react';
+import { useEffect, useMemo, useRef, useState } from 'react';
 import { motion as Motion, useReducedMotion } from 'framer-motion';
 import { projects } from '../data/projects';
 
@@ -41,6 +41,36 @@ function getSlideWidth(windowWidth) {
   }
 
   return Math.min(windowWidth * 0.5, 700);
+}
+
+function getRingRepeatCount(projectCount) {
+  if (projectCount <= 1 || projectCount >= 5) {
+    return 1;
+  }
+
+  const minimumFaceCount = 8;
+  return Math.ceil(minimumFaceCount / projectCount);
+}
+
+function createCarouselSlots(carouselProjects) {
+  const projectCount = carouselProjects?.length ?? 0;
+
+  if (projectCount === 0) {
+    return [];
+  }
+
+  const repeatCount = getRingRepeatCount(projectCount);
+  const slotCount = projectCount * repeatCount;
+
+  return Array.from({ length: slotCount }, (_, slotIndex) => {
+    const projectIndex = slotIndex % projectCount;
+
+    return {
+      slotIndex,
+      projectIndex,
+      project: carouselProjects[projectIndex],
+    };
+  });
 }
 
 function getPolygonGeometry(total, slideWidth, gap) {
@@ -99,7 +129,14 @@ function ProjectCarousel({ title, description, projects: carouselProjects }) {
   }, []);
 
   const totalCount = carouselProjects?.length ?? 0;
-  const activeIndex = totalCount > 0 ? wrapIndex(rotationStep, totalCount) : 0;
+  const carouselSlots = useMemo(
+    () => createCarouselSlots(carouselProjects),
+    [carouselProjects]
+  );
+  const slotCount = carouselSlots.length;
+  const activeSlotIndex = slotCount > 0 ? wrapIndex(rotationStep, slotCount) : 0;
+  const activeIndex =
+    slotCount > 0 ? carouselSlots[activeSlotIndex].projectIndex : 0;
   const activeProject = totalCount > 0 ? carouselProjects[activeIndex] : null;
 
   const isMobile = windowWidth < 768;
@@ -108,7 +145,7 @@ function ProjectCarousel({ title, description, projects: carouselProjects }) {
   const slideWidth = getSlideWidth(windowWidth);
   const polygonGap = isMobile ? 12 : isTablet ? 18 : 24;
   const { angle: polygonAngle, radius: polygonRadius } = getPolygonGeometry(
-    totalCount,
+    slotCount,
     slideWidth,
     polygonGap
   );
@@ -293,10 +330,14 @@ function ProjectCarousel({ title, description, projects: carouselProjects }) {
               ease: [0.22, 1, 0.36, 1],
             }}
           >
-            {carouselProjects.map((project, index) => {
-              const offset = getCircularOffset(index, activeIndex, totalCount);
+            {carouselSlots.map(({ project, slotIndex }) => {
+              const offset = getCircularOffset(
+                slotIndex,
+                activeSlotIndex,
+                slotCount
+              );
               const distance = Math.abs(offset);
-              const isActive = index === activeIndex;
+              const isActive = slotIndex === activeSlotIndex;
               const isInteractive = isActive || distance === 1;
               const hasMediaFailed = Boolean(failedMedia[project.id]);
 
@@ -310,19 +351,19 @@ function ProjectCarousel({ title, description, projects: carouselProjects }) {
                 !isActive && isInteractive
                   ? {
                       type: 'button',
-                      onClick: () => goToProject(index),
+                      onClick: () => goToProject(slotIndex % totalCount),
                       'aria-label': `Go to project: ${project.title}`,
                     }
                   : {};
 
               return (
                 <div
-                  key={project.id}
+                  key={`${project.id}-${slotIndex}`}
                   className={`coverflow-slide overflow-hidden rounded-xl border border-white/10 bg-zinc-900 ${
                     isActive ? 'shadow-xl' : 'shadow-none'
                   }`}
                   style={{
-                    transform: `rotateY(${index * polygonAngle}deg) translateZ(${polygonRadius}px)`,
+                    transform: `rotateY(${slotIndex * polygonAngle}deg) translateZ(${polygonRadius}px)`,
                     pointerEvents: isInteractive ? 'auto' : 'none',
                   }}
                   aria-hidden={!isInteractive}
