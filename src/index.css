@@ -79,25 +79,83 @@
 
 .hud-btn-primary:active {
   background-color: #e0267f;
-  box-shadow: 0 0 6px rgba(255, 45, 149, 0.15);
+}
+ 
+/* ─── Project Coverflow 3D ────────────────────────────────────────────────── */
+:root {
+  --slide-width: 80vw;
 }
 
-/* ─── HUD Card ───────────────────────────────────────────────────────────── */
-/*
- * Same accent token as .hud-btn — unified cyan system.
- * Default  : near-invisible cyan border, no glow
- * Hover    : visible cyan border, soft ambient glow
- *            (translateY elevation handled by Framer Motion whileHover)
- */
-.hud-card {
-  border: 1px solid rgba(0, 245, 212, 0.07);
-  box-shadow: none;
-  transition: border-color 160ms ease, box-shadow 160ms ease;
+@media (min-width: 768px) {
+  :root {
+    --slide-width: 66vw;
+  }
 }
 
-.hud-card:hover {
-  border-color: rgba(0, 245, 212, 0.28);
-  box-shadow: 0 0 24px rgba(0, 245, 212, 0.12);
+@media (min-width: 1024px) {
+  :root {
+    --slide-width: min(50vw, 700px);
+  }
+}
+
+.project-coverflow {
+  perspective: 1500px;
+  perspective-origin: 50% 48%;
+  overflow: hidden;
+  position: relative;
+  /* Stable height using clamp */
+  height: clamp(240px, 36vw, 480px);
+  width: 100%;
+  /* Ambient lighting gradient */
+  background: radial-gradient(
+    circle at center,
+    rgba(0, 245, 212, 0.06),
+    transparent 58%
+  );
+}
+
+.coverflow-slide {
+  position: absolute;
+  width: var(--slide-width);
+  height: calc(var(--slide-width) * 9 / 16);
+  /* Perfect absolute centering leaving transform free for Framer Motion */
+  left: calc(50% - (var(--slide-width) / 2));
+  top: calc(50% - (var(--slide-width) * 9 / 32));
+  transform-style: preserve-3d;
+  transform-origin: center center;
+  backface-visibility: hidden;
+  will-change: transform, opacity;
+}
+
+.carousel-control-btn:focus-visible,
+.carousel-selector-btn:focus-visible,
+.carousel-cta-link:focus-visible {
+  outline: 2px solid #00F5D4;
+  outline-offset: 4px;
+}
+
+.project-coverflow__controls {
+  position: absolute;
+  inset: 0;
+  width: var(--slide-width);
+  margin-inline: auto;
+  pointer-events: none;
+  z-index: 30;
+}
+
+.project-coverflow__arrow {
+  position: absolute;
+  top: 50%;
+  transform: translateY(-50%);
+  pointer-events: auto;
+}
+
+.project-coverflow__arrow--previous {
+  left: 16px;
+}
+
+.project-coverflow__arrow--next {
+  right: 16px;
 }
 
 /* ─── Base ────────────────────────────────────────────────────────────────── */
