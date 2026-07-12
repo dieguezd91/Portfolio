@@ -125,6 +125,74 @@ function getProjectActionLabel(project) {
   return project.ctaLabel || 'View project';
 }
 
+
+function CarouselArrowButton({
+  direction,
+  onClick,
+  shouldReduceMotion,
+}) {
+  const isPrevious = direction === 'previous';
+  const label = isPrevious
+    ? 'Previous project'
+    : 'Next project';
+
+  return (
+    <Motion.button
+      type="button"
+      onClick={onClick}
+      whileHover={
+        shouldReduceMotion
+          ? undefined
+          : {
+            x: isPrevious ? -2 : 2,
+            scale: 1.03,
+          }
+      }
+      whileTap={
+        shouldReduceMotion
+          ? undefined
+          : {
+            scale: 0.94,
+          }
+      }
+      className="carousel-control-btn group relative z-50 flex h-11 w-11 min-w-11 shrink-0 cursor-pointer items-center justify-center overflow-hidden rounded-xl border border-white/[0.12] bg-white/[0.035] text-zinc-300 shadow-[0_10px_30px_rgba(0,0,0,0.28)] backdrop-blur-md transition-colors duration-200 hover:border-[#00F5D4]/50 hover:bg-[#00F5D4]/[0.07] hover:text-[#00F5D4] focus-visible:outline-none md:h-[52px] md:w-[52px] md:min-w-[52px]"
+      aria-label={label}
+    >
+      <span
+        aria-hidden="true"
+        className="pointer-events-none absolute inset-x-2 top-0 h-px bg-gradient-to-r from-transparent via-white/30 to-transparent"
+      />
+
+      <span
+        aria-hidden="true"
+        className="pointer-events-none absolute inset-0 bg-[radial-gradient(circle_at_center,rgba(0,245,212,0.16),transparent_68%)] opacity-0 transition-opacity duration-200 group-hover:opacity-100"
+      />
+
+      <svg
+        aria-hidden="true"
+        viewBox="0 0 24 24"
+        fill="none"
+        stroke="currentColor"
+        strokeWidth="1.8"
+        strokeLinecap="round"
+        strokeLinejoin="round"
+        className={`relative h-5 w-5 transition-transform duration-200 ${isPrevious
+            ? 'group-hover:-translate-x-0.5'
+            : 'group-hover:translate-x-0.5'
+          }`}
+      >
+        <path
+          d={
+            isPrevious
+              ? 'M15 18l-6-6 6-6'
+              : 'M9 18l6-6-6-6'
+          }
+        />
+      </svg>
+    </Motion.button>
+  );
+}
+
 function ProjectCarousel({
   title,
   description,
@@ -325,16 +393,11 @@ function ProjectCarousel({
 
       <div className="flex w-full items-center gap-3 md:gap-6">
         {totalCount > 1 && (
-          <button
-            type="button"
+          <CarouselArrowButton
+            direction="previous"
             onClick={goToPrevious}
-            className="carousel-control-btn relative z-50 flex h-11 w-11 min-w-11 shrink-0 cursor-pointer items-center justify-center rounded-full border border-white/20 bg-[#0F1020] text-white shadow-lg transition-all duration-150 hover:border-[#00F5D4]/70 hover:text-[#00F5D4] md:h-[52px] md:w-[52px] md:min-w-[52px]"
-            aria-label="Previous project"
-          >
-            <span className="text-xl leading-none">
-              &larr;
-            </span>
-          </button>
+            shouldReduceMotion={shouldReduceMotion}
+          />
         )}
 
         <div
@@ -343,61 +406,61 @@ function ProjectCarousel({
         >
           <div
             className="project-coverflow__depth"
-          style={{
-            transform: `translateZ(-${polygonRadius}px)`,
-          }}
-        >
-          <Motion.div
-            className="project-coverflow__rotor"
-            animate={{
-              rotateY:
-                -rotationStep * polygonAngle,
-            }}
-            transition={{
-              duration: shouldReduceMotion
-                ? 0
-                : 0.55,
-              ease: [0.22, 1, 0.36, 1],
+            style={{
+              transform: `translateZ(-${polygonRadius}px)`,
             }}
           >
-            {carouselSlots.map(
-              ({
-                project,
-                projectIndex,
-                slotIndex,
-              }) => {
-                const offset =
-                  getCircularOffset(
-                    slotIndex,
-                    activeSlotIndex,
-                    slotCount
-                  );
+            <Motion.div
+              className="project-coverflow__rotor"
+              animate={{
+                rotateY:
+                  -rotationStep * polygonAngle,
+              }}
+              transition={{
+                duration: shouldReduceMotion
+                  ? 0
+                  : 0.55,
+                ease: [0.22, 1, 0.36, 1],
+              }}
+            >
+              {carouselSlots.map(
+                ({
+                  project,
+                  projectIndex,
+                  slotIndex,
+                }) => {
+                  const offset =
+                    getCircularOffset(
+                      slotIndex,
+                      activeSlotIndex,
+                      slotCount
+                    );
 
-                const distance =
-                  Math.abs(offset);
+                  const distance =
+                    Math.abs(offset);
 
-                const isActive =
-                  slotIndex === activeSlotIndex;
+                  const isActive =
+                    slotIndex === activeSlotIndex;
 
-                const isInteractive =
-                  isActive || distance === 1;
+                  const isInteractive =
+                    isActive || distance === 1;
 
-                const hasMediaFailed =
-                  Boolean(
-                    failedMedia[project.id]
-                  );
+                  const hasMediaFailed =
+                    Boolean(
+                      failedMedia[project.id]
+                    );
 
-                let SlideTag = 'div';
+                  let SlideTag = 'div';
 
-                if (isActive) {
-                  SlideTag = 'article';
-                } else if (isInteractive) {
-                  SlideTag = 'button';
-                }
+                  if (isActive) {
+                    SlideTag = 'article';
+                  } else if (isInteractive) {
+                    SlideTag = 'button';
+                  }
 
-                const slideProps =
-                  !isActive && isInteractive
-                    ? {
+                  const slideProps =
+                    !isActive && isInteractive
+                      ? {
                         type: 'button',
                         onClick: () =>
                           goToProject(
@@ -405,125 +468,119 @@ function ProjectCarousel({
                           ),
                         'aria-label': `Go to project: ${project.title}`,
                       }
-                    : {};
+                      : {};
 
-                return (
-                  <div
-                    key={`${project.id}-${slotIndex}`}
-                    className={`coverflow-slide overflow-hidden rounded-xl border border-white/10 bg-zinc-900 ${
-                      isActive
-                        ? 'shadow-xl'
-                        : 'shadow-none'
-                    }`}
-                    style={{
-                      transform: `rotateY(${slotIndex * polygonAngle}deg) translateZ(${polygonRadius}px)`,
-                      pointerEvents:
-                        isInteractive
-                          ? 'auto'
-                          : 'none',
-                    }}
-                    aria-hidden={!isInteractive}
-                  >
-                    <Motion.div
-                      className="coverflow-slide__surface h-full w-full"
-                      animate={{
-                        opacity:
-                          getSurfaceOpacity(
-                            distance
-                          ),
+                  return (
+                    <div
+                      key={`${project.id}-${slotIndex}`}
+                      className={`coverflow-slide overflow-hidden rounded-xl border border-white/10 bg-zinc-900 ${isActive
+                          ? 'shadow-xl'
+                          : 'shadow-none'
+                        }`}
+                      style={{
+                        transform: `rotateY(${slotIndex * polygonAngle}deg) translateZ(${polygonRadius}px)`,
+                        pointerEvents:
+                          isInteractive
+                            ? 'auto'
+                            : 'none',
                       }}
-                      transition={{
-                        duration:
-                          shouldReduceMotion
-                            ? 0
-                            : 0.35,
-                        ease: 'easeOut',
-                      }}
+                      aria-hidden={!isInteractive}
                     >
-                      <SlideTag
-                        {...slideProps}
-                        className="group relative block h-full w-full text-left focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[#00F5D4]"
+                      <Motion.div
+                        className="coverflow-slide__surface h-full w-full"
+                        animate={{
+                          opacity:
+                            getSurfaceOpacity(
+                              distance
+                            ),
+                        }}
+                        transition={{
+                          duration:
+                            shouldReduceMotion
+                              ? 0
+                              : 0.35,
+                          ease: 'easeOut',
+                        }}
                       >
-                        {hasMediaFailed ? (
-                          <div className="flex h-full w-full flex-col items-center justify-center bg-zinc-950 p-6 text-center">
-                            <span className="mb-2 font-heading text-lg font-bold text-white">
-                              {project.title}
-                            </span>
+                        <SlideTag
+                          {...slideProps}
+                          className="group relative block h-full w-full text-left focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[#00F5D4]"
+                        >
+                          {hasMediaFailed ? (
+                            <div className="flex h-full w-full flex-col items-center justify-center bg-zinc-950 p-6 text-center">
+                              <span className="mb-2 font-heading text-lg font-bold text-white">
+                                {project.title}
+                              </span>
 
-                            <span className="text-xs text-zinc-500">
-                              Screenshot unavailable
-                            </span>
-                          </div>
-                        ) : (
-                          <Motion.div
-                            drag={
-                              isActive &&
-                              !shouldReduceMotion
-                                ? 'x'
-                                : false
-                            }
-                            dragConstraints={{
-                              left: 0,
-                              right: 0,
-                            }}
-                            dragElastic={0.08}
-                            onDragEnd={
-                              handleDragEnd
-                            }
-                            className="h-full w-full"
-                            style={{
-                              touchAction:
-                                'pan-y',
-                            }}
-                          >
-                            <img
-                              src={project.media}
-                              alt={`${project.title} gameplay screenshot`}
-                              loading="lazy"
-                              decoding="async"
-                              className="pointer-events-none h-full w-full select-none"
-                              style={{
-                                objectFit:
-                                  project.mediaFit ||
-                                  'cover',
-                                objectPosition:
-                                  project.mediaPosition ||
-                                  'center',
-                              }}
-                              draggable={false}
-                              onError={() =>
-                                markMediaAsFailed(
-                                  project.id
-                                )
+                              <span className="text-xs text-zinc-500">
+                                Screenshot unavailable
+                              </span>
+                            </div>
+                          ) : (
+                            <Motion.div
+                              drag={
+                                isActive &&
+                                  !shouldReduceMotion
+                                  ? 'x'
+                                  : false
                               }
-                            />
-                          </Motion.div>
-                        )}
+                              dragConstraints={{
+                                left: 0,
+                                right: 0,
+                              }}
+                              dragElastic={0.08}
+                              onDragEnd={
+                                handleDragEnd
+                              }
+                              className="h-full w-full"
+                              style={{
+                                touchAction:
+                                  'pan-y',
+                              }}
+                            >
+                              <img
+                                src={project.media}
+                                alt={`${project.title} gameplay screenshot`}
+                                loading="lazy"
+                                decoding="async"
+                                className="pointer-events-none h-full w-full select-none"
+                                style={{
+                                  objectFit:
+                                    project.mediaFit ||
+                                    'cover',
+                                  objectPosition:
+                                    project.mediaPosition ||
+                                    'center',
+                                }}
+                                draggable={false}
+                                onError={() =>
+                                  markMediaAsFailed(
+                                    project.id
+                                  )
+                                }
+                              />
+                            </Motion.div>
+                          )}
 
-                        {!isActive && (
-                          <div className="absolute inset-0 bg-black/45 transition-colors duration-200 group-hover:bg-black/25" />
-                        )}
-                      </SlideTag>
-                    </Motion.div>
-                  </div>
-                );
-              }
-            )}
-          </Motion.div>
+                          {!isActive && (
+                            <div className="absolute inset-0 bg-black/45 transition-colors duration-200 group-hover:bg-black/25" />
+                          )}
+                        </SlideTag>
+                      </Motion.div>
+                    </div>
+                  );
+                }
+              )}
+            </Motion.div>
           </div>
         </div>
 
         {totalCount > 1 && (
-          <button
-            type="button"
+          <CarouselArrowButton
+            direction="next"
             onClick={goToNext}
-            className="carousel-control-btn relative z-50 flex h-11 w-11 min-w-11 shrink-0 cursor-pointer items-center justify-center rounded-full border border-white/20 bg-[#0F1020] text-white shadow-lg transition-all duration-150 hover:border-[#00F5D4]/70 hover:text-[#00F5D4] md:h-[52px] md:w-[52px] md:min-w-[52px]"
-            aria-label="Next project"
-          >
-            <span className="text-xl leading-none">
-              &rarr;
-            </span>
-          </button>
+            shouldReduceMotion={shouldReduceMotion}
+          />
         )}
       </div>
 
@@ -654,18 +711,16 @@ function ProjectCarousel({
                         : undefined
                     }
                     aria-label={`Go to project: ${project.title}`}
-                    className={`carousel-selector-btn relative flex min-w-0 items-center gap-3 overflow-hidden rounded-lg border px-4 py-3 text-left transition-all duration-200 focus:outline-none ${
-                      isActive
+                    className={`carousel-selector-btn relative flex min-w-0 items-center gap-3 overflow-hidden rounded-lg border px-4 py-3 text-left transition-all duration-200 focus:outline-none ${isActive
                         ? 'border-white/[0.14] bg-white/[0.06] text-white'
                         : 'border-transparent bg-transparent text-zinc-500 hover:border-white/[0.07] hover:bg-white/[0.025] hover:text-zinc-300'
-                    }`}
+                      }`}
                   >
                     <span
-                      className={`h-1.5 w-1.5 shrink-0 rounded-full ${
-                        isActive
+                      className={`h-1.5 w-1.5 shrink-0 rounded-full ${isActive
                           ? 'bg-[#00F5D4]'
                           : 'bg-white/15'
-                      }`}
+                        }`}
                     />
 
                     <span className="shrink-0 font-mono text-[10px] font-semibold text-zinc-600">
@@ -787,7 +842,8 @@ export default function Projects() {
 
         <ProjectCarousel
           title="Featured Projects"
-          description="Projects that best represent my current work."
+          description="A selection of game projects showcasing my work in Unity,
+            gameplay programming, and systems implementation."
           projects={featuredProjects}
         />
 
