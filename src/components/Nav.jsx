@@ -94,7 +94,7 @@ export default function Nav() {
             aria-label={`${site.name} — back to top`}
           >
             <Monogram className="h-6 w-6 text-[color:var(--color-bone)] transition-opacity duration-200 group-hover:opacity-80" />
-            <span className="type-meta hidden text-[color:var(--color-bone)] sm:inline">
+            <span className="hidden text-[0.9375rem] text-[color:var(--color-bone)] sm:inline" style={{ fontVariationSettings: "'wdth' 104, 'wght' 650", letterSpacing: '-0.01em' }}>
               {site.name}
             </span>
           </a>
@@ -109,11 +109,12 @@ export default function Nav() {
                     <a
                       href={`#${id}`}
                       aria-current={isActive ? 'true' : undefined}
-                      className={`type-meta relative flex min-h-9 items-center px-3 py-2 transition-colors duration-200 ${
+                      className={`relative flex min-h-9 items-center px-3 py-2 text-[0.875rem] transition-colors duration-200 ${
                         isActive
                           ? 'text-[color:var(--color-bone)]'
-                          : 'text-[color:var(--color-dim)] hover:text-[color:var(--color-bone)]'
+                          : 'text-[color:var(--color-muted)] hover:text-[color:var(--color-bone)]'
                       }`}
+                      style={{ fontVariationSettings: "'wdth' 100, 'wght' 500" }}
                     >
                       {label}
                       <span
@@ -165,7 +166,7 @@ export default function Nav() {
             onClick={() => setOpen((v) => !v)}
             aria-expanded={open}
             aria-controls="mobile-menu"
-            className="type-meta -mr-2 flex min-h-11 items-center gap-2 rounded-[3px] px-2 py-2 text-[color:var(--color-bone)] lg:hidden"
+            className="-mr-2 flex min-h-11 items-center gap-2 rounded-[3px] px-2 py-2 text-[0.9375rem] text-[color:var(--color-bone)] lg:hidden"
           >
             {open ? 'Close' : 'Menu'}
             {open ? <Close className="h-5 w-5" /> : <Menu className="h-5 w-5" />}
@@ -233,7 +234,7 @@ export default function Nav() {
                       href={href}
                       target="_blank"
                       rel="noopener noreferrer"
-                      className="type-meta text-[color:var(--color-muted)] underline decoration-[color:var(--color-rule-strong)] hover:text-[color:var(--color-bone)]"
+                      className="text-[0.875rem] text-[color:var(--color-muted)] underline decoration-[color:var(--color-rule-strong)] hover:text-[color:var(--color-bone)]"
                     >
                       {label}
                     </a>

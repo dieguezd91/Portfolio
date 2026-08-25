@@ -264,26 +264,21 @@
     object-fit: cover;
   }
 
-  /* Case-study plate. Wide captures fill the mount; square and portrait
-     captures sit centred at their own scale rather than being blown up. */
-  .media-plate {
-    display: flex;
-    align-items: center;
-    justify-content: center;
+  /* Key art is not a gameplay capture. It sits contained on its mount with
+     breathing room, at a frame size that suits art rather than a screenshot,
+     instead of being stretched to gameplay-plate dimensions. */
+  .media-keyart {
+    padding: clamp(1rem, 2vw, 1.75rem);
   }
 
-  /* Height is driven per image (inline) so a small source gains a modest,
-     capped presence instead of floating at thumbnail scale — never more than
-     1.25x its own pixels, and never taller than its mount. */
-  .media-plate img {
-    width: auto;
-    height: auto;
-    max-width: 100%;
+  .media-keyart img {
+    width: 100%;
+    height: 100%;
     object-fit: contain;
   }
 
   .media-quiet img {
-    filter: saturate(0.42) contrast(1.02);
+    filter: saturate(0.82) contrast(1.01);
     transform: scale(1.001);
     transition:
       filter 480ms var(--ease-out-expo),
@@ -292,8 +287,8 @@
 
   .media-quiet:hover img,
   .media-quiet:focus-within img {
-    filter: saturate(1) contrast(1);
-    transform: scale(1.035);
+    filter: saturate(1.05) contrast(1);
+    transform: scale(1.03);
   }
 }
 
@@ -315,7 +310,7 @@
   }
 
   .media-quiet img {
-    filter: saturate(1);
+    filter: saturate(1.05);
   }
 
   .media-quiet:hover img,

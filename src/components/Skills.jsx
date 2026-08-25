@@ -13,9 +13,9 @@ export default function Skills() {
       id="skills"
       heading="Skills & tools"
       lede="What I work in day to day, weighted the way the work is."
-      className="pt-20 sm:pt-24 lg:pt-28"
+      className="pt-16 sm:pt-20 lg:pt-24"
     >
-      <div className="mt-12 grid gap-x-10 gap-y-12 lg:mt-16 lg:grid-cols-12">
+      <div className="mt-10 grid gap-x-10 gap-y-10 lg:mt-12 lg:grid-cols-12">
         {/* Primary — game development */}
         <Reveal className="lg:col-span-7">
           <h3
@@ -25,23 +25,20 @@ export default function Skills() {
             {skills.primary.heading}
           </h3>
 
-          <dl className="mt-6 border-t border-[color:var(--color-rule)]">
+          {/* Set as an editorial run, not a property inspector: no chips,
+              no per-item borders, one hairline per group. */}
+          <dl className="mt-5">
             {skills.primary.groups.map(({ label, items }) => (
               <div
                 key={label}
-                className="grid gap-x-6 gap-y-2 border-b border-[color:var(--color-rule)] py-4 sm:grid-cols-[7rem_minmax(0,1fr)]"
+                className="grid gap-x-6 gap-y-1 border-b border-[color:var(--color-rule)] py-3.5 sm:grid-cols-[6rem_minmax(0,1fr)] sm:items-baseline"
               >
-                <dt className="type-meta pt-1 text-[color:var(--color-dim)]">{label}</dt>
-                <dd className="flex flex-wrap gap-x-2 gap-y-2">
-                  {items.map((item) => (
-                    <span
-                      key={item}
-                      className="rounded-[3px] border border-[color:var(--color-rule)] px-3 py-1.5 text-[0.875rem] text-[color:var(--color-bone)]"
-                      style={{ fontVariationSettings: "'wdth' 100, 'wght' 500" }}
-                    >
-                      {item}
-                    </span>
-                  ))}
+                <dt className="type-meta text-[color:var(--color-dim)]">{label}</dt>
+                <dd
+                  className="text-[1.0625rem] text-[color:var(--color-bone)]"
+                  style={{ fontVariationSettings: "'wdth' 100, 'wght' 500", letterSpacing: '-0.01em' }}
+                >
+                  {items.join(', ')}
                 </dd>
               </div>
             ))}
@@ -57,19 +54,16 @@ export default function Skills() {
             {skills.release.heading}
           </h3>
 
-          <ul className="mt-6 border-t border-[color:var(--color-rule)]">
+          <ul className="mt-5 space-y-2">
             {skills.release.items.map((item) => (
-              <li
-                key={item}
-                className="flex items-center gap-3 border-b border-[color:var(--color-rule)] py-3.5"
-              >
+              <li key={item} className="flex items-center gap-3">
                 <span
                   aria-hidden="true"
                   className="h-px w-3 shrink-0 bg-[color:var(--color-signal)]"
                 />
                 <span
-                  className="text-[0.9375rem] text-[color:var(--color-bone)]"
-                  style={{ fontVariationSettings: "'wdth' 100, 'wght' 500" }}
+                  className="text-[1.0625rem] text-[color:var(--color-bone)]"
+                  style={{ fontVariationSettings: "'wdth' 100, 'wght' 500", letterSpacing: '-0.01em' }}
                 >
                   {item}
                 </span>
@@ -77,14 +71,14 @@ export default function Skills() {
             ))}
           </ul>
 
-          <p className="type-body mt-5 max-w-[38ch] text-[0.875rem] text-[color:var(--color-dim)]">
+          <p className="type-body mt-4 max-w-[38ch] text-[0.875rem] text-[color:var(--color-dim)]">
             Shipped on Slash &rsquo;em Out! for Android.
           </p>
         </Reveal>
 
         {/* Secondary — subordinate by construction */}
         <Reveal delay={0.1} className="lg:col-span-12">
-          <div className="flex flex-col gap-x-8 gap-y-3 border-t border-[color:var(--color-rule)] pt-6 sm:flex-row sm:items-baseline">
+          <div className="flex flex-col gap-x-8 gap-y-2 border-t border-[color:var(--color-rule)] pt-5 sm:flex-row sm:items-baseline">
             <h3 className="type-meta shrink-0 text-[color:var(--color-dim)] sm:w-[7rem]">
               {skills.secondary.heading}
             </h3>

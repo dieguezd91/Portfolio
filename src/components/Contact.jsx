@@ -14,9 +14,9 @@ export default function Contact() {
   return (
     <section
       id="contact"
-      className="mt-20 border-t border-[color:var(--color-rule)] bg-[color:var(--color-ink-raised)] px-6 pb-20 pt-20 sm:mt-24 sm:px-8 sm:pb-24 sm:pt-24 lg:mt-28 lg:px-12 lg:pb-28 lg:pt-28"
+      className="mt-16 border-t border-[color:var(--color-rule)] bg-[color:var(--color-ink-raised)] px-6 pb-16 pt-16 sm:mt-20 sm:px-8 sm:pb-20 sm:pt-20 lg:mt-24 lg:px-12 lg:pb-24 lg:pt-24"
     >
-      <div className="mx-auto grid w-full max-w-[1440px] gap-x-10 gap-y-14 lg:grid-cols-12 lg:items-start">
+      <div className="mx-auto grid w-full max-w-[1440px] gap-x-10 gap-y-12 lg:grid-cols-12 lg:items-start">
         <Reveal className="lg:col-span-7">
           <p className="flex items-center gap-2.5">
             <span

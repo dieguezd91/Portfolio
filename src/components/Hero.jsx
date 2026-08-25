@@ -28,23 +28,23 @@ export default function Hero() {
   return (
     <section
       id="top"
-      className="relative px-6 pb-20 pt-32 sm:px-8 sm:pb-24 sm:pt-36 lg:px-12 lg:pb-32 lg:pt-44"
+      className="relative px-6 pb-12 pt-28 sm:px-8 sm:pb-16 sm:pt-32 lg:px-12 lg:pb-20 lg:pt-36"
     >
-      <div className="mx-auto grid w-full max-w-[1440px] gap-x-10 gap-y-16 lg:grid-cols-12 lg:items-start">
+      <div className="mx-auto grid w-full max-w-[1440px] gap-x-10 gap-y-12 lg:grid-cols-12 lg:items-start">
         {/* ── Thesis ─────────────────────────────────────────────────────── */}
         <div className="lg:col-span-7 xl:col-span-6">
           <h1>
             <Motion.span
               {...rise(0)}
-              className="type-display block text-[clamp(2.35rem,6.4vw,4.5rem)] text-[color:var(--color-bone)]"
+              className="type-display block text-[clamp(2.15rem,5vw,3.5rem)] text-[color:var(--color-bone)]"
             >
               Unity and C# developer focused on gameplay and game systems.
             </Motion.span>
 
             <Motion.span
               {...rise(0.09)}
-              className="mt-8 block border-t border-[color:var(--color-rule)] pt-5 text-[0.9375rem] text-[color:var(--color-bone)] sm:text-base"
-              style={{ fontVariationSettings: "'wdth' 100, 'wght' 500" }}
+              className="mt-7 block border-t border-[color:var(--color-rule)] pt-5 text-[1.0625rem] text-[color:var(--color-bone)] sm:text-[1.1875rem]"
+              style={{ fontVariationSettings: "'wdth' 104, 'wght' 650", letterSpacing: '-0.015em' }}
             >
               {site.name}
             </Motion.span>

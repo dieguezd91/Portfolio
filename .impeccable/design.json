@@ -53,7 +53,7 @@
       "lead": { "displayName": "Lead", "purpose": "The opening paragraph of About. One per page." },
       "body-lg": { "displayName": "Body LG", "purpose": "Entry titles in the More work grid and education list — a name, not prose." },
       "body": { "displayName": "Body", "purpose": "All prose. Measure capped between 52ch and 64ch." },
-      "caption": { "displayName": "Caption", "purpose": "Button labels, skill chips, the secondary skills run." },
+      "caption": { "displayName": "Caption", "purpose": "Button labels and the secondary skills run." },
       "caption-sm": { "displayName": "Caption SM", "purpose": "The masthead Résumé button only." },
       "label": {
         "displayName": "Label",
@@ -80,7 +80,7 @@
       {
         "name": "duration-media",
         "value": "480ms filter / 640ms transform",
-        "purpose": "More work capture returning to full saturation and scale on hover."
+        "purpose": "More work capture lifting from saturate(0.82) to 1.05 on hover."
       },
       {
         "name": "duration-reveal",

@@ -60,9 +60,9 @@ export default function MoreWork() {
       heading="More work"
       lede="Additional projects across mobile, browser and PC, each linked directly to its playable or project page."
       count={`${otherProjects.length} projects`}
-      className="pt-20 sm:pt-24 lg:pt-28"
+      className="pt-16 sm:pt-20 lg:pt-24"
     >
-      <ul className="mt-12 grid gap-x-8 gap-y-12 sm:grid-cols-2 lg:mt-16 lg:grid-cols-3 xl:grid-cols-4">
+      <ul className="mt-10 grid gap-x-8 gap-y-10 sm:grid-cols-2 lg:mt-12 lg:grid-cols-3 xl:grid-cols-4">
         {otherProjects.map((project, i) => (
           <ProjectEntry key={project.id} project={project} index={i} />
         ))}

@@ -108,6 +108,10 @@ export const projects = [
     media: 'https://img.itch.zone/aW1nLzIzODc4MjQxLnBuZw==/original/6%2Bq1bX.png',
     mediaWidth: 524,
     mediaHeight: 551,
+    /* Key art, not a gameplay capture — framed as art rather than stretched
+       into a gameplay plate. Replace when a real capture exists. */
+    mediaKind: 'keyArt',
+    mediaNote: 'Key art only. Needs an actual in-headset gameplay capture.',
     dimension: '3D',
     technologies: ['Unity', 'C#', 'Meta Quest'],
     tags: ['VR', 'Educational'],

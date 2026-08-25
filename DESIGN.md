@@ -15,7 +15,7 @@ colors:
 typography:
   display:
     fontFamily: "Archivo, 'Helvetica Neue', Arial, sans-serif"
-    fontSize: "clamp(2.35rem, 6.4vw, 4.5rem)"
+    fontSize: "clamp(2.15rem, 5vw, 3.5rem)"
     lineHeight: 0.92
     letterSpacing: "-0.035em"
     fontVariation: "'wdth' 112, 'wght' 700"
@@ -89,8 +89,8 @@ spacing:
   sm: "16px"
   md: "24px"
   lg: "40px"
-  section: "80px"
-  section-lg: "112px"
+  section: "64px"
+  section-lg: "96px"
 components:
   button-signal:
     backgroundColor: "{colors.signal}"
@@ -131,7 +131,7 @@ The confirmed anti-reference is the site this replaced: a near-black-with-neon-c
 - Achromatic interface; all chroma is content
 - Hairline rules instead of boxes and shadows
 - Real metadata set in a real monospace, never as decoration
-- Screenshots never upscaled past their own pixels
+- Source art framed to its nature: gameplay fills, key art is matted
 - One motion grammar, applied once per section
 
 ## Colors
@@ -148,7 +148,7 @@ An achromatic dark palette with a single warm signal, chosen so that colourful g
 - **Mount Grey** (`#131315`): Raised surfaces only — media frames, the hero release panel, the Contact and Footer bands. The single step of tonal elevation in the system.
 - **Bone** (`#F2F0EC`): Primary text, headings, and the monogram. Slightly warm off-white; never pure `#FFF`.
 - **Ash** (`#A5A29B`): Secondary body copy and spec values. 7.8:1 on Pressroom Black.
-- **Graphite** (`#85827C`): Spec keys, section counts, and inactive navigation. 5.2:1 on Pressroom Black — the floor of the system, never lightened past this for smaller text.
+- **Graphite** (`#85827C`): Spec keys and section counts. 5.2:1 on Pressroom Black — the floor of the system, never lightened past this for smaller text.
 - **Rule** (`rgba(255,255,255,0.10)`) and **Rule Strong** (`rgba(255,255,255,0.20)`): Every divider, frame border, and control outline in the system.
 
 ### Named Rules
@@ -169,7 +169,7 @@ An achromatic dark palette with a single warm signal, chosen so that colourful g
 
 ### Hierarchy
 
-- **Display** (`wdth` 112 / `wght` 700, `clamp(2.35rem, 6.4vw, 4.5rem)` in the hero and `clamp(2rem, 4.8vw, 3.5rem)` in Contact, lh 0.92, ls −0.035em): The hero positioning statement and the Contact availability line. Two per page, maximum.
+- **Display** (`wdth` 112 / `wght` 700, `clamp(2.15rem, 5vw, 3.5rem)` in the hero and `clamp(2rem, 4.8vw, 3.5rem)` in Contact, lh 0.92, ls −0.035em): The hero positioning statement and the Contact availability line. Two per page, maximum.
 - **Headline** (`wdth` 110 / `wght` 600, `clamp(1.75rem, 3.4vw, 2.75rem)`, lh 1.05): Section headings.
 - **Title** (`wdth` 108 / `wght` 650, `clamp(1.6rem, 3vw, 2.25rem)`, lh 1.02): Case-study titles.
 - **Title MD** (1.5rem): The hero release panel's title.
@@ -179,7 +179,7 @@ An achromatic dark palette with a single warm signal, chosen so that colourful g
 - **Body** (`wdth` 100 / `wght` 400, 0.9375rem, lh 1.62): All prose. Steps up to 1rem at `sm` and above. Measure capped between 52ch and 64ch; never wider.
 - **Caption** (`wght` 600, 0.875rem): Button labels, skill chips, the secondary skills run.
 - **Caption SM** (0.8125rem): The masthead Résumé button only.
-- **Label** (Martian Mono 400, 0.6875rem, uppercase, ls 0.02em, tabular figures): Spec keys and values, platform and year strings, navigation, section counts, the footer colophon.
+- **Label** (Martian Mono 400, 0.6875rem, uppercase, ls 0.02em, tabular figures): Spec keys and values, platform and year strings, release status, section counts, the footer colophon. **Not** navigation, and not descriptive UI — the mono face marks data, never chrome.
 
 The ramp is a 1/16rem ladder: 11, 13, 14, 15, 17, 19, 20, 24px, then three clamps. A size outside that set is drift, not a decision.
 
@@ -199,10 +199,11 @@ Recurring column assignments:
 
 - **Hero:** thesis on columns 1–7 (1–6 at `xl`), release panel on 8–12.
 - **Section header:** heading on 1–5, lede on 7–12. The asymmetry is the system's signature; a centred section header is off-system.
-- **Case study:** plate on 1–7, record on 8–12.
+- **Primary case study:** plate on 1–7, record on 8–12. One per page — the shipped release, the only entry with a verified role and scope of work.
+- **Secondary case studies:** a 2-up grid capped at `58rem`, sitting under a hairline below the primary. Still Featured Work, deliberately a smaller footprint, because less verified information exists to fill one.
 - **More work:** 1 / 2 / 3 / 4 columns at base / `sm` / `lg` / `xl`.
 
-Vertical rhythm runs on 80px (base) to 112px (`lg`) between sections, with case studies separated by 64–112px. Every section opens with a full-width hairline directly above its heading. More space sits above a heading than below it, everywhere.
+Vertical rhythm runs on 64px (base) to 96px (`lg`) between sections. Every section opens with a full-width hairline directly above its heading. More space sits above a heading than below it, everywhere.
 
 Below `lg` the desktop navigation is replaced entirely by a full-screen panel; nothing is merely reflowed. Anchor scrolling reserves 88px of clearance for the fixed masthead.
 
@@ -240,9 +241,9 @@ The system's signature control. A flex row of optional icon, label, and arrow, w
 ### Media frames
 
 - **Corner:** 4px. **Border:** 1px Rule. **Ground:** Mount Grey.
-- **Fill mode** (aspect ≥ 1.4): the capture fills the frame with `object-fit: cover`.
-- **Plate mode** (aspect < 1.4): the frame takes a 16:10 mount and the capture sits centred at its own scale, height-capped at `clamp(14rem, 33vw, 29rem)`, `object-fit: contain`.
-- **Quiet variant** (`.media-quiet`, More work grid only): rests at `saturate(0.42)` and returns to full colour with a 1.035 scale over 480–640ms on hover or focus-within.
+- **Fill mode** (default): the capture fills its frame with `object-fit: cover`. Frame aspect is chosen per slot — 16:9 for the primary case study, 4:3 for a secondary one, 16:10 in the More work grid. Modest interpolation is accepted so a small source still has presence; the frame width is capped instead of leaving the art stranded.
+- **Key-art mode** (`.media-keyart`, set by `mediaKind: 'keyArt'` in the data): the frame takes the artwork's own aspect, caps at `21rem` wide, and carries `clamp(1rem, 2vw, 1.75rem)` of padding, so the art reads as a mounted piece rather than a gameplay capture stranded in an empty rectangle. Roughly a third of that frame is deliberate mat.
+- **Quiet variant** (`.media-quiet`, More work grid only): rests at `saturate(0.82)` — near full colour, so the artwork carries the grid — and lifts to `saturate(1.05)` with a 1.03 scale over 480–640ms on hover or focus-within.
 
 ### Spec table
 
@@ -250,7 +251,7 @@ A `<dl>` opened and closed by hairlines, one hairline per row, keys in Graphite 
 
 ### Navigation
 
-- **Desktop:** A fixed 76px masthead. Monogram plus name on the left in label type, six section links centred in label type, brand icons and a ghost Résumé button on the right. Inactive links are Graphite; the active link is Bone and grows a Signal Orange hairline beneath it via `scaleX`, driven by an IntersectionObserver with a `-30% / -60%` root margin.
+- **Desktop:** A fixed 76px masthead. Monogram plus name on the left at 0.9375rem, six section links centred at 0.875rem, brand icons and a ghost Résumé button on the right. **All navigation is set in Archivo, never the mono face** — section labels are chrome, not metadata. Inactive links are Ash; the active link is Bone and grows a Signal Orange hairline beneath it via `scaleX`, driven by an IntersectionObserver with a `-30% / -60%` root margin.
 - **Mobile:** A labelled `Menu` / `Close` toggle opens a full-screen Pressroom Black panel. Section links are set in Title type at 1.75rem on hairline-separated rows with a down arrow, staggered in at 35ms intervals. The panel locks body scroll, closes on Escape, focuses itself on open, and returns focus to the toggle on close.
 
 ### Scope-of-work list
@@ -263,7 +264,7 @@ A two-column grid per item: a 12px Signal Orange hairline aligned to the first l
 
 - **Do** let the game captures be the only source of colour, and keep the interface achromatic around them.
 - **Do** record real image dimensions in the data and set `width`/`height` plus an explicit `aspect-ratio` on every image, so nothing shifts on load.
-- **Do** mount a capture rather than upscale it. Nothing in this system is displayed above roughly 1.2× its native pixels.
+- **Do** frame source art to what it is: gameplay captures fill their frame, key art is matted on a narrower plate. Where a source is small, cap the frame rather than leaving the art stranded in empty ground — presentation outranks strict pixel preservation, within reason.
 - **Do** open every section with a full-width hairline and set the heading on columns 1–5 with the lede on 7–12.
 - **Do** keep body measure between 52ch and 64ch.
 - **Do** reserve Martian Mono for content that would sit in a table.

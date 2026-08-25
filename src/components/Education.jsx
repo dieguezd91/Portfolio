@@ -10,8 +10,8 @@ import { education } from '../data/site';
  */
 export default function Education() {
   return (
-    <Section id="education" heading="Education" className="pt-20 sm:pt-24 lg:pt-28">
-      <ul className="mt-10 border-t border-[color:var(--color-rule)] lg:mt-14">
+    <Section id="education" heading="Education" className="pt-16 sm:pt-20 lg:pt-24">
+      <ul className="mt-8 border-t border-[color:var(--color-rule)] lg:mt-10">
         {education.map((item, i) => (
           <Reveal
             as="li"

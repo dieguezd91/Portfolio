@@ -19,8 +19,8 @@ export default function Section({
   return (
     <section id={id} className={`px-6 sm:px-8 lg:px-12 ${className}`}>
       <div className="mx-auto w-full max-w-[1440px]">
-        <Reveal className={`border-t border-[color:var(--color-rule)] pt-6 sm:pt-8 ${headerClassName}`}>
-          <div className="grid gap-x-8 gap-y-4 md:grid-cols-12">
+        <Reveal className={`border-t border-[color:var(--color-rule)] pt-5 sm:pt-6 ${headerClassName}`}>
+          <div className="grid gap-x-8 gap-y-3 md:grid-cols-12">
             <div className="md:col-span-5">
               <h2 className="type-section text-[clamp(1.75rem,3.4vw,2.75rem)] text-[color:var(--color-bone)]">
                 {heading}

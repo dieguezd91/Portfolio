@@ -10,10 +10,10 @@ import { ArrowDown } from './icons';
  */
 export default function About() {
   return (
-    <Section id="about" heading="About" className="pt-20 sm:pt-24 lg:pt-28">
-      <div className="mt-12 grid gap-x-10 gap-y-10 lg:mt-16 lg:grid-cols-12 lg:items-start">
+    <Section id="about" heading="About" className="pt-16 sm:pt-20 lg:pt-24">
+      <div className="mt-10 grid gap-x-10 gap-y-8 lg:mt-12 lg:grid-cols-12 lg:items-start">
         <Reveal className="lg:col-span-4">
-          <figure className="media-frame max-w-[22rem] lg:max-w-none">
+          <figure className="media-frame max-w-[13rem] sm:max-w-[15rem]">
             <img
               src={portrait}
               width={512}
@@ -25,7 +25,7 @@ export default function About() {
             />
           </figure>
 
-          <dl className="mt-6 max-w-[22rem] border-t border-[color:var(--color-rule)] lg:max-w-none">
+          <dl className="mt-5 max-w-[20rem] border-t border-[color:var(--color-rule)]">
             {[
               ['Discipline', 'Gameplay · Systems'],
               ['Engine', 'Unity · C#'],
