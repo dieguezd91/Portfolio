@@ -58,7 +58,7 @@ export default function MoreWork() {
     <Section
       id="more-work"
       heading="More work"
-      lede="The rest of the catalogue, across Unity, C# and four target platforms. Each entry links straight to its playable page."
+      lede="Additional projects across mobile, browser and PC, each linked directly to its playable or project page."
       count={`${otherProjects.length} projects`}
       className="pt-20 sm:pt-24 lg:pt-28"
     >

@@ -34,7 +34,18 @@ Nothing beyond these four may be claimed about this project.
 - **Range across platforms and dimensions.** Eleven projects spanning Android, Meta Quest (VR), WebGL, and PC; 2D and 3D. Breadth of platform and target is verifiable from the store links themselves.
 - **Formal study in game development.** Universidad Argentina De la Empresa, Video Game Development, 2022–2025. See the status caveat under Evidence on Hand.
 
-**Explicitly NOT positioning evidence.** The per-project `contributions[]` lines in `src/data/projects.js` are **legacy portfolio copy of unverified accuracy**. Specific implementation claims of the kind they contain — pathfinding, state machines, object pooling, spawning algorithms, difficulty scaling, physics-based controls, custom engines, and similar — must **not** be used as positioning, headline copy, hero claims, or proof of responsibility unless independently confirmed by reliable project context. They may appear as ordinary display content on a project's own entry, and they carry a standing verification debt (see Capabilities and Constraints). Do not build the site's argument on them.
+**Explicitly NOT positioning evidence, and never rendered.** The legacy per-project contribution and role copy inherited from the previous portfolio is of **unverified accuracy**. Specific implementation claims of the kind it contains — pathfinding, state machines, object pooling, spawning algorithms, difficulty scaling, physics-based controls, SDK integrations, custom engines, and similar — are governed by the rule below.
+
+**The verification rule.** Unverified contributions and roles:
+
+- **may** remain stored as legacy or reference data (`legacyContributions` / `legacyRole` in `src/data/projects.js`);
+- **must not** be rendered anywhere in the UI as Daniel's responsibilities;
+- **must not** be used as positioning, headline copy, hero claims, or proof of responsibility;
+- **may only** become visible after explicit verification — at which point the confirmed lines move into `contributions` / `role` and the project is marked `verified: true`.
+
+*Slash 'em Out!* is currently the **only** project with a verified personal scope of work. No other project may display one until its responsibilities are confirmed.
+
+This rule also applies to skills: a visible skill must be established by confirmed product truth. A project's target platform does not establish personal expertise in that platform's SDK.
 
 ## Operating Context
 
@@ -48,7 +59,7 @@ Nothing beyond these four may be claimed about this project.
 
 **Content model:** project data lives in `src/data/projects.js` — 11 entries with `title`, `year`, `role`, `description`, `platform`, `storeType` (`googlePlay` | `itch`), `storeUrl`, `media`, `dimension` (2D/3D), `technologies[]`, and `contributions[]`.
 
-**Verification debt (open):** the `contributions[]` copy for every project, and the `role` strings, are inherited from the previous portfolio and have not been verified against what Daniel actually built. The *Slash 'em Out!* entry is confirmed inaccurate and is corrected by the Positioning section above. The remaining entries are treated as display content pending review, not as product truth.
+**Verification debt (open):** the legacy contribution copy and role strings for every project other than *Slash 'em Out!* are inherited from the previous portfolio and have not been verified against what Daniel actually built. They are held in `legacyContributions` / `legacyRole`, are never rendered, and are not product truth. The *Slash 'em Out!* legacy entry was confirmed inaccurate and is superseded by the confirmed scope in Positioning.
 
 **Section architecture (target):** Hero → Featured Work → More Work → About → Skills & Tools → Education → Contact.
 
@@ -80,11 +91,13 @@ Nothing beyond these four may be claimed about this project.
 - Resume: Google Docs PDF export
 - Local assets: `public/SlashEmOut.png`, `public/Portfolio_BG.jpeg`, `public/google-play-badge.svg`, `src/assets/Profile_pic.jpg`
 
-**Unverified — display content only, not positioning:** all `contributions[]` bullets and `role` strings in `projects.js` other than the *Slash 'em Out!* scope confirmed above.
+**Confirmed commercial outcome:** *Müecas Game*, the advergame produced for the MÜECAS cereal brand, was a **commercial project that generated revenue**. This is confirmed and may be presented as a project-level fact. The amounts, sales figures, conversion rates, and every other financial metric are **unknown** and must never be invented, estimated, or implied.
 
-**Education status — do not overstate.** The previous UI listed "Bachelor's Degree in Video Game Development, 2022 - 2025" at Universidad Argentina De la Empresa. Completion is **not confirmed**; that string is legacy UI copy, not a verified credential. Present it conservatively — the field of study, the institution, and the date range — without asserting a conferred degree, until completion is explicitly confirmed. The same caution applies to Coderhouse (Web development, 2022) and the two Udemy courses (Game Production & Design, 2023; Unity Programming with C#, 2023).
+**Unverified — stored only, never rendered:** all legacy contribution bullets and role strings in `projects.js` other than the *Slash 'em Out!* scope confirmed above. See the verification rule in Positioning.
 
-**Absent — must never be fabricated:** download or install counts, ratings or review scores, revenue, team sizes, studio employment history, client names beyond the MÜECAS advergame already in the data, testimonials, press coverage, awards, or any performance benchmark. Gameplay video and playable embeds do not exist on the site; do not reference them as if they do.
+**Education status — do not overstate.** The previous UI listed "Bachelor's Degree in Video Game Development, 2022 - 2025" at Universidad Argentina De la Empresa. Completion is **not confirmed**; that string is legacy UI copy, not a verified credential. No wording anywhere may imply it was completed: do not assert a conferred degree, and **show no dates at all** — any range, open or closed, implies a completion status that is not confirmed. Present the field of study, the institution, and the kind of programme only, until completion is explicitly confirmed. The same applies to Coderhouse (Web development) and the two Udemy courses (Game Production & Design; Unity Programming with C#): dates are held in this file as reference, not rendered. The dates on record are UADE 2022–2025, Coderhouse 2022, and both Udemy courses 2023, all from legacy UI copy.
+
+**Absent — must never be fabricated:** download or install counts, ratings or review scores, **any revenue amount, sales figure, conversion rate or other financial metric** (the fact that *Müecas Game* generated revenue is confirmed; every number attached to it is not), team sizes, studio employment history, client names beyond the MÜECAS advergame already in the data, testimonials, press coverage, awards, or any performance benchmark. Gameplay video and playable embeds do not exist on the site; do not reference them as if they do.
 
 **Fragile:** every itch.io thumbnail is hotlinked to `img.itch.zone`. Those URLs are outside the project's control and can change or disappear.
 

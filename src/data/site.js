@@ -50,8 +50,13 @@ export const skills = {
   primary: {
     heading: 'Game development',
     groups: [
-      { label: 'Engine', items: ['Unity', 'Unity XR / Oculus SDK'] },
-      { label: 'Language', items: ['C#', '.NET'] },
+      /* A visible skill must be established by confirmed product truth.
+         '.NET' and 'Unity XR / Oculus SDK' were removed: the first is not
+         established, the second derived from unverified BinforcerVR
+         responsibility copy. A project's target platform does not establish
+         personal expertise in that platform's SDK. */
+      { label: 'Engine', items: ['Unity'] },
+      { label: 'Language', items: ['C#'] },
       { label: 'Discipline', items: ['Gameplay programming', 'Game systems', 'Game design', 'VR development'] },
       { label: 'Targets', items: ['Android', 'Meta Quest', 'WebGL', 'PC / Windows'] },
     ],
@@ -67,9 +72,10 @@ export const skills = {
 };
 
 /**
- * Education — presented conservatively. Field of study, institution and dates
- * only; completion of the UADE programme is NOT confirmed, so no degree is
- * asserted. See PRODUCT.md § Evidence on Hand.
+ * Education — presented conservatively: field of study, institution, kind.
+ * No degree is asserted, and no entry carries dates. Completion of the UADE
+ * programme is NOT confirmed, and a date range reads as a completion status.
+ * See PRODUCT.md § Evidence on Hand.
  */
 export const education = [
   {
@@ -77,27 +83,23 @@ export const education = [
     programme: 'Video Game Development',
     institution: 'Universidad Argentina De la Empresa',
     kind: 'University programme',
-    years: '2022 — 2025',
   },
   {
     id: 2,
     programme: 'Web Development',
     institution: 'Coderhouse',
     kind: 'Course',
-    years: '2022',
   },
   {
     id: 3,
     programme: 'Game Production & Design',
     institution: 'Udemy',
     kind: 'Course',
-    years: '2023',
   },
   {
     id: 4,
     programme: 'Unity Programming with C#',
     institution: 'Udemy',
     kind: 'Course',
-    years: '2023',
   },
 ];

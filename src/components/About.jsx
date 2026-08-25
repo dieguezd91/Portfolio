@@ -45,23 +45,20 @@ export default function About() {
         <Reveal delay={0.06} className="lg:col-span-7 lg:col-start-6">
           <div className="max-w-[64ch] space-y-6">
             <p className="type-body text-[1.0625rem] text-[color:var(--color-bone)] sm:text-[1.1875rem]">
-              I&rsquo;m a game developer working in Unity and C#, focused on gameplay and
-              systems. I take features from concept to implementation, and I&rsquo;d rather
-              own a system end to end than hand it off half-built.
+              I&rsquo;m a game developer working in Unity and C#, focused on gameplay and game
+              systems. I focus on taking features from concept to implementation with a strong
+              engineering mindset.
             </p>
 
             <p className="type-body text-[0.9375rem] text-[color:var(--color-muted)] sm:text-base">
-              That includes the part after the fun part. On{' '}
-              <span className="text-[color:var(--color-bone)]">Slash &rsquo;em Out!</span> I
-              worked on the game&rsquo;s systems, then took it through Google Play deployment,
-              ads integration, and in-app purchases &mdash; the work that only exists once
-              something actually ships.
+              On <span className="text-[color:var(--color-bone)]">Slash &rsquo;em Out!</span>, I
+              worked primarily on game systems and handled Google Play deployment and release,
+              Ads integration, and in-app purchases.
             </p>
 
             <p className="type-body text-[0.9375rem] text-[color:var(--color-muted)] sm:text-base">
-              Across eleven projects I&rsquo;ve built for Android, Meta Quest, WebGL and PC, in
-              both 2D and 3D &mdash; a mobile deckbuilder, a VR arcade game, bullet hell, survival
-              horror, and an advergame for a cereal brand. I studied Video Game Development at
+              I&rsquo;ve worked on projects targeting Android, Meta Quest, WebGL and PC, across
+              both 2D and 3D games. I&rsquo;m currently studying Video Game Development at
               Universidad Argentina De la Empresa.
             </p>
 

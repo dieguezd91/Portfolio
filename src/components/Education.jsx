@@ -3,9 +3,10 @@ import Reveal from './Reveal';
 import { education } from '../data/site';
 
 /**
- * Presented conservatively: field of study, institution, and dates.
- * No degree is asserted — completion of the UADE programme is not confirmed.
- * See PRODUCT.md § Evidence on Hand before changing this wording.
+ * Presented conservatively: field of study, institution, and kind.
+ * No degree is asserted and no dates are shown — completion of the UADE
+ * programme is not confirmed, and a date range reads as a completion status.
+ * See PRODUCT.md § Evidence on Hand before changing this.
  */
 export default function Education() {
   return (
@@ -30,12 +31,8 @@ export default function Education() {
                 {item.institution}
               </p>
 
-              <p className="type-meta text-[color:var(--color-dim)] sm:col-span-2">
+              <p className="type-meta text-[color:var(--color-dim)] sm:col-span-3">
                 {item.kind}
-              </p>
-
-              <p className="type-meta tabular text-[color:var(--color-muted)] sm:col-span-1 sm:text-right">
-                {item.years}
               </p>
             </div>
           </Reveal>
