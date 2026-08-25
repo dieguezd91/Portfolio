@@ -57,7 +57,10 @@ export const skills = {
          personal expertise in that platform's SDK. */
       { label: 'Engine', items: ['Unity'] },
       { label: 'Language', items: ['C#'] },
-      { label: 'Discipline', items: ['Gameplay programming', 'Game systems', 'Game design', 'VR development'] },
+      /* 'Game design' is deliberately absent: a positioning decision, not a
+         claim of no design experience. It must not compete with the Unity
+         gameplay/systems specialisation this portfolio targets. */
+      { label: 'Discipline', items: ['Gameplay programming', 'Game systems', 'VR development'] },
       { label: 'Targets', items: ['Android', 'Meta Quest', 'WebGL', 'PC / Windows'] },
     ],
   },
