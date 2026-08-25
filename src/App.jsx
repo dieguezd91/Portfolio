@@ -1,26 +1,32 @@
 import { useEffect } from 'react';
-import Navbar from './components/Navbar';
+import Nav from './components/Nav';
 import Hero from './components/Hero';
-import Projects from './components/Projects';
+import FeaturedWork from './components/FeaturedWork';
+import MoreWork from './components/MoreWork';
+import About from './components/About';
+import Skills from './components/Skills';
 import Education from './components/Education';
-import Technologies from './components/Technologies';
+import Contact from './components/Contact';
 import Footer from './components/Footer';
 
 export default function App() {
   useEffect(() => {
-    window.scrollTo(0, 0);
+    if (!window.location.hash) window.scrollTo(0, 0);
   }, []);
 
   return (
-    <div className="scroll-smooth">
-      <Navbar />
-      <div className="max-w-[1920px] mx-auto bg-[#0F1020] shadow-2xl">
+    <div className="min-h-screen bg-[color:var(--color-ink)]">
+      <Nav />
+      <main>
         <Hero />
-        <Projects />
+        <FeaturedWork />
+        <MoreWork />
+        <About />
+        <Skills />
         <Education />
-        <Technologies />
-        <Footer />
-      </div>
+        <Contact />
+      </main>
+      <Footer />
     </div>
   );
 }

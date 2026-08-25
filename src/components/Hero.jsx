@@ -1,142 +1,150 @@
-import { useRef } from 'react';
-import { motion } from 'framer-motion';
-import { SiLinktree, SiGithub, SiLinkedin, SiItchdotio } from 'react-icons/si';
-import HeroParticles from './HeroParticles';
-import HudButton from './HudButton';
+import { motion as Motion, useReducedMotion } from 'framer-motion';
+import { SiGoogleplay } from 'react-icons/si';
+import { site } from '../data/site';
+import { featuredProjects } from '../data/projects';
+import { ArrowDown, ArrowUpRight, Download } from './icons';
 
+
+/**
+ * First viewport: the thesis on the left, the proof on the right.
+ *
+ * The shipped title sits beside the claim rather than three screens below it,
+ * presented as a release record — media, spec, store link — so a hiring
+ * engineer can verify the strongest fact on the page without scrolling.
+ */
 export default function Hero() {
-  const mouseRef = useRef({ x: -9999, y: -9999 });
+  const reduced = useReducedMotion();
+  const shipped = featuredProjects[0];
 
-  function onMouseMove(e) {
-    const rect = e.currentTarget.getBoundingClientRect();
-    mouseRef.current = { x: e.clientX - rect.left, y: e.clientY - rect.top };
-  }
-
-  function onMouseLeave() {
-    mouseRef.current = { x: -9999, y: -9999 };
-  }
+  const rise = (delay) =>
+    reduced
+      ? {}
+      : {
+          initial: { opacity: 0, y: 16 },
+          animate: { opacity: 1, y: 0 },
+          transition: { duration: 0.85, delay, ease: [0.16, 1, 0.3, 1] },
+        };
 
   return (
     <section
-      className="relative min-h-screen bg-gradient-to-b from-[#0F1020] to-[#14162A] text-white flex items-center justify-center overflow-hidden"
-      onMouseMove={onMouseMove}
-      onMouseLeave={onMouseLeave}
+      id="top"
+      className="relative px-6 pb-20 pt-32 sm:px-8 sm:pb-24 sm:pt-36 lg:px-12 lg:pb-32 lg:pt-44"
     >
-      {/* Particle layer — concentrates behind the name */}
-      <HeroParticles mouseRef={mouseRef} />
+      <div className="mx-auto grid w-full max-w-[1440px] gap-x-10 gap-y-16 lg:grid-cols-12 lg:items-start">
+        {/* ── Thesis ─────────────────────────────────────────────────────── */}
+        <div className="lg:col-span-7 xl:col-span-6">
+          <h1>
+            <Motion.span
+              {...rise(0)}
+              className="type-display block text-[clamp(2.35rem,6.4vw,4.5rem)] text-[color:var(--color-bone)]"
+            >
+              Unity and C# developer focused on gameplay and game systems.
+            </Motion.span>
 
-      {/* Content */}
-      <div className="relative z-10 w-full max-w-5xl mx-auto px-8 pt-16 pb-12 md:pt-28 md:pb-20 flex flex-col items-center text-center gap-0">
+            <Motion.span
+              {...rise(0.09)}
+              className="mt-8 block border-t border-[color:var(--color-rule)] pt-5 text-[0.9375rem] text-[color:var(--color-bone)] sm:text-base"
+              style={{ fontVariationSettings: "'wdth' 100, 'wght' 500" }}
+            >
+              {site.name}
+            </Motion.span>
+          </h1>
 
-        {/* Name — dominant focal point */}
-        <motion.h1
-          initial={{ opacity: 0, y: 24 }}
-          animate={{ opacity: 1, y: 0 }}
-          transition={{ duration: 0.7, ease: 'easeOut' }}
-          className="font-heading text-5xl md:text-6xl font-bold text-white uppercase tracking-wide leading-none"
-        >
-          Daniel Dieguez
-        </motion.h1>
-
-        {/* Role */}
-        <motion.p
-          initial={{ opacity: 0, y: 16 }}
-          animate={{ opacity: 1, y: 0 }}
-          transition={{ duration: 0.6, delay: 0.12, ease: 'easeOut' }}
-          className="font-heading text-lg md:text-xl text-[#00F5D4] uppercase tracking-[0.25em] font-medium mt-5 md:mt-6"
-        >
-          Game Developer
-        </motion.p>
-
-        {/* ── Mobile menu buttons — hidden on md+ ───────────────────────── */}
-        <motion.div
-          initial={{ opacity: 0, y: 16 }}
-          animate={{ opacity: 1, y: 0 }}
-          transition={{ duration: 0.6, delay: 0.22, ease: 'easeOut' }}
-          className="flex md:hidden flex-col w-full gap-3 mt-10"
-        >
-          <HudButton variant="solid" href="#projects" className="w-full py-4 rounded-lg text-base">
-            EXPLORE PROJECTS
-          </HudButton>
-
-          <HudButton
-            href="https://docs.google.com/document/d/1HPbOMsd2OPtrPolEdgYsLw9HlJyP51cpGVxyOe_9Pgg/export?format=pdf"
-            download="Daniel_Dieguez_CV.pdf"
-            target="_blank"
-            rel="noopener noreferrer"
-            className="w-full py-4 rounded-lg text-base"
+          <Motion.p
+            {...rise(0.16)}
+            className="type-body mt-6 max-w-[58ch] text-[0.9375rem] text-[color:var(--color-muted)] sm:text-base"
           >
-            DOWNLOAD RESUME
-            <svg className="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-              <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M19 14l-7 7m0 0l-7-7m7 7V3" />
-            </svg>
-          </HudButton>
+            {site.heroSupport}
+          </Motion.p>
 
-          <HudButton
-            href="https://linktr.ee/daniel_dieguez"
-            target="_blank"
-            rel="noopener noreferrer"
-            className="w-full py-4 rounded-lg text-base"
-          >
-            <SiLinktree className="w-4 h-4" />
-            CONTACT
-          </HudButton>
-        </motion.div>
-
-        {/* Mobile social icons — centered below menu buttons */}
-        <motion.div
-          initial={{ opacity: 0 }}
-          animate={{ opacity: 1 }}
-          transition={{ duration: 0.6, delay: 0.42, ease: 'easeOut' }}
-          className="flex md:hidden items-center justify-center gap-5 mt-10"
-        >
-          {[
-            { href: 'https://github.com/dieguezd91',               icon: <SiGithub    className="w-5 h-5" />, label: 'GitHub'   },
-            { href: 'https://www.linkedin.com/in/daniel-dieguez/', icon: <SiLinkedin  className="w-5 h-5" />, label: 'LinkedIn' },
-            { href: 'https://danidieguez.itch.io',                 icon: <SiItchdotio className="w-5 h-5" />, label: 'itch.io'  },
-          ].map(({ href, icon, label }) => (
-            <motion.a
-              key={label}
-              href={href}
+          <Motion.div {...rise(0.24)} className="mt-10 flex flex-wrap items-center gap-3">
+            <a href="#work" className="btn btn-signal">
+              See the work
+              <ArrowDown className="h-4 w-4" />
+            </a>
+            <a
+              href={site.resumeUrl}
+              download={site.resumeFilename}
               target="_blank"
               rel="noopener noreferrer"
-              whileHover={{ scale: 1.05 }}
-              whileTap={{ scale: 0.96 }}
-              transition={{ duration: 0.16, ease: 'easeOut' }}
-              className="p-3.5 rounded-lg bg-[#1C1F3A] border border-white/[0.10] text-zinc-500
-                         hover:border-white/[0.24] hover:text-zinc-300
-                         active:bg-white/[0.06] active:border-white/[0.30]
-                         transition-all duration-150"
-              aria-label={label}
+              className="btn btn-ghost"
             >
-              {icon}
-            </motion.a>
-          ))}
-        </motion.div>
+              Résumé
+              <Download className="h-4 w-4" />
+            </a>
+          </Motion.div>
+        </div>
 
-        {/* Description */}
-        {/* Desktop: after role, before CTA  |  Mobile: after buttons, reduced */}
-        <motion.p
-          initial={{ opacity: 0, y: 16 }}
-          animate={{ opacity: 1, y: 0 }}
-          transition={{ duration: 0.6, delay: 0.32, ease: 'easeOut' }}
-          className="font-body font-normal max-w-sm md:max-w-xl text-base md:text-lg text-zinc-400 md:text-zinc-300 leading-relaxed uppercase mt-10 md:mt-8"
+        {/* ── Proof: the release record ──────────────────────────────────── */}
+        <Motion.aside
+          {...rise(0.30)}
+          className="lg:col-span-5 lg:col-start-8"
+          aria-label="Latest release"
         >
-          Game Developer specializing in gameplay and systems, taking ownership of features from concept to implementation with a strong engineering mindset.
-        </motion.p>
+          <div className="overflow-hidden rounded-[4px] border border-[color:var(--color-rule)] bg-[color:var(--color-ink-raised)]">
+            {/* Detail band — the full plate runs in the case study below */}
+            <div className="aspect-[21/9] w-full border-b border-[color:var(--color-rule)]">
+              <img
+                src={shipped.media}
+                width={shipped.mediaWidth}
+                height={shipped.mediaHeight}
+                alt={`Gameplay from ${shipped.title}`}
+                loading="eager"
+                fetchPriority="high"
+                decoding="async"
+                className="block h-full w-full object-cover"
+              />
+            </div>
 
-        {/* Desktop CTA — hidden on mobile */}
-        <motion.div
-          initial={{ opacity: 0, y: 16 }}
-          animate={{ opacity: 1, y: 0 }}
-          transition={{ duration: 0.6, delay: 0.42, ease: 'easeOut' }}
-          className="hidden md:block mt-12"
-        >
-          <HudButton variant="solid" href="#projects" className="px-7 py-3 rounded-lg text-base">
-            EXPLORE PROJECTS
-          </HudButton>
-        </motion.div>
+            <div className="p-5 sm:p-6">
+              <p className="flex items-center gap-2.5">
+                <span
+                  aria-hidden="true"
+                  className="h-1.5 w-1.5 rounded-full bg-[color:var(--color-signal)]"
+                />
+                <span className="type-meta text-[color:var(--color-signal)]">
+                  Live on Google Play
+                </span>
+              </p>
 
+              <h2
+                className="type-title mt-3 text-[1.5rem] text-[color:var(--color-bone)]"
+              >
+                {shipped.title}
+              </h2>
+
+              <dl className="mt-5 border-t border-[color:var(--color-rule)]">
+                {[
+                  ['Platform', shipped.platform],
+                  ['Engine', 'Unity · C#'],
+                  ['Released', String(shipped.year)],
+                  ['Studio', shipped.studio],
+                ].map(([k, v]) => (
+                  <div
+                    key={k}
+                    className="flex items-baseline justify-between gap-4 border-b border-[color:var(--color-rule)] py-2.5"
+                  >
+                    <dt className="type-meta text-[color:var(--color-dim)]">{k}</dt>
+                    <dd className="type-meta tabular text-right text-[color:var(--color-muted)]">
+                      {v}
+                    </dd>
+                  </div>
+                ))}
+              </dl>
+
+              <a
+                href={shipped.storeUrl}
+                target="_blank"
+                rel="noopener noreferrer"
+                className="btn btn-ghost mt-5 w-full"
+              >
+                <SiGoogleplay className="h-4 w-4" aria-hidden="true" />
+                Get it on Google Play
+                <ArrowUpRight className="h-4 w-4" />
+              </a>
+            </div>
+          </div>
+        </Motion.aside>
       </div>
     </section>
   );

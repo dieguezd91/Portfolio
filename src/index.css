@@ -1,190 +1,325 @@
 @import "tailwindcss";
 
+/* ═══════════════════════════════════════════════════════════════════════════
+   Design tokens
+   Achromatic dark ground; a single signal orange; game imagery supplies colour.
+   ═══════════════════════════════════════════════════════════════════════════ */
+
 @theme {
-  --font-heading: 'Space Grotesk', Arial, sans-serif;
-  --font-body: 'Inter', Arial, sans-serif;
-  --font-mono: 'JetBrains Mono', monospace;
+  /* Type */
+  --font-display: 'Archivo', 'Helvetica Neue', Arial, sans-serif;
+  --font-body: 'Archivo', 'Helvetica Neue', Arial, sans-serif;
+  --font-mono: 'Martian Mono', ui-monospace, 'Cascadia Mono', Consolas, monospace;
 
-  --color-background-base: #0F1020;
-  --color-background-secondary: #14162A;
-  --color-background-elevated: #1C1F3A;
-  --color-border: rgba(255, 255, 255, 0.05);
+  /* Ground */
+  --color-ink: #0A0A0B;
+  --color-ink-raised: #131315;
+
+  /* Foreground */
+  --color-bone: #F2F0EC;
+  --color-muted: #A5A29B;
+  --color-dim: #85827C;
+
+  /* Signal */
+  --color-signal: #FF5C29;
+
+  /* Rules */
+  --color-rule: rgba(255, 255, 255, 0.10);
+  --color-rule-strong: rgba(255, 255, 255, 0.20);
+
+  /* Motion */
+  --ease-out-expo: cubic-bezier(0.16, 1, 0.3, 1);
 }
 
-/* ─── Button hierarchy ───────────────────────────────────────────────────── */
+/* ═══════════════════════════════════════════════════════════════════════════
+   Base
+   ═══════════════════════════════════════════════════════════════════════════ */
 
-.hud-btn-solid {
-  background-color: #00F5D4;
-  border: 1px solid #00F5D4;
-  color: #0F1020;
-  box-shadow: 0 0 14px rgba(0, 245, 212, 0.22);
-  transition: box-shadow 160ms ease, background-color 160ms ease, transform 160ms ease;
-}
-
-.hud-btn-solid:hover {
-  background-color: #00e6c5;
-  box-shadow: 0 0 26px rgba(0, 245, 212, 0.40);
-}
-
-.hud-btn-solid:active {
-  background-color: #00c9aa;
-  box-shadow: 0 0 8px rgba(0, 245, 212, 0.14);
-}
-
-.hud-btn {
-  background: transparent;
-  border: 1px solid rgba(0, 245, 212, 0.55);
-  color: #E5E7EB;
-  box-shadow: none;
-  transition: box-shadow 160ms ease, background-color 160ms ease, color 160ms ease, border-color 160ms ease, transform 160ms ease;
-}
-
-.hud-btn:hover {
-  border-color: #00F5D4;
-  box-shadow: 0 0 18px rgba(0, 245, 212, 0.28);
-}
-
-.hud-btn:active {
-  background-color: #00F5D4;
-  color: #0F1020;
-  box-shadow: 0 0 8px rgba(0, 245, 212, 0.18);
-}
-
-.hud-btn-primary {
-  background-color: #FF2D95;
-  border: 1px solid #FF2D95;
-  color: #0F1020;
-  box-shadow: 0 0 12px rgba(255, 45, 149, 0.2);
-  transition: box-shadow 160ms ease, background-color 160ms ease;
-}
-
-.hud-btn-primary:hover {
-  background-color: #ff3da0;
-  box-shadow: 0 0 22px rgba(255, 45, 149, 0.36);
-}
-
-.hud-btn-primary:active {
-  background-color: #e0267f;
-}
-
-/* ─── Project polygon carousel ───────────────────────────────────────────── */
-
-:root {
-  --slide-width: 80vw;
-}
-
-@media (min-width: 768px) {
+@layer base {
   :root {
-    --slide-width: 66vw;
+    color-scheme: dark;
+    scrollbar-color: rgba(255, 255, 255, 0.18) #0A0A0B;
   }
-}
 
-@media (min-width: 1024px) {
+  html {
+    scroll-behavior: smooth;
+    /* Fixed masthead clearance for in-page anchors */
+    scroll-padding-top: 5.5rem;
+    -webkit-text-size-adjust: 100%;
+  }
+
+  body {
+    background-color: #0A0A0B;
+    color: #F2F0EC;
+    font-family: var(--font-body);
+    font-synthesis-weight: none;
+    -webkit-font-smoothing: antialiased;
+    text-rendering: optimizeLegibility;
+  }
+
+  /* Browser surfaces themed from the palette, not left to defaults */
+  ::selection {
+    background-color: #FF5C29;
+    color: #0A0A0B;
+  }
+
   :root {
-    --slide-width: min(50vw, 700px);
+    caret-color: #FF5C29;
+  }
+
+  ::-webkit-scrollbar {
+    width: 11px;
+    height: 11px;
+  }
+
+  ::-webkit-scrollbar-track {
+    background: #0A0A0B;
+  }
+
+  ::-webkit-scrollbar-thumb {
+    background: rgba(255, 255, 255, 0.16);
+    border: 3px solid #0A0A0B;
+    border-radius: 99px;
+  }
+
+  ::-webkit-scrollbar-thumb:hover {
+    background: rgba(255, 255, 255, 0.28);
+  }
+
+  :focus-visible {
+    outline: 2px solid #FF5C29;
+    outline-offset: 3px;
+    border-radius: 2px;
+  }
+
+  a {
+    text-underline-offset: 0.22em;
+    text-decoration-thickness: from-font;
+  }
+
+  /* Metadata and figures align in columns */
+  .tabular {
+    font-variant-numeric: tabular-nums;
+    font-feature-settings: 'tnum' 1;
   }
 }
 
-.project-coverflow {
-  position: relative;
-  isolation: isolate;
-  width: 100%;
-  height: clamp(260px, 37vw, 500px);
-  overflow: hidden;
-  perspective: clamp(850px, 65vw, 1100px);
-  perspective-origin: 50% 50%;
-  background: radial-gradient(
-    circle at center,
-    rgba(0, 245, 212, 0.06),
-    transparent 58%
-  );
-}
+/* ═══════════════════════════════════════════════════════════════════════════
+   Type roles
+   Display uses Archivo's width axis; text stays at normal width.
+   ═══════════════════════════════════════════════════════════════════════════ */
 
-.project-coverflow__depth,
-.project-coverflow__rotor {
-  position: absolute;
-  inset: 0;
-  transform-style: preserve-3d;
-}
-
-.project-coverflow__depth {
-  pointer-events: none;
-}
-
-.project-coverflow__rotor {
-  pointer-events: none;
-  will-change: transform;
-}
-
-.coverflow-slide {
-  position: absolute;
-  left: calc(50% - (var(--slide-width) / 2));
-  top: calc(50% - (var(--slide-width) * 9 / 32));
-  width: var(--slide-width);
-  height: calc(var(--slide-width) * 9 / 16);
-  transform-style: preserve-3d;
-  transform-origin: center center;
-  backface-visibility: hidden;
-  will-change: transform;
-}
-
-.coverflow-slide__surface {
-  transform-style: preserve-3d;
-  backface-visibility: hidden;
-  will-change: opacity;
-}
-
-.project-carousel-stage {
-  display: grid;
-  grid-template-columns: minmax(0, 1fr);
-  align-items: center;
-  width: 100%;
-}
-
-.project-carousel-stage--with-controls {
-  grid-template-columns: 52px minmax(0, 1fr) 52px;
-  column-gap: clamp(12px, 2vw, 28px);
-}
-
-.project-carousel-stage__arrow {
-  position: relative;
-  z-index: 50;
-  width: 52px;
-  height: 52px;
-  justify-self: center;
-  flex-shrink: 0;
-}
-
-@media (max-width: 767px) {
-  :root {
-    --slide-width: min(72vw, calc(100vw - 124px));
+@layer components {
+  .type-display {
+    font-family: var(--font-display);
+    font-variation-settings: 'wdth' 112, 'wght' 700;
+    letter-spacing: -0.035em;
+    line-height: 0.92;
+    text-wrap: balance;
   }
 
-  .project-carousel-stage--with-controls {
-    grid-template-columns: 40px minmax(0, 1fr) 40px;
-    column-gap: 6px;
+  .type-title {
+    font-family: var(--font-display);
+    font-variation-settings: 'wdth' 108, 'wght' 650;
+    letter-spacing: -0.025em;
+    line-height: 1.02;
+    text-wrap: balance;
   }
 
-  .project-carousel-stage__arrow {
-    width: 40px;
-    height: 40px;
+  .type-section {
+    font-family: var(--font-display);
+    font-variation-settings: 'wdth' 110, 'wght' 600;
+    letter-spacing: -0.02em;
+    line-height: 1.05;
+  }
+
+  .type-body {
+    font-family: var(--font-body);
+    font-variation-settings: 'wdth' 100, 'wght' 400;
+    letter-spacing: -0.004em;
+    line-height: 1.62;
+  }
+
+  /* Real metadata only — platform, year, engine, spec keys */
+  .type-meta {
+    font-family: var(--font-mono);
+    font-weight: 400;
+    font-size: 0.6875rem;
+    letter-spacing: 0.02em;
+    line-height: 1.4;
+    text-transform: uppercase;
+    font-variant-numeric: tabular-nums;
   }
 }
 
-.carousel-control-btn:focus-visible,
-.carousel-selector-btn:focus-visible,
-.carousel-cta-link:focus-visible {
-  outline: 2px solid #00F5D4;
-  outline-offset: 4px;
+/* ═══════════════════════════════════════════════════════════════════════════
+   Controls
+   ═══════════════════════════════════════════════════════════════════════════ */
+
+@layer components {
+  .btn {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    gap: 0.6rem;
+    font-family: var(--font-display);
+    font-variation-settings: 'wdth' 104, 'wght' 600;
+    font-size: 0.875rem;
+    letter-spacing: 0.01em;
+    padding: 0.8125rem 1.375rem;
+    border-radius: 3px;
+    border: 1px solid transparent;
+    transition:
+      background-color 180ms var(--ease-out-expo),
+      border-color 180ms var(--ease-out-expo),
+      color 180ms var(--ease-out-expo),
+      box-shadow 180ms var(--ease-out-expo);
+  }
+
+  .btn-signal {
+    background-color: #FF5C29;
+    color: #0A0A0B;
+    border-color: #FF5C29;
+  }
+
+  .btn-signal:hover {
+    background-color: #FF7245;
+    border-color: #FF7245;
+  }
+
+  .btn-signal:active {
+    background-color: #E24A1B;
+    border-color: #E24A1B;
+  }
+
+  .btn-ghost {
+    background-color: transparent;
+    color: #F2F0EC;
+    border-color: rgba(255, 255, 255, 0.20);
+  }
+
+  .btn-ghost:hover {
+    border-color: rgba(255, 255, 255, 0.42);
+    background-color: rgba(255, 255, 255, 0.045);
+  }
+
+  .btn-ghost:active {
+    background-color: rgba(255, 255, 255, 0.09);
+  }
+
+  /* Inline link: rule grows from the left on hover.
+     Padding-block keeps the hit area at 44px without moving the rule. */
+  .link-rule {
+    position: relative;
+    display: inline-flex;
+    align-items: center;
+    gap: 0.5rem;
+    padding-block: 0.75rem;
+    color: #F2F0EC;
+    transition: color 180ms var(--ease-out-expo);
+  }
+
+  .link-rule::after {
+    content: '';
+    position: absolute;
+    left: 0;
+    bottom: 0.45rem;
+    height: 1px;
+    width: 100%;
+    background-color: #FF5C29;
+    transform: scaleX(0);
+    transform-origin: left;
+    transition: transform 320ms var(--ease-out-expo);
+  }
+
+  .link-rule:hover::after,
+  .link-rule:focus-visible::after {
+    transform: scaleX(1);
+  }
+
+  .link-rule:hover {
+    color: #FF5C29;
+  }
 }
 
-/* ─── Base ───────────────────────────────────────────────────────────────── */
+/* ═══════════════════════════════════════════════════════════════════════════
+   Media frames
+   Screenshots are the page's colour. The compact grid rests desaturated so
+   density stays calm, and comes to full colour when reached for.
+   ═══════════════════════════════════════════════════════════════════════════ */
 
-html {
-  scroll-behavior: smooth;
+@layer components {
+  .media-frame {
+    position: relative;
+    overflow: hidden;
+    background-color: #131315;
+    border: 1px solid rgba(255, 255, 255, 0.10);
+    border-radius: 4px;
+  }
+
+  .media-frame img {
+    display: block;
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+  }
+
+  /* Case-study plate. Wide captures fill the mount; square and portrait
+     captures sit centred at their own scale rather than being blown up. */
+  .media-plate {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
+
+  /* Height is driven per image (inline) so a small source gains a modest,
+     capped presence instead of floating at thumbnail scale — never more than
+     1.25x its own pixels, and never taller than its mount. */
+  .media-plate img {
+    width: auto;
+    height: auto;
+    max-width: 100%;
+    object-fit: contain;
+  }
+
+  .media-quiet img {
+    filter: saturate(0.42) contrast(1.02);
+    transform: scale(1.001);
+    transition:
+      filter 480ms var(--ease-out-expo),
+      transform 640ms var(--ease-out-expo);
+  }
+
+  .media-quiet:hover img,
+  .media-quiet:focus-within img {
+    filter: saturate(1) contrast(1);
+    transform: scale(1.035);
+  }
 }
 
-body {
-  font-family: var(--font-body);
-  background-color: #0F1020;
+/* ═══════════════════════════════════════════════════════════════════════════
+   Reduced motion
+   ═══════════════════════════════════════════════════════════════════════════ */
+
+@media (prefers-reduced-motion: reduce) {
+  html {
+    scroll-behavior: auto;
+  }
+
+  *,
+  *::before,
+  *::after {
+    animation-duration: 0.001ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.001ms !important;
+  }
+
+  .media-quiet img {
+    filter: saturate(1);
+  }
+
+  .media-quiet:hover img,
+  .media-quiet:focus-within img {
+    transform: none;
+  }
 }

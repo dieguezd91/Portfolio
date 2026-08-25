@@ -1,55 +1,22 @@
-import { motion } from 'framer-motion';
-import { SiLinktree } from 'react-icons/si';
-import HudButton from './HudButton';
+import { site } from '../data/site';
+import { Monogram } from './icons';
 
 export default function Footer() {
-  const currentYear = new Date().getFullYear();
+  const year = new Date().getFullYear();
 
   return (
-    <footer className="bg-[#0F1020] border-t border-white/[0.05] text-zinc-400 py-20 px-6">
-      <div className="max-w-4xl mx-auto flex flex-col items-center gap-8">
+    <footer className="border-t border-[color:var(--color-rule)] bg-[color:var(--color-ink-raised)] px-6 py-8 sm:px-8 lg:px-12">
+      <div className="mx-auto flex w-full max-w-[1440px] flex-col gap-4 sm:flex-row sm:items-center sm:justify-between">
+        <p className="flex items-center gap-3">
+          <Monogram className="h-4 w-4 text-[color:var(--color-dim)]" />
+          <span className="type-meta tabular text-[color:var(--color-dim)]">
+            &copy; {year} {site.name}
+          </span>
+        </p>
 
-        {/* CTA phrase */}
-        <motion.p
-          initial={{ opacity: 0, y: 16 }}
-          whileInView={{ opacity: 1, y: 0 }}
-          viewport={{ once: true }}
-          transition={{ duration: 0.6 }}
-          className="font-body text-xs tracking-[0.2em] uppercase text-zinc-500 text-center"
-        >
-          Available for game development opportunities
-        </motion.p>
-
-        {/* Contact button */}
-        <motion.div
-          initial={{ opacity: 0, y: 12 }}
-          whileInView={{ opacity: 1, y: 0 }}
-          viewport={{ once: true }}
-          transition={{ duration: 0.6, delay: 0.12 }}
-        >
-          <HudButton
-            variant="solid"
-            href="https://linktr.ee/daniel_dieguez"
-            target="_blank"
-            rel="noopener noreferrer"
-            className="px-7 py-3 rounded-lg text-base"
-          >
-            <SiLinktree className="w-4 h-4" />
-            GET IN TOUCH
-          </HudButton>
-        </motion.div>
-
-        {/* Copyright */}
-        <motion.p
-          initial={{ opacity: 0 }}
-          whileInView={{ opacity: 1 }}
-          viewport={{ once: true }}
-          transition={{ duration: 0.6, delay: 0.24 }}
-          className="font-body text-xs text-zinc-500 tracking-wide"
-        >
-          © {currentYear} Daniel Dieguez
-        </motion.p>
-
+        <p className="type-meta text-[color:var(--color-dim)]">
+          Archivo &amp; Martian Mono · Built with React and Vite
+        </p>
       </div>
     </footer>
   );
