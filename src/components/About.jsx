@@ -58,8 +58,8 @@ export default function About() {
 
             <p className="type-body text-[0.9375rem] text-[color:var(--color-muted)] sm:text-base">
               I&rsquo;ve worked on projects targeting Android, Meta Quest, WebGL and PC, across
-              both 2D and 3D games. I&rsquo;m currently studying Video Game Development at
-              Universidad Argentina De la Empresa.
+              both 2D and 3D games. Alongside that work I&rsquo;m studying Video Game
+              Development at Universidad Argentina De la Empresa.
             </p>
 
             <p>

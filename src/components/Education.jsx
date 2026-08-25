@@ -3,10 +3,10 @@ import Reveal from './Reveal';
 import { education } from '../data/site';
 
 /**
- * Presented conservatively: field of study, institution, and kind.
- * No degree is asserted and no dates are shown — completion of the UADE
- * programme is not confirmed, and a date range reads as a completion status.
- * See PRODUCT.md § Evidence on Hand before changing this.
+ * Presented conservatively: field of study, institution, kind, and — where it
+ * applies — an ongoing status. No degree is asserted and no dates are shown:
+ * completion of the UADE programme is not confirmed, and a date range reads as
+ * a completion status. See PRODUCT.md § Evidence on Hand before changing this.
  */
 export default function Education() {
   return (
@@ -21,7 +21,7 @@ export default function Education() {
           >
             <div className="grid gap-x-8 gap-y-2 py-5 sm:grid-cols-12 sm:items-baseline sm:py-6">
               <p
-                className="text-[1.0625rem] text-[color:var(--color-bone)] sm:col-span-5"
+                className="text-[1.0625rem] text-[color:var(--color-bone)] sm:col-span-4"
                 style={{ fontVariationSettings: "'wdth' 104, 'wght' 600", letterSpacing: '-0.015em' }}
               >
                 {item.programme}
@@ -31,9 +31,17 @@ export default function Education() {
                 {item.institution}
               </p>
 
-              <p className="type-meta text-[color:var(--color-dim)] sm:col-span-3">
+              <p className="type-meta text-[color:var(--color-dim)] sm:col-span-2">
                 {item.kind}
               </p>
+
+              {/* Ongoing study is marked here rather than with a date range,
+                  which would imply a completion status that is not confirmed. */}
+              {item.status && (
+                <p className="type-meta text-[color:var(--color-signal)] sm:col-span-2 sm:text-right">
+                  {item.status}
+                </p>
+              )}
             </div>
           </Reveal>
         ))}
