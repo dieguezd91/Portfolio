@@ -42,15 +42,16 @@ function StoreLink({ project, className = '' }) {
   );
 }
 
-function Plate({ project, ratio, eager = false }) {
+function Plate({ project, ratio, eager = false, className = '' }) {
   const { media, mediaWidth, mediaHeight, title, mediaKind } = project;
   const isKeyArt = mediaKind === 'keyArt';
 
-  /* Key art is framed to its own aspect on a narrower plate, so it reads as a
-     mounted piece of art rather than a gameplay capture in an empty rectangle. */
+  /* Key art keeps its own aspect and a mat, so it is never stretched into an
+     imitation of gameplay imagery. Width is set by the caller, so two plates
+     of different kinds still read as equal rank. */
   return (
     <figure
-      className={`media-frame ${isKeyArt ? 'media-keyart max-w-[21rem]' : ''}`}
+      className={`media-frame ${isKeyArt ? 'media-keyart' : ''} ${className}`}
       style={{ aspectRatio: isKeyArt ? `${mediaWidth} / ${mediaHeight}` : ratio }}
     >
       <img
@@ -149,7 +150,10 @@ function SecondaryCase({ project, index }) {
 
   return (
     <Reveal as="article" delay={0.05 + index * 0.06}>
-      <Plate project={project} ratio="4 / 3" />
+      {/* Both plates share one width cap, so a gameplay capture and a piece of
+          key art read as equal rank despite different treatments and heights.
+          The record below always spans the full column. */}
+      <Plate project={project} ratio="4 / 3" className="max-w-[28rem]" />
 
       <div className="mt-5">
         <StatusMark status={status} />
@@ -184,11 +188,11 @@ export default function FeaturedWork() {
         <PrimaryCase project={primary} />
       </div>
 
-      {/* Width-capped so the smaller source art is not blown past a soft
-          interpolation, and so the pair reads as secondary to the case study
-          above without being demoted out of Featured Work. */}
+      {/* Two structurally equal columns across the full content width. The
+          plates cap their own width so neither source is over-enlarged; the
+          records fill the column, which is what keeps the pair balanced. */}
       <div className="mt-14 border-t border-[color:var(--color-rule)] pt-10 lg:mt-16 lg:pt-12">
-        <div className="grid max-w-[58rem] gap-x-10 gap-y-12 sm:grid-cols-2">
+        <div className="grid gap-x-10 gap-y-12 sm:grid-cols-2">
           {secondary.map((project, i) => (
             <SecondaryCase key={project.id} project={project} index={i} />
           ))}

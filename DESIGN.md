@@ -200,7 +200,7 @@ Recurring column assignments:
 - **Hero:** thesis on columns 1–7 (1–6 at `xl`), release panel on 8–12.
 - **Section header:** heading on 1–5, lede on 7–12. The asymmetry is the system's signature; a centred section header is off-system.
 - **Primary case study:** plate on 1–7, record on 8–12. One per page — the shipped release, the only entry with a verified role and scope of work.
-- **Secondary case studies:** a 2-up grid capped at `58rem`, sitting under a hairline below the primary. Still Featured Work, deliberately a smaller footprint, because less verified information exists to fill one.
+- **Secondary case studies:** a 2-up grid across the full content width, sitting under a hairline below the primary. The two columns are structurally equal and each record spans its whole column; only the plates cap their width. Still Featured Work, deliberately a smaller footprint, because less verified information exists to fill one.
 - **More work:** 1 / 2 / 3 / 4 columns at base / `sm` / `lg` / `xl`.
 
 Vertical rhythm runs on 64px (base) to 96px (`lg`) between sections. Every section opens with a full-width hairline directly above its heading. More space sits above a heading than below it, everywhere.
@@ -242,7 +242,7 @@ The system's signature control. A flex row of optional icon, label, and arrow, w
 
 - **Corner:** 4px. **Border:** 1px Rule. **Ground:** Mount Grey.
 - **Fill mode** (default): the capture fills its frame with `object-fit: cover`. Frame aspect is chosen per slot — 16:9 for the primary case study, 4:3 for a secondary one, 16:10 in the More work grid. Modest interpolation is accepted so a small source still has presence; the frame width is capped instead of leaving the art stranded.
-- **Key-art mode** (`.media-keyart`, set by `mediaKind: 'keyArt'` in the data): the frame takes the artwork's own aspect, caps at `21rem` wide, and carries `clamp(1rem, 2vw, 1.75rem)` of padding, so the art reads as a mounted piece rather than a gameplay capture stranded in an empty rectangle. Roughly a third of that frame is deliberate mat.
+- **Key-art mode** (`.media-keyart`, set by `mediaKind: 'keyArt'` in the data): the frame takes the artwork's own aspect and carries `clamp(1rem, 2vw, 1.75rem)` of padding, so the art reads as a mounted piece rather than a gameplay capture stranded in an empty rectangle. Roughly a quarter of that frame is deliberate mat. Width comes from the caller, never from the mode: side-by-side plates share one width cap so a capture and a piece of key art read as equal rank while keeping different heights.
 - **Quiet variant** (`.media-quiet`, More work grid only): rests at `saturate(0.82)` — near full colour, so the artwork carries the grid — and lifts to `saturate(1.05)` with a 1.03 scale over 480–640ms on hover or focus-within.
 
 ### Spec table

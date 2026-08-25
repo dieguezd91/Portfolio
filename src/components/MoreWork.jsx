@@ -28,9 +28,14 @@ function ProjectEntry({ project, index }) {
 
         <div className="mt-4 flex items-start justify-between gap-4 border-b border-[color:var(--color-rule)] pb-4 transition-colors duration-300 group-hover:border-[color:var(--color-rule-strong)]">
           <div className="min-w-0">
+            {/* Full names, bounded to two lines so card rhythm stays even. */}
             <h3
-              className="truncate text-[1.0625rem] text-[color:var(--color-bone)]"
-              style={{ fontVariationSettings: "'wdth' 106, 'wght' 600", letterSpacing: '-0.015em' }}
+              className="line-clamp-2 text-[1.0625rem] text-[color:var(--color-bone)]"
+              style={{
+                fontVariationSettings: "'wdth' 106, 'wght' 600",
+                letterSpacing: '-0.015em',
+                lineHeight: 1.25,
+              }}
               title={title}
             >
               {title}
