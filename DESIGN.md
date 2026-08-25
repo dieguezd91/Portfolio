@@ -178,7 +178,7 @@ An achromatic dark palette with a single warm signal, chosen so that colourful g
 - **Body LG** (`wght` 600, 1.0625rem, ls −0.015em): Entry titles in the More work grid and the education list — a name, not prose.
 - **Body** (`wdth` 100 / `wght` 400, 0.9375rem, lh 1.62): All prose. Steps up to 1rem at `sm` and above. Measure capped between 52ch and 64ch; never wider.
 - **Caption** (`wght` 600, 0.875rem): Button labels, skill chips, the secondary skills run.
-- **Caption SM** (0.8125rem): The masthead Résumé button only.
+- **Caption SM** (0.8125rem): The masthead Resume button only.
 - **Label** (Martian Mono 400, 0.6875rem, uppercase, ls 0.02em, tabular figures): Spec keys and values, platform and year strings, release status, section counts, the footer colophon. **Not** navigation, and not descriptive UI — the mono face marks data, never chrome.
 
 The ramp is a 1/16rem ladder: 11, 13, 14, 15, 17, 19, 20, 24px, then three clamps. A size outside that set is drift, not a decision.
@@ -251,7 +251,7 @@ A `<dl>` opened and closed by hairlines, one hairline per row, keys in Graphite 
 
 ### Navigation
 
-- **Desktop:** A fixed 76px masthead. Monogram plus name on the left at 0.9375rem, six section links centred at 0.875rem, brand icons and a ghost Résumé button on the right. **All navigation is set in Archivo, never the mono face** — section labels are chrome, not metadata. Inactive links are Ash; the active link is Bone and grows a Signal Orange hairline beneath it via `scaleX`, driven by an IntersectionObserver with a `-30% / -60%` root margin.
+- **Desktop:** A fixed 76px masthead. Monogram plus name on the left at 0.9375rem, six section links centred at 0.875rem, brand icons and a ghost Resume button on the right. **All navigation is set in Archivo, never the mono face** — section labels are chrome, not metadata. Inactive links are Ash; the active link is Bone and grows a Signal Orange hairline beneath it via `scaleX`, driven by an IntersectionObserver with a `-30% / -60%` root margin.
 - **Mobile:** A labelled `Menu` / `Close` toggle opens a full-screen Pressroom Black panel. Section links are set in Title type at 1.75rem on hairline-separated rows with a down arrow, staggered in at 35ms intervals. The panel locks body scroll, closes on Escape, focuses itself on open, and returns focus to the toggle on close.
 
 ### Scope-of-work list

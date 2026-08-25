@@ -154,7 +154,7 @@ export default function Nav() {
               rel="noopener noreferrer"
               className="btn btn-ghost ml-2 px-4 py-2 text-[0.8125rem]"
             >
-              Résumé
+              Resume
               <Download className="h-4 w-4" />
             </a>
           </div>
@@ -223,7 +223,7 @@ export default function Nav() {
                 onClick={() => setOpen(false)}
                 className="btn btn-signal w-full"
               >
-                Download résumé
+                Download resume
                 <Download className="h-4 w-4" />
               </a>
 

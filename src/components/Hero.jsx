@@ -69,7 +69,7 @@ export default function Hero() {
               rel="noopener noreferrer"
               className="btn btn-ghost"
             >
-              Résumé
+              Resume
               <Download className="h-4 w-4" />
             </a>
           </Motion.div>

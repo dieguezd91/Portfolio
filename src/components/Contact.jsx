@@ -53,7 +53,7 @@ export default function Contact() {
               rel="noopener noreferrer"
               className="btn btn-ghost"
             >
-              Download résumé
+              Download resume
               <Download className="h-4 w-4" />
             </a>
           </div>
