@@ -86,9 +86,6 @@ export const education = [
     programme: 'Video Game Development',
     institution: 'Universidad Argentina De la Empresa',
     kind: 'University programme',
-    /* Confirmed ongoing. Carries the status instead of a date range, which
-       would imply a completion this entry cannot claim. */
-    status: 'In progress',
   },
   {
     id: 2,

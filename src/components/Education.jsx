@@ -3,10 +3,11 @@ import Reveal from './Reveal';
 import { education } from '../data/site';
 
 /**
- * Presented conservatively: field of study, institution, kind, and — where it
- * applies — an ongoing status. No degree is asserted and no dates are shown:
- * completion of the UADE programme is not confirmed, and a date range reads as
- * a completion status. See PRODUCT.md § Evidence on Hand before changing this.
+ * Presented conservatively: field of study, institution, kind. No degree is
+ * asserted, no dates are shown, and no enrolment status is stated — study
+ * status is not part of this portfolio's positioning, and a date range would
+ * read as a completion that is not confirmed.
+ * See PRODUCT.md § Evidence on Hand before changing this.
  */
 export default function Education() {
   return (
@@ -31,17 +32,9 @@ export default function Education() {
                 {item.institution}
               </p>
 
-              <p className="type-meta text-[color:var(--color-dim)] sm:col-span-2">
+              <p className="type-meta text-[color:var(--color-dim)] sm:col-span-4">
                 {item.kind}
               </p>
-
-              {/* Ongoing study is marked here rather than with a date range,
-                  which would imply a completion status that is not confirmed. */}
-              {item.status && (
-                <p className="type-meta text-[color:var(--color-signal)] sm:col-span-2 sm:text-right">
-                  {item.status}
-                </p>
-              )}
             </div>
           </Reveal>
         ))}
