@@ -1,0 +1,230 @@
+{
+  "schemaVersion": 2,
+  "generatedAt": "2026-08-25T00:00:00.000Z",
+  "title": "Design System: Daniel Dieguez Portfolio",
+  "extensions": {
+    "colorMeta": {
+      "ink": {
+        "role": "neutral",
+        "displayName": "Pressroom Black",
+        "canonical": "#0A0A0B",
+        "tonalRamp": ["#050506", "#0A0A0B", "#131315", "#1D1D20", "#2C2C30", "#4A4A4F", "#7A7A80", "#C9C9CC"]
+      },
+      "ink-raised": {
+        "role": "neutral",
+        "displayName": "Mount Grey",
+        "canonical": "#131315",
+        "tonalRamp": ["#0A0A0B", "#131315", "#1B1B1E", "#26262A", "#38383D", "#57575D", "#8A8A90", "#D2D2D5"]
+      },
+      "bone": {
+        "role": "neutral",
+        "displayName": "Bone",
+        "canonical": "#F2F0EC",
+        "tonalRamp": ["#242320", "#3A3833", "#55524B", "#726E66", "#948F86", "#B8B3AA", "#D7D3CC", "#F2F0EC"]
+      },
+      "ash": {
+        "role": "neutral",
+        "displayName": "Ash",
+        "canonical": "#A5A29B",
+        "tonalRamp": ["#1E1D1B", "#33312D", "#4C4945", "#66635D", "#85827C", "#A5A29B", "#C6C3BC", "#E6E4DE"]
+      },
+      "graphite": {
+        "role": "neutral",
+        "displayName": "Graphite",
+        "canonical": "#85827C",
+        "tonalRamp": ["#191816", "#2B2A27", "#413F3A", "#57544E", "#6E6B65", "#85827C", "#A8A59E", "#CBC8C1"]
+      },
+      "signal": {
+        "role": "primary",
+        "displayName": "Signal Orange",
+        "canonical": "#FF5C29",
+        "tonalRamp": ["#3A1206", "#5C1D0A", "#8A2C0F", "#B83A15", "#E24A1B", "#FF5C29", "#FF7245", "#FFA98A"]
+      }
+    },
+    "typographyMeta": {
+      "display": {
+        "displayName": "Display",
+        "purpose": "The hero positioning statement and the Contact availability line. Two per page, maximum. Uses Archivo's width axis at 112."
+      },
+      "headline": { "displayName": "Headline", "purpose": "Section headings only." },
+      "title": { "displayName": "Title", "purpose": "Case-study titles." },
+      "title-md": { "displayName": "Title MD", "purpose": "The hero release panel title." },
+      "title-sm": { "displayName": "Title SM", "purpose": "Sub-headings inside a section — the Skills column heads." },
+      "lead": { "displayName": "Lead", "purpose": "The opening paragraph of About. One per page." },
+      "body-lg": { "displayName": "Body LG", "purpose": "Entry titles in the More work grid and education list — a name, not prose." },
+      "body": { "displayName": "Body", "purpose": "All prose. Measure capped between 52ch and 64ch." },
+      "caption": { "displayName": "Caption", "purpose": "Button labels, skill chips, the secondary skills run." },
+      "caption-sm": { "displayName": "Caption SM", "purpose": "The masthead Résumé button only." },
+      "label": {
+        "displayName": "Label",
+        "purpose": "Real metadata only — platform, year, engine, role, handle, count. Never prose."
+      }
+    },
+    "shadows": [],
+    "motion": [
+      {
+        "name": "ease-out-expo",
+        "value": "cubic-bezier(0.16, 1, 0.3, 1)",
+        "purpose": "The system's only easing curve. Every transition and every entrance uses it."
+      },
+      {
+        "name": "duration-control",
+        "value": "180ms",
+        "purpose": "Colour and border state changes on buttons, icons and nav links."
+      },
+      {
+        "name": "duration-rule",
+        "value": "320ms",
+        "purpose": "The link-rule underline scaling from its left origin."
+      },
+      {
+        "name": "duration-media",
+        "value": "480ms filter / 640ms transform",
+        "purpose": "More work capture returning to full saturation and scale on hover."
+      },
+      {
+        "name": "duration-reveal",
+        "value": "720ms",
+        "purpose": "Section entrance: 14px rise plus fade, once per element, never re-triggered."
+      }
+    ],
+    "breakpoints": [
+      { "name": "sm", "value": "640px" },
+      { "name": "md", "value": "768px" },
+      { "name": "lg", "value": "1024px" },
+      { "name": "xl", "value": "1280px" },
+      { "name": "container", "value": "1440px" }
+    ]
+  },
+  "components": [
+    {
+      "name": "Signal Button",
+      "kind": "button",
+      "refersTo": "button-signal",
+      "description": "The primary action. One per viewport at most.",
+      "html": "<a class=\"ds-btn-signal\" href=\"#work\">See the work</a>",
+      "css": ".ds-btn-signal { display: inline-flex; align-items: center; justify-content: center; gap: 0.6rem; font-family: Archivo, 'Helvetica Neue', Arial, sans-serif; font-variation-settings: 'wdth' 104, 'wght' 600; font-size: 0.875rem; letter-spacing: 0.01em; padding: 0.8125rem 1.375rem; border-radius: 3px; border: 1px solid #FF5C29; background-color: #FF5C29; color: #0A0A0B; text-decoration: none; transition: background-color 180ms cubic-bezier(0.16,1,0.3,1), border-color 180ms cubic-bezier(0.16,1,0.3,1); } .ds-btn-signal:hover { background-color: #FF7245; border-color: #FF7245; } .ds-btn-signal:active { background-color: #E24A1B; border-color: #E24A1B; } .ds-btn-signal:focus-visible { outline: 2px solid #FF5C29; outline-offset: 3px; }"
+    },
+    {
+      "name": "Ghost Button",
+      "kind": "button",
+      "refersTo": "button-ghost",
+      "description": "Secondary action — résumé downloads and store links in panels.",
+      "html": "<a class=\"ds-btn-ghost\" href=\"#\">Résumé</a>",
+      "css": ".ds-btn-ghost { display: inline-flex; align-items: center; justify-content: center; gap: 0.6rem; font-family: Archivo, 'Helvetica Neue', Arial, sans-serif; font-variation-settings: 'wdth' 104, 'wght' 600; font-size: 0.875rem; letter-spacing: 0.01em; padding: 0.8125rem 1.375rem; border-radius: 3px; border: 1px solid rgba(255,255,255,0.20); background-color: transparent; color: #F2F0EC; text-decoration: none; transition: background-color 180ms cubic-bezier(0.16,1,0.3,1), border-color 180ms cubic-bezier(0.16,1,0.3,1); } .ds-btn-ghost:hover { border-color: rgba(255,255,255,0.42); background-color: rgba(255,255,255,0.045); } .ds-btn-ghost:active { background-color: rgba(255,255,255,0.09); } .ds-btn-ghost:focus-visible { outline: 2px solid #FF5C29; outline-offset: 3px; }"
+    },
+    {
+      "name": "Rule Link",
+      "kind": "custom",
+      "description": "The system's signature control: a Signal Orange hairline draws from the left on hover or focus.",
+      "html": "<a class=\"ds-link-rule\" href=\"#\"><svg viewBox=\"0 0 24 24\" fill=\"none\" stroke=\"currentColor\" stroke-width=\"1.5\" stroke-linecap=\"round\" stroke-linejoin=\"round\" width=\"16\" height=\"16\"><path d=\"M8 16 16 8\"/><path d=\"M9.5 8H16v6.5\"/></svg><span>View on itch.io</span></a>",
+      "css": ".ds-link-rule { position: relative; display: inline-flex; align-items: center; gap: 0.5rem; padding-block: 0.75rem; font-family: 'Martian Mono', ui-monospace, Consolas, monospace; font-size: 0.6875rem; letter-spacing: 0.02em; text-transform: uppercase; color: #F2F0EC; text-decoration: none; transition: color 180ms cubic-bezier(0.16,1,0.3,1); } .ds-link-rule::after { content: ''; position: absolute; left: 0; bottom: 0.45rem; height: 1px; width: 100%; background-color: #FF5C29; transform: scaleX(0); transform-origin: left; transition: transform 320ms cubic-bezier(0.16,1,0.3,1); } .ds-link-rule:hover { color: #FF5C29; } .ds-link-rule:hover::after, .ds-link-rule:focus-visible::after { transform: scaleX(1); }"
+    },
+    {
+      "name": "Media Frame",
+      "kind": "card",
+      "refersTo": "media-frame",
+      "description": "The recurring silhouette: a 1px-ruled rectangle on Mount Grey holding a game capture.",
+      "html": "<figure class=\"ds-media-frame\"><div class=\"ds-media-fill\"></div></figure>",
+      "css": ".ds-media-frame { position: relative; overflow: hidden; margin: 0; background-color: #131315; border: 1px solid rgba(255,255,255,0.10); border-radius: 4px; aspect-ratio: 16 / 9; } .ds-media-fill { width: 100%; height: 100%; background: linear-gradient(135deg, #1D1D20, #131315); }"
+    },
+    {
+      "name": "Spec Table",
+      "kind": "custom",
+      "refersTo": "spec-row",
+      "description": "Carries the page's factual weight. Hairline per row, Graphite keys, Ash values, tabular figures.",
+      "html": "<dl class=\"ds-spec\"><div><dt>Platform</dt><dd>Android</dd></div><div><dt>Engine</dt><dd>Unity · C#</dd></div><div><dt>Released</dt><dd>2026</dd></div></dl>",
+      "css": ".ds-spec { margin: 0; border-top: 1px solid rgba(255,255,255,0.10); } .ds-spec > div { display: flex; align-items: baseline; justify-content: space-between; gap: 1rem; border-bottom: 1px solid rgba(255,255,255,0.10); padding: 0.625rem 0; } .ds-spec dt, .ds-spec dd { margin: 0; font-family: 'Martian Mono', ui-monospace, Consolas, monospace; font-size: 0.6875rem; letter-spacing: 0.02em; line-height: 1.4; text-transform: uppercase; font-variant-numeric: tabular-nums; } .ds-spec dt { color: #85827C; } .ds-spec dd { color: #A5A29B; text-align: right; }"
+    },
+    {
+      "name": "Status Marker",
+      "kind": "chip",
+      "description": "Marks a game as live on a store. The single most important signal on the page.",
+      "html": "<p class=\"ds-status\"><span class=\"ds-status-dot\"></span><span>Live on Google Play</span></p>",
+      "css": ".ds-status { display: flex; align-items: center; gap: 0.625rem; margin: 0; font-family: 'Martian Mono', ui-monospace, Consolas, monospace; font-size: 0.6875rem; letter-spacing: 0.02em; text-transform: uppercase; color: #FF5C29; } .ds-status-dot { width: 6px; height: 6px; border-radius: 999px; background-color: #FF5C29; flex-shrink: 0; }"
+    },
+    {
+      "name": "Scope-of-work List",
+      "kind": "custom",
+      "description": "Confirmed scope of work. Renders only for verified projects. The only place the signal colour touches body-scale content.",
+      "html": "<ul class=\"ds-contrib\"><li><span class=\"ds-contrib-rule\"></span><span>Google Play deployment and release.</span></li><li><span class=\"ds-contrib-rule\"></span><span>In-app purchase (IAP) integration.</span></li></ul>",
+      "css": ".ds-contrib { list-style: none; margin: 0; padding: 0; display: flex; flex-direction: column; gap: 0.5rem; } .ds-contrib li { display: grid; grid-template-columns: 0.75rem minmax(0,1fr); gap: 0.75rem; font-family: Archivo, 'Helvetica Neue', Arial, sans-serif; font-variation-settings: 'wdth' 100, 'wght' 400; font-size: 0.9375rem; line-height: 1.62; letter-spacing: -0.004em; color: #F2F0EC; } .ds-contrib-rule { margin-top: 0.68em; height: 1px; width: 0.75rem; background-color: #FF5C29; }"
+    },
+    {
+      "name": "Masthead Nav Link",
+      "kind": "nav",
+      "description": "Desktop section link. Active state is Bone plus a Signal Orange hairline that scales in.",
+      "html": "<nav class=\"ds-nav\"><a href=\"#\" class=\"ds-nav-link ds-nav-link--active\">Work<span class=\"ds-nav-rule\"></span></a><a href=\"#\" class=\"ds-nav-link\">About<span class=\"ds-nav-rule\"></span></a></nav>",
+      "css": ".ds-nav { display: flex; gap: 0.25rem; background: #0A0A0B; padding: 0.5rem; } .ds-nav-link { position: relative; display: flex; align-items: center; min-height: 2.25rem; padding: 0.5rem 0.75rem; font-family: 'Martian Mono', ui-monospace, Consolas, monospace; font-size: 0.6875rem; letter-spacing: 0.02em; text-transform: uppercase; color: #85827C; text-decoration: none; transition: color 200ms cubic-bezier(0.16,1,0.3,1); } .ds-nav-link:hover { color: #F2F0EC; } .ds-nav-link--active { color: #F2F0EC; } .ds-nav-rule { position: absolute; left: 0.75rem; right: 0.75rem; bottom: 0; height: 1px; background-color: #FF5C29; transform: scaleX(0); transform-origin: left; transition: transform 300ms cubic-bezier(0.16,1,0.3,1); } .ds-nav-link--active .ds-nav-rule, .ds-nav-link:hover .ds-nav-rule { transform: scaleX(1); }"
+    }
+  ],
+  "narrative": {
+    "northStar": "The Release Record",
+    "overview": "This system treats a career as a set of records to be filed, not a showreel to be performed. Every project arrives as an entry: a plate holding the capture, a spec table of hard facts, a short account of the work, and a link to the live thing. The interface behaves like the ruled stationery those records are filed on — hairlines, aligned columns, tabular figures, generous margins — and it deliberately withholds colour so that the only colour on screen comes from the games themselves.\n\nThe register is engineering-professional rather than arcade. There are no glows, no neon edges, no particle fields, no 3D carousels. Depth comes from two ground values and a 10%-white hairline, never from shadow. Where the system does raise its voice it does so with one signal orange, spent almost entirely on two things: the fact that a game is live on a store, and the primary action.\n\nThe confirmed anti-reference is the site this replaced: a near-black-with-neon-cyan hero over an interactive particle canvas, with the work hidden inside a perspective coverflow. That page led with atmosphere and buried evidence. This one leads with evidence.",
+    "keyCharacteristics": [
+      "Achromatic interface; all chroma is content",
+      "Hairline rules instead of boxes and shadows",
+      "Real metadata set in a real monospace, never as decoration",
+      "Screenshots never upscaled past their own pixels",
+      "One motion grammar, applied once per section"
+    ],
+    "rules": [
+      {
+        "name": "The Content-Carries-Colour Rule",
+        "body": "The interface is achromatic. Every hue on screen comes from a game capture or the portrait. If a new component needs colour to work, it needs better structure instead.",
+        "section": "colors"
+      },
+      {
+        "name": "The Two-Grounds Rule",
+        "body": "There are exactly two surface values: Pressroom Black and Mount Grey. A third ground is not a new token, it is a design error.",
+        "section": "colors"
+      },
+      {
+        "name": "The Signal Budget",
+        "body": "Signal Orange covers under 2% of any viewport. It marks live-on-a-store status, the primary action, and interaction feedback. It is never used for decoration, never for section headings, and never as a gradient.",
+        "section": "colors"
+      },
+      {
+        "name": "The Mono-Means-Data Rule",
+        "body": "Martian Mono is permitted only for metadata that would sit in a table: platform, year, engine, role, handle, count, technology list. Prose in mono is a costume, not a voice.",
+        "section": "typography"
+      },
+      {
+        "name": "The No-Eyebrow Rule",
+        "body": "No kicker, label, or eyebrow ever sits above a heading. The identity line in the hero sits below the display type as a byline, which is why it is permitted. A section number is only allowed if the sequence carries information the reader needs — it never has here.",
+        "section": "typography"
+      },
+      {
+        "name": "The Byline Rule",
+        "body": "Every display statement is attributed underneath by a hairline and a name-plus-role line, never introduced from above.",
+        "section": "typography"
+      },
+      {
+        "name": "The Flat Rule",
+        "body": "Separation comes from a rule or a ground change. If neither works, the layout is wrong — reach for space, not shadow.",
+        "section": "elevation"
+      }
+    ],
+    "dos": [
+      "Do let the game captures be the only source of colour, and keep the interface achromatic around them.",
+      "Do record real image dimensions in the data and set width/height plus an explicit aspect-ratio on every image, so nothing shifts on load.",
+      "Do mount a capture rather than upscale it. Nothing in this system is displayed above roughly 1.2× its native pixels.",
+      "Do open every section with a full-width hairline and set the heading on columns 1–5 with the lede on 7–12.",
+      "Do keep body measure between 52ch and 64ch.",
+      "Do reserve Martian Mono for content that would sit in a table.",
+      "Do theme the browser's own surfaces — selection, caret, scrollbar, focus ring — from the palette.",
+      "Do give a new section one Reveal entrance and nothing more."
+    ],
+    "donts": [
+      "Don't add a shadow, glow, or coloured halo. This system has none.",
+      "Don't put a kicker, eyebrow, or section number above a heading.",
+      "Don't introduce a third ground value or a second accent colour.",
+      "Don't set prose in the mono face, or use it to make something look technical.",
+      "Don't use gradient text, or a gradient anywhere as decoration.",
+      "Don't exceed a 1px border, or add a coloured edge stripe to a row or panel.",
+      "Don't animate on scroll more than once per section, and never re-trigger a reveal.",
+      "Don't render an unverified project contribution anywhere in the UI, or promote one into a heading, hero line, or claim — see PRODUCT.md § Positioning.",
+      "Don't rank a project by the resolution of its screenshot. Weak source art is solved by contained framing, never by demotion."
+    ]
+  }
+}
