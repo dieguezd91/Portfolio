@@ -19,9 +19,9 @@ export const site = {
     'Game Developer with experience building and shipping projects across mobile, PC, WebGL and VR.',
   availability: 'Available for game development opportunities',
 
-  resumeUrl:
-    'https://docs.google.com/document/d/1HPbOMsd2OPtrPolEdgYsLw9HlJyP51cpGVxyOe_9Pgg/export?format=pdf',
-  resumeFilename: 'Daniel_Dieguez_CV.pdf',
+    resumeUrl:
+    'https://drive.google.com/file/d/1yeS46pE8zZ9ey5vAwDieAsY3fZC9vbxa/view?usp=drive_link',
+  resumeFilename: 'Resume_Daniel_Dieguez.pdf',
 
   contactUrl: 'https://linktr.ee/daniel_dieguez',
 
